@@ -1,0 +1,26 @@
+.content-wrapper {
+    padding: 10px;
+    height: 100%;
+    .loading-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
+    .chart-wrapper {
+        .customize-chart {
+            margin-top: 20px;
+            height: 200px;
+            .toggle-prod {
+                --track-background-checked: #ffae00;
+            }
+            .toggle-delivery {
+                --track-background-checked: #175728;
+            }
+            .toggle-consumption {
+                --track-background-checked: #184080;
+            }
+        }
+    }
+}

@@ -1,0 +1,52 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Stromnetz
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Stromnetz</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <div class="content-wrapper">
+    <ion-card class="frequency-card" [ngClass]="{'stable': ((this.currentEntry?.frequency?.value ?? 49.85) > 49.85) && !this.dataOutDated, 'warning': ((this.currentEntry?.frequency?.value ?? 49.85) <= 49.85) || this.dataOutDated, 'critical': (this.currentEntry?.frequency?.value ?? 49.85) <= 49.8}">
+      <ion-card-header>
+        <ion-card-subtitle>Frequenz</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content class="frequency-card-content">
+        <h1>{{!this.dataOutDated ? this.currentEntry?.frequency?.value?.toFixed(2) ?? "-" : "-"}} Hz</h1>
+      </ion-card-content>
+    </ion-card>
+    <app-blink *ngIf="(this.currentEntry?.frequency?.value ?? 49.85) <= 49.8" [active]="true" [visibleMS]="1000" [inVisibleMS]="1000" [totalMS]="2000">
+      <div class="power-grid-alert">
+        <ion-icon color="danger" name="warning-outline"></ion-icon>
+        <h3>Power Grid Frequency critical</h3>
+        <h4>Risk of blackout!</h4>
+      </div>
+    </app-blink>
+    <ion-card *ngIf="this.dataOutDated" class="frequency-card warning">
+      <ion-card-content class="frequency-card-content">
+        <h2>Wechselrichter-Einspeisung offline.</h2>
+        <h2>Stromnetzfrequenz nicht verfügbar.</h2>
+      </ion-card-content>
+    </ion-card>
+    <ion-card class="frequency-card" [ngClass]="{'consume': (this.currentEntry?.consumption?.value ?? 0) > 0, 'stable': (this.currentEntry?.delivery?.value ?? 0) > 0}">
+      <ion-card-header>
+        <ion-card-subtitle>Status</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content class="frequency-card-content">
+        <h1>{{this.currentEntry?.delivery != null ? (this.currentEntry?.delivery?.value ?? 0) > 0  ? 'Einspeisung' : 'Bezug' : 'n/a'}}</h1>
+      </ion-card-content>
+    </ion-card>
+    <ion-segment mode="ios" value="today" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="today">Heute</ion-segment-button>
+      <ion-segment-button value="lastHour">Stunde</ion-segment-button>
+      <ion-segment-button value="last5Minutes">5 Minuten</ion-segment-button>
+    </ion-segment>
+    <canvasjs-chart class="chart" [options]="this.chartOptions"></canvasjs-chart>
+  </div>
+</ion-content>

@@ -1,0 +1,41 @@
+.frequency-card {
+    .frequency-card-content {
+        text-align: center;
+        h1 {
+            font-size: 25pt;
+        }
+    }
+}
+
+.power-grid-alert {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    ion-icon {
+        font-size: 60pt;
+    }
+
+    h3, h4 {
+        color: var(--ion-color-danger)
+    }
+}
+.stable {
+    border: 1px solid #00b200;
+    background-color: rgba($color: #00b200, $alpha: 0.2);
+}
+
+.warning {
+    border: 1px solid var(--ion-color-primary);
+    background-color: rgba($color: #e0af00, $alpha: 0.2);
+}
+
+.critical {
+    border: 1px solid #b20600;
+    background-color: rgba($color: #b20600, $alpha: 0.2);
+}
+
+.consume {
+    border: 1px solid #184080;
+    background-color: rgba($color: #184080, $alpha: 0.2);
+}

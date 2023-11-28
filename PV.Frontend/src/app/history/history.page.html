@@ -1,0 +1,43 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Historie
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Historie</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <div class="content-wrapper">
+    <ion-segment mode="ios" value="today">
+      <ion-segment-button value="today">Heute</ion-segment-button>
+      <ion-segment-button value="month">Monat</ion-segment-button>
+      <ion-segment-button value="year">Jahr</ion-segment-button>
+      <ion-segment-button value="total">Gesamt</ion-segment-button>
+    </ion-segment>
+    <div *ngIf="!this.loading" class="chart-wrapper">
+      <canvasjs-chart class="chart" [options]="this.chartOptions"></canvasjs-chart>
+      <div class="customize-chart">
+        <ion-list>
+          <ion-item>
+            <ion-toggle [(ngModel)]="this.showProd" (ionChange)="renderChart()" aria-label="Toggle Production" class="toggle-prod">Production</ion-toggle>
+          </ion-item>
+          <ion-item>
+            <ion-toggle [(ngModel)]="this.showConsumption" (ionChange)="renderChart()" aria-label="Toggle Production" (ionChange)="renderChart()" class="toggle-consumption">Consumption</ion-toggle>
+          </ion-item>
+          <ion-item>
+            <ion-toggle [(ngModel)]="this.showDelivery" (ionChange)="renderChart()" aria-label="Toggle Production" (ionChange)="renderChart()" class="toggle-delivery">Delivery</ion-toggle>
+          </ion-item>
+        </ion-list>
+      </div>
+    </div>
+    <div *ngIf="this.loading" class="loading-wrapper">
+      <ion-spinner color="primary"></ion-spinner>
+      <h2>Lade Daten...</h2>
+    </div>
+  </div>
+</ion-content>

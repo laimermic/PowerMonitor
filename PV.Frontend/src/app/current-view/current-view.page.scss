@@ -1,0 +1,71 @@
+.production-graph-wrapper {
+    display: grid;
+    grid-template-columns: 33.3% 33.3% 33.3%;
+
+    div {
+        display: flex;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+        flex-direction: column;
+
+        .graph-value {
+            margin-top: 10px;
+            font-weight: 600;
+            font-size: 10pt;
+        }
+    }
+    .photovoltaic {
+        border-right: 1px solid var(--ion-color-medium-shade);
+        color: var(--ion-color-primary);
+        ion-icon {
+            font-size: 25px;
+            border: 1px solid var(--ion-color-primary);
+            border-radius: 50%;
+            padding: 10px;
+        }
+        .graph-value {
+            color: var(--ion-color-primary);
+            text-align: center;
+        }
+    }
+
+    .home {
+        border-right: 1px solid var(--ion-color-medium-shade);
+        color: #2f4f8b;
+        ion-icon {
+            font-size: 25px;
+            border: 1px solid #2f4f8b;
+            border-radius: 50%;
+            padding: 10px;
+        }
+        .graph-value {
+            color: #2f4f8b;
+            text-align: center;
+        }
+    }
+    .power-grid {
+        color: #cfcfcf;
+        ion-icon {
+            font-size: 25px;
+            border-radius: 50%;
+            background-color: #4c4c4c;
+            padding: 10px;
+        }
+        .graph-value {
+            text-align: center;
+        }
+    }
+}
+
+.statistic-item {
+    height: 60px;
+    .statistic-title {
+        margin-left: 10px;
+    }
+    .statistic-value {
+        justify-self: flex-end;
+        text-align: right;
+        font-weight: bold;
+    }
+}
