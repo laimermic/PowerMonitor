@@ -1,0 +1,17 @@
+<SunSpecData v="1">
+	<d man="Fronius" mod="Fronius Symo 8.2-3-M" sn="32033325" t="2023-02-18T19:49:04+01:00">
+		<m id="1">
+			<p id="Mn">Fronius</p>
+			<p id="Md">Fronius Symo 8.2-3-M</p>
+			<p id="Vr">0.3.24.1</p>
+			<p id="SN">32033325</p>
+			<p id="DA">1</p>
+		</m>
+		<m id="113">
+			<p id="Wh">12125749.000000</p>
+			<p id="St">3</p>
+			<p id="DCA">0.000000</p>
+			<p id="DCV">1.000000</p>
+		</m>
+	</d>
+</SunSpecData>
