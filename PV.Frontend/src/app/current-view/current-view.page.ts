@@ -22,11 +22,6 @@ export class CurrentViewPage implements ViewDidEnter, ViewDidLeave {
 
   public async getNow() {
     this.currentEntry = (await lastValueFrom(this.http.get(AppConfig.backendUrl + "/api/now"))) as CurrentEntry;
-    if (this.currentEntry.consumption.value > 0) {
-      this.currentNeed = this.currentEntry.consumption.value + this.currentEntry.production.value;
-    } else {
-      this.currentNeed = this.currentEntry.production.value - this.currentEntry.delivery.value;
-    }
   }
   ionViewDidEnter() {
     this.interval = setInterval(() => {

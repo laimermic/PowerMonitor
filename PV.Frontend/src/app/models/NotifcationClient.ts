@@ -1,3 +1,6 @@
-export interface NotificationClient {
-    token: string;
+export class NotificationClient {
+    public token: string;
+    constructor(token: string) {
+        this.token = token;
+    }
 }

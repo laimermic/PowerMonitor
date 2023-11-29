@@ -21,8 +21,7 @@ export class HistoryPage implements ViewDidEnter {
 
   public prodEntries: InfluxResult[] | null = new Array<InfluxResult>();
   public prodDataPoints: Array<CanvasJS.ChartDataPoint> | null = null;
-  public consumptionDataPoints: Array<CanvasJS.ChartDataPoint> | null = null;
-  public deliveryDataPoints: Array<CanvasJS.ChartDataPoint> | null = null;
+  public usageDataPoints: Array<CanvasJS.ChartDataPoint> | null = null;
   public showProd: boolean = true;
   public showConsumption: boolean = false;
   public showDelivery: boolean = false;
@@ -37,49 +36,30 @@ export class HistoryPage implements ViewDidEnter {
   public renderChart() {
     console.log("rendering");
     var data = new Array<ChartDataSeriesOptions>();
-    if (this.showProd) {
-      var prodEntry = {
-        type: "area",
-        color: "#ffae00",
-        markerColor: "#ffae00",
-        name: "Production",
-        xValueFormatString: "HH:mm",
-        dataPoints: this.prodDataPoints ?? new Array<CanvasJS.ChartDataPoint>(),
-        legendText: "Production",
-        showInLegend: true,
-        visible: this.showProd
-      }
-      data.push(prodEntry);
+    var prodEntry = {
+      type: "area",
+      color: "#ffae00",
+      markerColor: "#ffae00",
+      name: "Production",
+      xValueFormatString: "HH:mm",
+      dataPoints: this.prodDataPoints ?? new Array<CanvasJS.ChartDataPoint>(),
+      legendText: "Production",
+      showInLegend: true,
+      visible: this.showProd
     }
-    if (this.showConsumption) {
-      var consumptionEntry = {
-        type: 'line',
-        color: '#184080',
-        markerColor: '#184080',
-        name: 'Consumption',
-        dataPoints: this.consumptionDataPoints ?? new Array<ChartDataPoint>(),
-        xValueFormatString: "HH:mm",
-        legendText: "Consumption from Power Grid",
-        showInLegend: true,
-        visible: this.showConsumption
-      }
-      data.push(consumptionEntry);
+    data.push(prodEntry);
+
+    var usageEntry = {
+      type: "line",
+      color: "#325ea8",
+      markerColor: "#325ea8",
+      name: "Usage",
+      xValueFormatString: "HH:mm",
+      dataPoints: this.usageDataPoints ?? new Array<CanvasJS.ChartDataPoint>(),
+      legendText: "Usage",
+      showInLegend: true
     }
-    if (this.showDelivery) {
-      var deliveryEntry = {
-        type: 'line',
-        fillOpacity: 0.2,
-        color: '#175728',
-        markerColor: '#175728',
-        name: 'Delivery',
-        dataPoints: this.deliveryDataPoints ?? new Array<ChartDataPoint>(),
-        xValueFormatString: "HH:mm",
-        legendText: "Delivery to Power Grid",
-        showInLegend: true,
-        visible: this.showDelivery
-      }
-      data.push(deliveryEntry);
-    }
+    data.push(usageEntry)
 
     var maxDate = new Date();
     maxDate.setHours(23);
@@ -109,8 +89,7 @@ export class HistoryPage implements ViewDidEnter {
   public async getHistory() {
     var response = (await lastValueFrom(this.http.get(AppConfig.backendUrl + "/api/today"))) as HistoryResponse;
     this.prodDataPoints = response.production.map(entry => { return { x: new Date(entry._time), y: entry._value, label: 'Production' } });
-    this.consumptionDataPoints = response.consumption.map(entry => { return { x: new Date(entry._time), y: entry._value, label: 'Consumption' } });
-    this.deliveryDataPoints = response.delivery.map(entry => { return { x: new Date(entry._time), y: entry._value, label: 'Delivery' } });
+    this.usageDataPoints = response.usage.map(entry => { return { x: new Date(entry._time), y: entry._value, label: 'Usage' } });
     this.renderChart();
     this.loading = false;
   }

@@ -21,7 +21,7 @@
     </ion-segment>
     <div *ngIf="!this.loading" class="chart-wrapper">
       <canvasjs-chart class="chart" [options]="this.chartOptions"></canvasjs-chart>
-      <div class="customize-chart">
+      <!-- <div class="customize-chart">
         <ion-list>
           <ion-item>
             <ion-toggle [(ngModel)]="this.showProd" (ionChange)="renderChart()" aria-label="Toggle Production" class="toggle-prod">Production</ion-toggle>
@@ -33,7 +33,7 @@
             <ion-toggle [(ngModel)]="this.showDelivery" (ionChange)="renderChart()" aria-label="Toggle Production" (ionChange)="renderChart()" class="toggle-delivery">Delivery</ion-toggle>
           </ion-item>
         </ion-list>
-      </div>
+      </div> -->
     </div>
     <div *ngIf="this.loading" class="loading-wrapper">
       <ion-spinner color="primary"></ion-spinner>

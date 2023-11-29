@@ -113,19 +113,19 @@ function getFromToday(measurement: string): Promise<Array<InfluxResult>> {
         |> filter(fn: (r) => r._measurement == "` + measurement + `")
         |> filter(fn: (r) => r._field == "value")`;
         var points: InfluxResult[] = [];
-        // queryApi.queryRows(fluxQuery, {
-        //     next(row: any, tableMeta: any) {
-        //         const o = tableMeta.toObject(row) as InfluxResult;
-        //         points.push(o)
-        //     }, complete() {
-        //         var filtered = points.filter(point => new Date(point._time).getDay() == new Date().getDay())
-        //         resolve(filtered)
-        //     },
-        //     error(error) {
-        //         console.log(error)
-        //         reject(error);
-        //     }
-        // })
+        queryApi.queryRows(fluxQuery, {
+            next(row: any, tableMeta: any) {
+                const o = tableMeta.toObject(row) as InfluxResult;
+                points.push(o)
+            }, complete() {
+                var filtered = points.filter(point => new Date(point._time).getDay() == new Date().getDay())
+                resolve(filtered)
+            },
+            error(error) {
+                console.log(error)
+                reject(error);
+            }
+        })
 
     })
 }
@@ -237,18 +237,17 @@ app.post('/uploaddelivery', express.text({ type: '*/*' }), (req: Request, res: R
 //    }
 //})
 
-/*app.get('/api/today', async (req: Request, res: Response) => {
+app.get('/api/today', async (req: Request, res: Response) => {
     var prodEntries = await getFromToday('production');
-    var consumptionEntries = await getFromToday('consumption');
-    var deliveryEntries = await getFromToday('delivery');
-    var response = new HistoryResponse(prodEntries, consumptionEntries, deliveryEntries, null);
+    var usageEntries = await getFromToday('usage')
+    var response = new HistoryResponse(prodEntries, usageEntries);
     res.send(response);
 })
 
 app.get('/api/freqtoday', async (req: Request, res: Response) => {
     var freqEntries = await getFromToday('frequency');
     res.send(freqEntries)
-});*/
+});
 
 app.post('/api/registerNotification', express.json({ type: '*/*' }), async (req: Request, res: Response) => {
     var client = req.body as NotificationClient;

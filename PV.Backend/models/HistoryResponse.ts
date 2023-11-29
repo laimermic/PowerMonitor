@@ -3,19 +3,13 @@ import { usageEntry } from "./usageEntry";
 
 export class HistoryResponse {
     public production: InfluxResult[];
-    public consumption: InfluxResult[];
-    public usage: usageEntry[] | null;
-    public delivery: InfluxResult[];
+    public usage: InfluxResult[]
 
     constructor(
         production: InfluxResult[],
-        consumption: InfluxResult[],
-        delivery: InfluxResult[],
-        usage: usageEntry[] | null
+        usage: InfluxResult[]
     ) {
         this.production = production;
-        this.consumption = consumption;
-        this.delivery = delivery;
         this.usage = usage;
     }
 }
