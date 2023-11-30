@@ -65,24 +65,26 @@ function calculateUsage() {
 }
 
 async function inserttoMongo() {
-    if (document.consumption && document.delivery && document.frequency && document.production && document.usage) {
+    if (document.consumption && document.delivery && document.production && document.usage) {
         await mongo.collection<CurrentEntry>('current').findOneAndUpdate({}, { $set: document }, { upsert: true });
+    } else {
+        console.log("Not logging to current due to missing data");
+    }
+    if (document.frequency) {
         const difference = new Date().getTime() - document.frequency.time.getTime();
         if ((new Date().getTime() - document.frequency.time.getTime()) / (1000 * 60) < 2) {
             var frequencyPoint = new Point('frequency').floatField('value', document.frequency?.value);
             writeApi.writePoint(frequencyPoint);
         }
-    } else {
-        //console.log("Not logging to current due to missing data");
     }
 }
 
 async function insertToInflux() {
-    if (document.consumption && document.delivery && document.frequency && document.production && document.usage) {
-        var deliveryPoint = new Point('delivery').floatField('value', document.delivery?.value)
-        var consumptionPoint = new Point('consumption').floatField('value', document.consumption?.value)
-        var productionPoint = new Point('production').floatField('value', document.production?.value)
-        var usagePoint = new Point('usage').floatField('value', document.usage?.value);
+    if (document.consumption && document.delivery && document.production && document.usage) {
+        var deliveryPoint = new Point('delivery').floatField('value', document.delivery.value);
+        var consumptionPoint = new Point('consumption').floatField('value', document.consumption.value);
+        var productionPoint = new Point('production').floatField('value', document.production.value);
+        var usagePoint = new Point('usage').floatField('value', document.usage.value);
         writeApi.writePoint(deliveryPoint);
         writeApi.writePoint(consumptionPoint);
         writeApi.writePoint(productionPoint);
