@@ -9,18 +9,44 @@
         height: 100%;
     }
     .chart-wrapper {
-        .customize-chart {
-            margin-top: 20px;
-            height: 200px;
-            .toggle-prod {
-                --track-background-checked: #ffae00;
+        height: 100%;
+        .view-wrapper {
+            height: 100%;
+            .chart-heading {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-content: space-between;
+                padding: 20px;
+                ion-card-subtitle {
+                    font-size: medium;
+                }
             }
-            .toggle-delivery {
-                --track-background-checked: #175728;
+            .canvas-wrapper {
+                height: 80%;
             }
-            .toggle-consumption {
-                --track-background-checked: #184080;
+            // .customize-chart {
+            //     margin-top: 20px;
+            //     height: 300px;
+            //     .toggle-prod {
+            //         --track-background-checked: #ffae00;
+            //     }
+            //     .toggle-delivery {
+            //         --track-background-checked: #175728;
+            //     }
+            //     .toggle-consumption {
+            //         --track-background-checked: #184080;
+            //     }
+            // }
+            .day-switcher {
+                width: 100%;
+                margin-top: 20px;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-content: space-between;
             }
         }
     }
+
 }

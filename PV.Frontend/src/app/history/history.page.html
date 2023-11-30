@@ -20,20 +20,26 @@
       <ion-segment-button value="total">Gesamt</ion-segment-button>
     </ion-segment>
     <div *ngIf="!this.loading" class="chart-wrapper">
-      <canvasjs-chart class="chart" [options]="this.chartOptions"></canvasjs-chart>
-      <!-- <div class="customize-chart">
-        <ion-list>
-          <ion-item>
-            <ion-toggle [(ngModel)]="this.showProd" (ionChange)="renderChart()" aria-label="Toggle Production" class="toggle-prod">Production</ion-toggle>
-          </ion-item>
-          <ion-item>
-            <ion-toggle [(ngModel)]="this.showConsumption" (ionChange)="renderChart()" aria-label="Toggle Production" (ionChange)="renderChart()" class="toggle-consumption">Consumption</ion-toggle>
-          </ion-item>
-          <ion-item>
-            <ion-toggle [(ngModel)]="this.showDelivery" (ionChange)="renderChart()" aria-label="Toggle Production" (ionChange)="renderChart()" class="toggle-delivery">Delivery</ion-toggle>
-          </ion-item>
-        </ion-list>
-      </div> -->
+      <div *ngIf="this.currentView == 'today'" class="view-wrapper">
+        <div class="chart-heading">
+          <ion-card-subtitle>30.11.2023</ion-card-subtitle>
+          <ion-card-subtitle>30.32 kWh</ion-card-subtitle>
+        </div>
+        <div class="canvas-wrapper">
+          <canvasjs-chart class="chart" [options]="this.chartOptions"></canvasjs-chart>
+        </div>
+        <div class="day-switcher">
+          <div (click)="removeDay()">
+            <ion-icon *ngIf="today.getDay() - 1 != selectedDay.getDay()" name="chevron-back-outline"></ion-icon>
+          </div>
+          <div>
+            <span>{{this.selectedDay | date: 'dd.MM.yyyy'}} <ion-icon name="calendar-outline"></ion-icon></span>
+          </div>
+          <div (click)="addDay()">
+            <ion-icon *ngIf="today.getDay() != selectedDay.getDay()" name="chevron-forward-outline"></ion-icon>
+          </div>
+        </div>
+      </div>
     </div>
     <div *ngIf="this.loading" class="loading-wrapper">
       <ion-spinner color="primary"></ion-spinner>

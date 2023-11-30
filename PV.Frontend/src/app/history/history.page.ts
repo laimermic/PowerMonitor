@@ -22,9 +22,9 @@ export class HistoryPage implements ViewDidEnter {
   public prodEntries: InfluxResult[] | null = new Array<InfluxResult>();
   public prodDataPoints: Array<CanvasJS.ChartDataPoint> | null = null;
   public usageDataPoints: Array<CanvasJS.ChartDataPoint> | null = null;
-  public showProd: boolean = true;
-  public showConsumption: boolean = false;
-  public showDelivery: boolean = false;
+  public currentView: string = 'today';
+  public selectedDay: Date = new Date();
+  public today: Date = new Date();
   public chartOptions: CanvasJS.ChartOptions | null = {
     title: {},
     data: []
@@ -32,6 +32,10 @@ export class HistoryPage implements ViewDidEnter {
   public loading: boolean = true;
 
   constructor(private http: HttpClient) { }
+
+  public viewChange(ev: any) {
+
+  }
 
   public renderChart() {
     console.log("rendering");
@@ -44,8 +48,7 @@ export class HistoryPage implements ViewDidEnter {
       xValueFormatString: "HH:mm",
       dataPoints: this.prodDataPoints ?? new Array<CanvasJS.ChartDataPoint>(),
       legendText: "Production",
-      showInLegend: true,
-      visible: this.showProd
+      showInLegend: true
     }
     data.push(prodEntry);
 
@@ -81,13 +84,32 @@ export class HistoryPage implements ViewDidEnter {
       axisY: {
         minimum: 0
       },
+      toolTip: {
+        enabled: true,
+        shared: true
+      },
       data: data
     }
     console.log(this.chartOptions)
   }
 
+  public removeDay() {
+    console.log("removing");
+    this.selectedDay.setDate(this.selectedDay.getDate() - 1);
+    this.selectedDay = new Date(this.selectedDay.getTime());
+    console.log(this.selectedDay.getTime());
+    this.getHistory();
+  }
+
+  public addDay() {
+    console.log("adding");
+    this.selectedDay.setDate(this.selectedDay.getDate() + 1);
+    this.selectedDay = new Date(this.selectedDay.getTime())
+    this.getHistory();
+  }
+
   public async getHistory() {
-    var date = Math.floor(new Date().getTime() / 1000);
+    var date = Math.floor(this.selectedDay.getTime() / 1000);
     var response = (await lastValueFrom(this.http.get(AppConfig.backendUrl + "/api/day/" + date))) as HistoryResponse;
     this.prodDataPoints = response.production.map(entry => { return { x: new Date(entry._time), y: entry._value, label: 'Production' } });
     this.usageDataPoints = response.usage.map(entry => { return { x: new Date(entry._time), y: entry._value, label: 'Usage' } });
@@ -96,7 +118,7 @@ export class HistoryPage implements ViewDidEnter {
   }
 
   ionViewDidEnter(): void {
-    this.getHistory()
+    this.getHistory();
   }
 
 }

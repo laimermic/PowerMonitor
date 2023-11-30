@@ -121,7 +121,7 @@ function getFromDay(measurement: string, day: Date): Promise<Array<InfluxResult>
                 const o = tableMeta.toObject(row) as InfluxResult;
                 points.push(o)
             }, complete() {
-                var filtered = points.filter(point => new Date(point._time).getDay() == day.getDay())
+                var filtered = points.filter(point => new Date(point._time).getDate() == day.getDate())
                 resolve(filtered)
             },
             error(error) {

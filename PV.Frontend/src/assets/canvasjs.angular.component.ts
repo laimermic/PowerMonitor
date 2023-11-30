@@ -19,7 +19,7 @@ var CanvasJS = require('./canvasjs.min');
 	standalone: true,
 	selector: 'canvasjs-chart',
 	template: '<div id="{{chartContainerId}}" class="custom-container-class"></div>',
-	styles: ['.custom-container-class {width: 100%; height: 400px; .canvasjs-chart-credit { display: none; }}']
+	styles: ['.custom-container-class {width: 100%; height: 100%; .canvasjs-chart-credit { display: none; }}']
 })
 
 class CanvasJSChart implements AfterViewInit, OnChanges, OnDestroy {
@@ -39,7 +39,7 @@ class CanvasJSChart implements AfterViewInit, OnChanges, OnDestroy {
 
 	constructor() {
 		this.options = this.options ? this.options : {};
-		this.styles = this.styles ? this.styles : { width: "100%", position: "relative" };
+		this.styles = this.styles ? this.styles : { width: "100%", height: "100%", position: "relative" };
 		this.styles.height = this.options.height ? this.options.height + "px" : "400px";
 
 		this.chartContainerId = 'canvasjs-angular-chart-container-' + CanvasJSChart._cjsChartContainerId++;
