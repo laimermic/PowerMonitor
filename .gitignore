@@ -137,4 +137,3 @@ PV.Backend/firebase-adminsdk-keys.json
 **/.DS_Store
 .DS_Store
 .vscode
-PV.Frontend/src/assets/appConfig.json

@@ -50,7 +50,7 @@ export class HistoryPage implements ViewDidEnter {
     data.push(prodEntry);
 
     var usageEntry = {
-      type: "line",
+      type: "area",
       color: "#325ea8",
       markerColor: "#325ea8",
       name: "Usage",
@@ -87,7 +87,8 @@ export class HistoryPage implements ViewDidEnter {
   }
 
   public async getHistory() {
-    var response = (await lastValueFrom(this.http.get(AppConfig.backendUrl + "/api/today"))) as HistoryResponse;
+    var date = Math.floor(new Date().getTime() / 1000);
+    var response = (await lastValueFrom(this.http.get(AppConfig.backendUrl + "/api/day/" + date))) as HistoryResponse;
     this.prodDataPoints = response.production.map(entry => { return { x: new Date(entry._time), y: entry._value, label: 'Production' } });
     this.usageDataPoints = response.usage.map(entry => { return { x: new Date(entry._time), y: entry._value, label: 'Usage' } });
     this.renderChart();

@@ -67,10 +67,13 @@ function calculateUsage() {
 async function inserttoMongo() {
     if (document.consumption && document.delivery && document.frequency && document.production && document.usage) {
         await mongo.collection<CurrentEntry>('current').findOneAndUpdate({}, { $set: document }, { upsert: true });
-        var frequencyPoint = new Point('frequency').floatField('value', document.frequency?.value);
-        writeApi.writePoint(frequencyPoint);
+        const difference = new Date().getTime() - document.frequency.time.getTime();
+        if ((new Date().getTime() - document.frequency.time.getTime()) / (1000 * 60) < 2) {
+            var frequencyPoint = new Point('frequency').floatField('value', document.frequency?.value);
+            writeApi.writePoint(frequencyPoint);
+        }
     } else {
-        console.log("Not logging to current due to missing data");
+        //console.log("Not logging to current due to missing data");
     }
 }
 
@@ -103,7 +106,7 @@ function initMongo(): Db {
 
 const mongo = initMongo();
 
-function getFromToday(measurement: string): Promise<Array<InfluxResult>> {
+function getFromDay(measurement: string, day: Date): Promise<Array<InfluxResult>> {
     return new Promise<Array<InfluxResult>>((resolve, reject) => {
         var today = new Date();
         today.setHours(0, 0, 0, 0);
@@ -118,7 +121,7 @@ function getFromToday(measurement: string): Promise<Array<InfluxResult>> {
                 const o = tableMeta.toObject(row) as InfluxResult;
                 points.push(o)
             }, complete() {
-                var filtered = points.filter(point => new Date(point._time).getDay() == new Date().getDay())
+                var filtered = points.filter(point => new Date(point._time).getDay() == day.getDay())
                 resolve(filtered)
             },
             error(error) {
@@ -169,26 +172,12 @@ app.post('/upload', express.json({ type(req) { return true } }), async (req: Req
     res.end();
 });
 
-//app.post('/api/uploadcurrent', express.json({ type(req) { return true } }), async (req: Request, res: Response) => {
-//    var body = req.body as PowerDocument;
-//    var result = await mongo.collection<CurrentEntry>('current').findOneAndUpdate({}, { $set: { production: { time: new Date(), value: Number(body.Body.PAC.Values[1]) } } }, { upsert: true });
-//    if (result.ok == 1) {
-//        res.end();
-//    } else {
-//        res.status(500);
-//        res.end();
-//    }
-//})
-
 app.post('/uploadfreq', express.text({ type: '*/*' }), async (req: Request, res: Response) => {
     var xmldocument = new DOMParser().parseFromString(req.body);
     if (xmldocument) {
         var frequency = Number(xmldocument.getElementById("Hz")?.lastChild?.nodeValue ?? "-1");
         if (frequency != -1) {
             document.frequency = new CurrentField(new Date(), frequency);
-            // var point = new Point('frequency').floatField('value', frequency);
-            // writeApi.writePoint(point);
-            // await mongo.collection<CurrentEntry>('current').findOneAndUpdate({}, { $set: { frequency: { time: new Date(), value: frequency } } }, { upsert: true });
             if (frequency < 49.85) {
                 if (frequency < 49.8) {
                     sendAlert("Frequency is now at " + frequency.toFixed(2) + "Hz", "Power Grid Frequency has passed critical limit!");
@@ -209,16 +198,6 @@ app.post('/uploadconsumption', express.text({ type: '*/*' }), (req: Request, res
     res.send()
 })
 
-//app.post('/uploadcurrentconsumption', express.text({ type: '*/*' }), async (req: Request, res: Response) => {
-//    var result = await mongo.collection<CurrentEntry>('current').findOneAndUpdate({}, { $set: { consumption: { time: new Date(), value: Number(req.body) } } }, { upsert: true });
-//    if (result.ok == 1) {
-//        res.end();
-//    } else {
-//        res.status(500);
-//        res.end();
-//    }
-//})
-
 app.post('/uploaddelivery', express.text({ type: '*/*' }), (req: Request, res: Response) => {
     var delivery = Number(req.body);
     document.delivery = new CurrentField(new Date(), delivery);
@@ -227,31 +206,23 @@ app.post('/uploaddelivery', express.text({ type: '*/*' }), (req: Request, res: R
     res.end();
 })
 
-//app.post('/uploadcurrentdelivery', express.text({ type: '*/*' }), async (req: Request, res: Response) => {
-//    var result = await mongo.collection<CurrentEntry>('current').findOneAndUpdate({}, { $set: { delivery: { time: new Date(), value: Number(req.body) } } }, { upsert: true });
-//    if (result.ok == 1) {
-//        res.end();
-//    } else {
-//        res.status(500);
-//        res.end();
-//    }
-//})
-
-app.get('/api/today', async (req: Request, res: Response) => {
-    var prodEntries = await getFromToday('production');
-    var usageEntries = await getFromToday('usage')
+app.get('/api/day/:unix', async (req: Request, res: Response) => {
+    var myDate = new Date(Number(req.params.unix) * 1000);
+    var prodEntries = await getFromDay('production', myDate);
+    var usageEntries = await getFromDay('usage', myDate)
     var response = new HistoryResponse(prodEntries, usageEntries);
     res.send(response);
 })
 
-app.get('/api/freqtoday', async (req: Request, res: Response) => {
-    var freqEntries = await getFromToday('frequency');
+app.get('/api/freqday/:unix', async (req: Request, res: Response) => {
+    var myDate = new Date(Number(req.params.unix) * 1000);
+    var freqEntries = await getFromDay('frequency', myDate);
     res.send(freqEntries)
 });
 
 app.post('/api/registerNotification', express.json({ type: '*/*' }), async (req: Request, res: Response) => {
     var client = req.body as NotificationClient;
-    //mongo.collection<NotificationClient>('clients').updateOne({ token: client.token }, { $set: client }, { upsert: true });
+    mongo.collection<NotificationClient>('clients').updateOne({ token: client.token }, { $set: client }, { upsert: true });
     res.end();
 })
 
@@ -259,7 +230,7 @@ cron.schedule('*/5 * * * *', () => {
     insertToInflux();
 })
 
-cron.schedule('*/5 * * * * *', () => {
+cron.schedule('*/10 * * * * *', () => {
     inserttoMongo();
 });
 

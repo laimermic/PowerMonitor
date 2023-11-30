@@ -16,12 +16,29 @@ import { AppConfig } from '../models/AppConfig';
 export class CurrentViewPage implements ViewDidEnter, ViewDidLeave {
 
   public currentEntry: CurrentEntry | null = null;
-  public currentNeed: number = 0;
   public interval: any = 0;
+  public houseusage: number = 0;
+  public selfsufficiency: number = 0;
   constructor(private http: HttpClient) { }
 
   public async getNow() {
     this.currentEntry = (await lastValueFrom(this.http.get(AppConfig.backendUrl + "/api/now"))) as CurrentEntry;
+    console.log(this.currentEntry);
+    var usage = this.currentEntry?.usage?.value ?? 0;
+    var prod = this.currentEntry?.production?.value ?? 1;
+    console.log("Usage: " + usage);
+    console.log("Prod: " + prod);
+    if ((usage / prod) > 1) {
+      this.houseusage = 100;
+    } else {
+      this.houseusage = (usage / prod) * 100;
+    }
+
+    if ((prod / usage) > 1) {
+      this.selfsufficiency = 100;
+    } else {
+      this.selfsufficiency = (prod / usage) * 100;
+    }
   }
   ionViewDidEnter() {
     this.interval = setInterval(() => {
