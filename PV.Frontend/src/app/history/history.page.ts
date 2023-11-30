@@ -64,7 +64,7 @@ export class HistoryPage implements ViewDidEnter {
     }
     data.push(usageEntry)
 
-    var maxDate = new Date();
+    var maxDate = this.selectedDay;
     maxDate.setHours(23);
     maxDate.setMinutes(59);
     this.chartOptions = {
