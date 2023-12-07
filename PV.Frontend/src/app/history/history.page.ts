@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicModule, ViewDidEnter } from '@ionic/angular';
+import { IonicModule, ViewDidEnter, ViewDidLeave } from '@ionic/angular';
 import { InfluxResult } from '../models/InfluxResult';
 import { HistoryResponse } from '../models/HistoryResponse';
 import { CanvasJSChart } from 'src/assets/canvasjs.angular.component';
@@ -9,6 +9,7 @@ import { ChartDataPoint, ChartDataSeriesOptions } from 'canvasjs';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
 import { AppConfig } from '../models/AppConfig';
+import { DayEntry } from '../models/DayEntry';
 
 @Component({
   selector: 'app-history',
@@ -17,12 +18,14 @@ import { AppConfig } from '../models/AppConfig';
   standalone: true,
   imports: [IonicModule, CanvasJSChart, CommonModule, FormsModule, HttpClientModule]
 })
-export class HistoryPage implements ViewDidEnter {
+export class HistoryPage implements ViewDidEnter, ViewDidLeave {
 
   public prodEntries: InfluxResult[] | null = new Array<InfluxResult>();
   public prodDataPoints: Array<CanvasJS.ChartDataPoint> | null = null;
   public usageDataPoints: Array<CanvasJS.ChartDataPoint> | null = null;
   public currentView: string = 'today';
+  public dayEntry: DayEntry | null = null;
+  private refresher: any;
   public selectedDay: Date = new Date();
   public today: Date = new Date();
   public chartOptions: CanvasJS.ChartOptions | null = {
@@ -117,8 +120,23 @@ export class HistoryPage implements ViewDidEnter {
     this.loading = false;
   }
 
+  public async getFullDay(date: Date) {
+    this.http.get(AppConfig.backendUrl + '/api/fullday/' + date.getTime()).subscribe(response => {
+      console.log(response);
+      this.dayEntry = response as DayEntry;
+    })
+  }
+
   ionViewDidEnter(): void {
     this.getHistory();
+    this.getFullDay(new Date());
+    this.refresher = setInterval(() => {
+      this.getHistory();
+    }, 30000)    
+  }
+
+  ionViewDidLeave(): void {
+    clearInterval(this.refresher);
   }
 
 }
