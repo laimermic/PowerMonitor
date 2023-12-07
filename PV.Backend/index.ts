@@ -14,6 +14,7 @@ import { applicationDefault, initializeApp } from 'firebase-admin/app';
 import { messaging } from 'firebase-admin';
 import { CurrentField } from './models/CurrentField';
 import dotenv from 'dotenv'
+import _ from 'lodash';
 
 //E-Mail Monate
 const monthNames = ["January", "February", "March", "April", "May", "June",
@@ -49,12 +50,37 @@ var cron = require('node-cron');
 // });
 const app: Express = express();
 
-function calculateUsage() {
+async function calculateUsage() {
     if (document.delivery?.value == 0) {
-        document.usage = new CurrentField(new Date(), (document?.production?.value ?? 0) + (document?.consumption?.value ?? 0));
+        document.usage = new CurrentField(new Date(), (document?.production?.value ?? 0) + (document?.consumption?.value ?? 0), document.usage?.time ?? new Date());
     } else {
-        document.usage = new CurrentField(new Date(), (document.production?.value ?? 0) - (document.delivery?.value ?? 0));
+        document.usage = new CurrentField(new Date(), (document.production?.value ?? 0) - (document.delivery?.value ?? 0), document.usage?.time ?? new Date());
     }
+
+    var usageAdd = document.usage ? calculateWh(document.usage?.oldTime ?? new Date(), document.usage?.value ?? 0) : 0;    
+    if (usageAdd > 0) {
+        let start = new Date();
+        start.setHours(0);
+        start.setMinutes(0);
+        start.setSeconds(0);
+
+        let end = new Date();
+        end.setHours(23,59,59);
+        var currentDayEntry = await mongo.collection<DayEntry>('DayEntry').findOne({
+            day: {
+                $gte: start,
+                $lte: end
+            }
+        })
+        if (currentDayEntry) {
+            currentDayEntry.usage = currentDayEntry.usage + usageAdd;
+            await mongo.collection<DayEntry>('DayEntry').updateOne({_id: currentDayEntry._id}, { $set: currentDayEntry});
+        } else {
+            let newcurrentDayEntry = new DayEntry(0, 0, 0, usageAdd, new Date());
+            await mongo.collection<DayEntry>('DayEntry').insertOne(newcurrentDayEntry);
+        }
+    }
+
     console.log("==============================================");
     console.log("Recalculated the numbers");
     console.log("Production: " + document.production?.value);
@@ -123,7 +149,10 @@ function getFromDay(measurement: string, day: Date): Promise<Array<InfluxResult>
                 const o = tableMeta.toObject(row) as InfluxResult;
                 points.push(o)
             }, complete() {
-                var filtered = points.filter(point => new Date(point._time).getDate() == day.getDate())
+                var filtered = points.filter(point => {
+                    return new Date(point._time).getDate() == day.getDate()
+                });
+                //console.log(filtered.length)
                 resolve(filtered)
             },
             error(error) {
@@ -133,6 +162,24 @@ function getFromDay(measurement: string, day: Date): Promise<Array<InfluxResult>
         })
 
     })
+}
+
+function calculateWh(startTime: Date, power: number): number {
+    let now = new Date();
+    console.log("nowtime: " + now.getTime());
+    console.log("constime: " + startTime.getTime());
+    let timeDifference = (now.getTime() - (startTime.getTime() ?? new Date().getTime())) / 1000;
+    if (timeDifference > 90) {
+        console.log('Not logging to log due to too huge time difference!');
+        return 0;
+    }
+    else {
+        let timeDifferenceinSeconds = timeDifference / 3600;
+        console.log("passedW: " + power);
+        console.log("difference" + timeDifferenceinSeconds);
+        let addedWh = (power ?? 0) * timeDifferenceinSeconds;
+        return addedWh;
+    }
 }
 
 
@@ -169,8 +216,27 @@ app.get('/api/now/', async (req: Request, res: Response) => {
 
 app.post('/upload', express.json({ type(req) { return true } }), async (req: Request, res: Response) => {
     var body = req.body as PowerDocument;
-    document.production = new CurrentField(new Date(), Number(body.Body.PAC.Values[1]));
+    console.log(body);
+    document.production = new CurrentField(new Date(), Number(body.Body.PAC.Values[1]), document.production?.time ?? new Date());
     calculateUsage();
+    let start = new Date();
+    start.setHours(0, 0, 0);
+
+    let end = new Date();
+    end.setHours(23, 59, 59);
+    var currentDayEntry = await mongo.collection<DayEntry>('DayEntry').findOne({
+        day: {
+            $gte: start,
+            $lte: end
+        }
+    })
+    if (currentDayEntry) {
+        currentDayEntry.produced = body.Body.DAY_ENERGY.Values[1];
+        await mongo.collection<DayEntry>('DayEntry').updateOne({_id: currentDayEntry._id}, { $set: currentDayEntry});
+    } else {
+        let newcurrentDayEntry = new DayEntry(body.Body.DAY_ENERGY.Values[1], 0, 0, 0, new Date());
+        await mongo.collection<DayEntry>('DayEntry').insertOne(newcurrentDayEntry);
+    }
     res.end();
 });
 
@@ -179,7 +245,7 @@ app.post('/uploadfreq', express.text({ type: '*/*' }), async (req: Request, res:
     if (xmldocument) {
         var frequency = Number(xmldocument.getElementById("Hz")?.lastChild?.nodeValue ?? "-1");
         if (frequency != -1) {
-            document.frequency = new CurrentField(new Date(), frequency);
+            document.frequency = new CurrentField(new Date(), frequency, document.frequency?.time ?? new Date());
             if (frequency < 49.85) {
                 if (frequency < 49.8) {
                     sendAlert("Frequency is now at " + frequency.toFixed(2) + "Hz", "Power Grid Frequency has passed critical limit!");
@@ -192,32 +258,94 @@ app.post('/uploadfreq', express.text({ type: '*/*' }), async (req: Request, res:
     res.end();
 });
 
-app.post('/uploadconsumption', express.text({ type: '*/*' }), (req: Request, res: Response) => {
+app.post('/uploadconsumption', express.text({ type: '*/*' }), async (req: Request, res: Response) => {
     var consumption = Number(req.body);
-    document.consumption = new CurrentField(new Date(), consumption);
+    document.consumption = new CurrentField(new Date(), consumption, document.consumption?.time ?? new Date());
     calculateUsage();
+    var consumptionAdd = document.consumption ? calculateWh(document.consumption?.oldTime ?? new Date(), document.consumption?.value ?? 0) : 0;
+    
+    if (consumptionAdd > 0) {
+        let start = new Date();
+        start.setHours(0);
+        start.setMinutes(0);
+        start.setSeconds(0);
+
+        let end = new Date();
+        end.setHours(23,59,59);
+        var currentDayEntry = await mongo.collection<DayEntry>('DayEntry').findOne({
+            day: {
+                $gte: start,
+                $lte: end
+            }
+        })
+        if (currentDayEntry) {
+            currentDayEntry.consumption = currentDayEntry.consumption + consumptionAdd;
+            await mongo.collection<DayEntry>('DayEntry').updateOne({_id: currentDayEntry._id}, { $set: currentDayEntry});
+        } else {
+            let newcurrentDayEntry = new DayEntry(0, consumptionAdd, 0, 0, new Date());
+            await mongo.collection<DayEntry>('DayEntry').insertOne(newcurrentDayEntry);
+        }
+    }
     res.statusCode = 200;
-    res.send()
+    res.send();
 })
 
-app.post('/uploaddelivery', express.text({ type: '*/*' }), (req: Request, res: Response) => {
+app.get('/api/fullday/:unix', async (req: Request, res: Response) => {
+    var dayDate = new Date(Number(req.params.unix));
+    var startLimit = new Date(Number(req.params.unix));
+    startLimit.setHours(0, 0, 0);
+    var endLimit = new Date(Number(req.params.unix));
+    endLimit.setHours(23, 59, 59);
+    var dayEntry = await mongo.collection<DayEntry>('DayEntry').findOne({ day: {
+        $gte: startLimit,
+        $lte: endLimit
+    }});
+    res.send(dayEntry)
+})
+
+app.post('/uploaddelivery', express.text({ type: '*/*' }), async (req: Request, res: Response) => {
     var delivery = Number(req.body);
-    document.delivery = new CurrentField(new Date(), delivery);
+    document.delivery = new CurrentField(new Date(), delivery, document.delivery?.time ?? new Date());
     calculateUsage();
+    var deliveryAdd = document.delivery ? calculateWh(document.delivery?.oldTime ?? new Date(), document.delivery?.value ?? 0) : 0;    
+    if (deliveryAdd > 0) {
+        let start = new Date();
+        start.setHours(0);
+        start.setMinutes(0);
+        start.setSeconds(0);
+
+        let end = new Date();
+        end.setHours(23,59,59);
+        var currentDayEntry = await mongo.collection<DayEntry>('DayEntry').findOne({
+            day: {
+                $gte: start,
+                $lte: end
+            }
+        })
+        if (currentDayEntry) {
+            currentDayEntry.delivery = currentDayEntry.delivery + deliveryAdd;
+            await mongo.collection<DayEntry>('DayEntry').updateOne({_id: currentDayEntry._id}, { $set: currentDayEntry});
+        } else {
+            let newcurrentDayEntry = new DayEntry(0, 0, deliveryAdd, 0, new Date());
+            await mongo.collection<DayEntry>('DayEntry').insertOne(newcurrentDayEntry);
+        }
+    }
     res.statusCode = 200;
     res.end();
 })
 
 app.get('/api/day/:unix', async (req: Request, res: Response) => {
-    var myDate = new Date(Number(req.params.unix) * 1000);
+    var myDate = new Date(Number(req.params.unix));
+    //console.log(myDate.toLocaleString())
     var prodEntries = await getFromDay('production', myDate);
-    var usageEntries = await getFromDay('usage', myDate)
+    var usageEntries = await getFromDay('usage', myDate);
     var response = new HistoryResponse(prodEntries, usageEntries);
     res.send(response);
 })
 
 app.get('/api/freqday/:unix', async (req: Request, res: Response) => {
-    var myDate = new Date(Number(req.params.unix) * 1000);
+    var myDate = new Date(Number(req.params.unix));
+    //console.log(myDate.toLocaleString())
     var freqEntries = await getFromDay('frequency', myDate);
     res.send(freqEntries)
 });
