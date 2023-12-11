@@ -42,11 +42,28 @@
         <h1>{{this.currentEntry?.delivery != null ? (this.currentEntry?.delivery?.value ?? 0) > 0  ? 'Einspeisung' : 'Bezug' : 'n/a'}}</h1>
       </ion-card-content>
     </ion-card>
-    <ion-segment mode="ios" value="today" (ionChange)="segmentChanged($event)">
-      <ion-segment-button value="today">Heute</ion-segment-button>
-      <ion-segment-button value="lastHour">Stunde</ion-segment-button>
-      <ion-segment-button value="last5Minutes">5 Minuten</ion-segment-button>
-    </ion-segment>
-    <canvasjs-chart class="chart" [options]="this.chartOptions"></canvasjs-chart>
+    <div *ngIf="!this.loading" class="data-wrapper">
+      <ion-segment mode="ios" value="today" (ionChange)="segmentChanged($event)">
+        <ion-segment-button value="today">Heute</ion-segment-button>
+        <ion-segment-button value="lastHour">Stunde</ion-segment-button>
+        <ion-segment-button value="last5Minutes">5 Minuten</ion-segment-button>
+      </ion-segment>
+      <canvasjs-chart class="chart" [options]="this.chartOptions"></canvasjs-chart>
+    </div>
+    <div class="hours-grid" *ngIf="this.hoursEntries.length > 0">
+      <ion-card *ngFor="let hourEntry of this.hoursEntries" [ngClass]="{'stable': ((this.hourEntry?.min ?? 49.85) >= 49.85), 'warning': ((this.hourEntry?.min ?? 49.85) < 49.85), 'critical': (this.hourEntry?.min ?? 49.85) <= 49.8}">
+        <ion-card-header>
+          <ion-card-title>{{hourEntry.hour < 10 ? '0' + hourEntry.hour : hourEntry.hour}}:00 - {{hourEntry.hour < 9 ? '0' + (hourEntry.hour + 1) : hourEntry.hour + 1}}:00</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <h2>Min: {{hourEntry.min.toFixed(2)}} Hz</h2>
+          <h2>Max: {{hourEntry.max.toFixed(2)}} Hz</h2>
+        </ion-card-content>
+      </ion-card>
+    </div>
+    <div *ngIf="this.loading" class="loading-wrapper">
+      <ion-spinner color="primary"></ion-spinner>
+      <h2>Lade Daten...</h2>
+    </div>
   </div>
 </ion-content>

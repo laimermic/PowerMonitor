@@ -10,6 +10,7 @@ import { CanvasJSChart } from 'src/assets/canvasjs.angular.component';
 import { ChartDataPoint } from 'canvasjs';
 import { BlinkComponent } from 'src/assets/blink.component';
 import { AppConfig } from '../models/AppConfig';
+import { FrequencyHour } from '../models/FrequencyHour';
 
 @Component({
   selector: 'app-power-grid',
@@ -30,7 +31,10 @@ export class PowerGridPage implements ViewDidEnter, ViewDidLeave {
   };
   public historyInterval: any;
   public points: InfluxResult[] = new Array<InfluxResult>();
+  public loading = true;
   public frequencyDataPoints: Array<CanvasJS.ChartDataPoint> | null = null;
+
+  public hoursEntries: Array<FrequencyHour> = new Array<FrequencyHour>();
 
   constructor(private http: HttpClient) { }
 
@@ -56,6 +60,23 @@ export class PowerGridPage implements ViewDidEnter, ViewDidLeave {
     this.points = (await lastValueFrom(this.http.get(AppConfig.backendUrl + "/api/freqday/" + date))) as Array<InfluxResult>;
     this.frequencyDataPoints = this.points.map(point => { return { x: new Date(point._time), y: Math.round((point._value + Number.EPSILON) * 100) / 100 } });
     this.renderChart();
+    this.calculateHourEntries();
+    this.loading = false;
+  }
+
+  public calculateHourEntries() {
+    let newHoursEntries = new Array<FrequencyHour>();
+    var minDate = new Date(Math.min.apply(Math, this.points.map(function (o) { return new Date(o._time)?.getTime(); })));
+    var hourofDate = minDate.getUTCHours();
+    for (let currentHour = hourofDate; currentHour <= 23; currentHour++) {
+      var currentHourPoints = this.points.filter(point => (new Date(point._time)?.getUTCHours() == currentHour));
+      if (currentHourPoints.length > 0) {
+        var min = Math.min.apply(Math, currentHourPoints.map(o => o._value));
+        var max = Math.max.apply(Math, currentHourPoints.map(o => o._value));
+        newHoursEntries.push(new FrequencyHour(currentHour, min, max));
+      }
+      this.hoursEntries = newHoursEntries;
+    }
   }
 
   public renderChart() {
@@ -84,7 +105,7 @@ export class PowerGridPage implements ViewDidEnter, ViewDidLeave {
       axisX: {
         valueFormatString: "HH:mm",
         minimum: xMin.getTime(),
-        maximum: new Date().getTime()
+        maximum: Math.max.apply(Math, this.frequencyDataPoints?.map(function (o) { return (o?.x as Date)?.getTime(); }) ?? new Array<number>()),
       },
       axisY: {
         title: "Frequency in Hz",
@@ -121,14 +142,14 @@ export class PowerGridPage implements ViewDidEnter, ViewDidLeave {
   }
 
   async ionViewDidEnter(): Promise<void> {
+    this.loading = true;
     this.interval = setInterval(() => {
       this.getFreq();
-      this.renderChart
     }, 10000)
     this.getFreq();
     this.historyInterval = setInterval(async () => {
       await this.getHistory();
-    }, 20000)
+    }, 60000)
     await this.getHistory();
   }
 

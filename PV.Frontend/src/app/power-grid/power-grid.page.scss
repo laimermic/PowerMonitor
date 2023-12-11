@@ -39,3 +39,27 @@
     border: 1px solid #184080;
     background-color: rgba($color: #184080, $alpha: 0.2);
 }
+
+.content-wrapper {
+    height: 100%;
+    .loading-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 50px;
+    }
+    .data-wrapper {
+        height: 40%;
+    }
+    .hours-grid {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-gap: 10px;
+        padding: 70px 0px;
+        ion-card {
+            cursor: pointer;
+        }
+    }
+
+}
