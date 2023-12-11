@@ -57,7 +57,7 @@ async function calculateUsage() {
         document.usage = new CurrentField(new Date(), (document.production?.value ?? 0) - (document.delivery?.value ?? 0), document.usage?.time ?? new Date());
     }
 
-    var usageAdd = document.usage ? calculateWh(document.usage?.oldTime ?? new Date(), document.usage?.value ?? 0) : 0;    
+    /*var usageAdd = document.usage ? calculateWh(document.usage?.oldTime ?? new Date(), document.usage?.value ?? 0) : 0;    
     if (usageAdd > 0) {
         let start = new Date();
         start.setHours(0);
@@ -79,19 +79,20 @@ async function calculateUsage() {
             let newcurrentDayEntry = new DayEntry(0, 0, 0, usageAdd, new Date());
             await mongo.collection<DayEntry>('DayEntry').insertOne(newcurrentDayEntry);
         }
-    }
+    }*/
 
-    console.log("==============================================");
-    console.log("Recalculated the numbers");
-    console.log("Production: " + document.production?.value);
-    console.log("Delivery: " + document.delivery?.value);
-    console.log("Consumption: " + document.consumption?.value);
-    console.log("Usage: " + document.usage?.value);
-    console.log("==============================================");
+    // console.log("==============================================");
+    // console.log("Recalculated the numbers");
+    // console.log("Production: " + document.production?.value);
+    // console.log("Delivery: " + document.delivery?.value);
+    // console.log("Consumption: " + document.consumption?.value);
+    // console.log("Usage: " + document.usage?.value);
+    // console.log("==============================================");
 }
 
 async function inserttoMongo() {
     if (document.consumption && document.delivery && document.production && document.usage) {
+        console.log("logging to current")
         await mongo.collection<CurrentEntry>('current').findOneAndUpdate({}, { $set: document }, { upsert: true });
     } else {
         console.log("Not logging to current due to missing data");
@@ -166,8 +167,8 @@ function getFromDay(measurement: string, day: Date): Promise<Array<InfluxResult>
 
 function calculateWh(startTime: Date, power: number): number {
     let now = new Date();
-    console.log("nowtime: " + now.getTime());
-    console.log("constime: " + startTime.getTime());
+    // console.log("nowtime: " + now.getTime());
+    // console.log("constime: " + startTime.getTime());
     let timeDifference = (now.getTime() - (startTime.getTime() ?? new Date().getTime())) / 1000;
     if (timeDifference > 90) {
         console.log('Not logging to log due to too huge time difference!');
@@ -175,8 +176,8 @@ function calculateWh(startTime: Date, power: number): number {
     }
     else {
         let timeDifferenceinSeconds = timeDifference / 3600;
-        console.log("passedW: " + power);
-        console.log("difference" + timeDifferenceinSeconds);
+        // console.log("passedW: " + power);
+        // console.log("difference" + timeDifferenceinSeconds);
         let addedWh = (power ?? 0) * timeDifferenceinSeconds;
         return addedWh;
     }
@@ -185,7 +186,6 @@ function calculateWh(startTime: Date, power: number): number {
 
 async function sendAlert(message: string, title: string) {
     var cursor = mongo.collection<NotificationClient>("clients").find();
-    var clients = new Array<WithId<NotificationClient>>();
 
     var tokens = await cursor.map(doc => {
         return doc.token;
@@ -216,7 +216,6 @@ app.get('/api/now/', async (req: Request, res: Response) => {
 
 app.post('/upload', express.json({ type(req) { return true } }), async (req: Request, res: Response) => {
     var body = req.body as PowerDocument;
-    console.log(body);
     document.production = new CurrentField(new Date(), Number(body.Body.PAC.Values[1]), document.production?.time ?? new Date());
     calculateUsage();
     let start = new Date();
@@ -224,17 +223,21 @@ app.post('/upload', express.json({ type(req) { return true } }), async (req: Req
 
     let end = new Date();
     end.setHours(23, 59, 59);
-    var currentDayEntry = await mongo.collection<DayEntry>('DayEntry').findOne({
-        day: {
-            $gte: start,
-            $lte: end
+    var entryCursor = mongo.collection<DayEntry>('DayEntry').find();
+    var dayEntries = (await entryCursor.map(doc => {
+        let lastDate = new Date(doc.lastupdated);
+        if (lastDate.getTime() > start.getTime() && lastDate.getTime() < end.getTime()) {
+            return doc;
         }
-    })
-    if (currentDayEntry) {
-        currentDayEntry.produced = body.Body.DAY_ENERGY.Values[1];
-        await mongo.collection<DayEntry>('DayEntry').updateOne({_id: currentDayEntry._id}, { $set: currentDayEntry});
+    }).toArray());
+    var dayEntry = dayEntries[0];
+    if (dayEntry) {
+        dayEntry.produced = body.Body.DAY_ENERGY.Values[1];
+        dayEntry.usage = dayEntry.produced - dayEntry.delivery + dayEntry.consumption;
+        dayEntry.lastupdated = new Date().getTime();
+        await mongo.collection<DayEntry>('DayEntry').updateOne({_id: dayEntry._id}, { $set: dayEntry});
     } else {
-        let newcurrentDayEntry = new DayEntry(body.Body.DAY_ENERGY.Values[1], 0, 0, 0, new Date());
+        let newcurrentDayEntry = new DayEntry(body.Body.DAY_ENERGY.Values[1], 0, 0, 0, new Date().getTime());
         await mongo.collection<DayEntry>('DayEntry').insertOne(newcurrentDayEntry);
     }
     res.end();
@@ -272,17 +275,21 @@ app.post('/uploadconsumption', express.text({ type: '*/*' }), async (req: Reques
 
         let end = new Date();
         end.setHours(23,59,59);
-        var currentDayEntry = await mongo.collection<DayEntry>('DayEntry').findOne({
-            day: {
-                $gte: start,
-                $lte: end
+        var entryCursor = mongo.collection<DayEntry>('DayEntry').find();
+        var dayEntries = (await entryCursor.map(doc => {
+            let lastDate = new Date(doc.lastupdated);
+            if (lastDate.getTime() > start.getTime() && lastDate.getTime() < end.getTime()) {
+                return doc;
             }
-        })
-        if (currentDayEntry) {
-            currentDayEntry.consumption = currentDayEntry.consumption + consumptionAdd;
-            await mongo.collection<DayEntry>('DayEntry').updateOne({_id: currentDayEntry._id}, { $set: currentDayEntry});
+        }).toArray());
+        var dayEntry = dayEntries[0];
+        if (dayEntry) {
+            dayEntry.consumption = dayEntry.consumption + consumptionAdd;
+            dayEntry.usage = dayEntry.produced - dayEntry.delivery + dayEntry.consumption;
+            dayEntry.lastupdated = new Date().getTime();
+            await mongo.collection<DayEntry>('DayEntry').updateOne({_id: dayEntry._id}, { $set: dayEntry});
         } else {
-            let newcurrentDayEntry = new DayEntry(0, consumptionAdd, 0, 0, new Date());
+            let newcurrentDayEntry = new DayEntry(0, consumptionAdd, 0, 0, new Date().getTime() / 1000);
             await mongo.collection<DayEntry>('DayEntry').insertOne(newcurrentDayEntry);
         }
     }
@@ -316,17 +323,21 @@ app.post('/uploaddelivery', express.text({ type: '*/*' }), async (req: Request, 
 
         let end = new Date();
         end.setHours(23,59,59);
-        var currentDayEntry = await mongo.collection<DayEntry>('DayEntry').findOne({
-            day: {
-                $gte: start,
-                $lte: end
+        var entryCursor = mongo.collection<DayEntry>('DayEntry').find();
+        var dayEntries = (await entryCursor.map(doc => {
+            let lastDate = new Date(doc.lastupdated);
+            if (lastDate.getTime() > start.getTime() && lastDate.getTime() < end.getTime()) {
+                return doc;
             }
-        })
-        if (currentDayEntry) {
-            currentDayEntry.delivery = currentDayEntry.delivery + deliveryAdd;
-            await mongo.collection<DayEntry>('DayEntry').updateOne({_id: currentDayEntry._id}, { $set: currentDayEntry});
+        }).toArray());
+        var dayEntry = dayEntries[0];
+        if (dayEntry) {
+            dayEntry.delivery = dayEntry.delivery + deliveryAdd;
+            dayEntry.usage = dayEntry.produced - dayEntry.delivery + dayEntry.consumption;
+            dayEntry.lastupdated = new Date().getTime();
+            await mongo.collection<DayEntry>('DayEntry').updateOne({_id: dayEntry._id}, { $set: dayEntry});
         } else {
-            let newcurrentDayEntry = new DayEntry(0, 0, deliveryAdd, 0, new Date());
+            let newcurrentDayEntry = new DayEntry(0, 0, deliveryAdd, 0, new Date().getTime());
             await mongo.collection<DayEntry>('DayEntry').insertOne(newcurrentDayEntry);
         }
     }
@@ -336,7 +347,6 @@ app.post('/uploaddelivery', express.text({ type: '*/*' }), async (req: Request, 
 
 app.get('/api/day/:unix', async (req: Request, res: Response) => {
     var myDate = new Date(Number(req.params.unix));
-    //console.log(myDate.toLocaleString())
     var prodEntries = await getFromDay('production', myDate);
     var usageEntries = await getFromDay('usage', myDate);
     var response = new HistoryResponse(prodEntries, usageEntries);
@@ -345,7 +355,6 @@ app.get('/api/day/:unix', async (req: Request, res: Response) => {
 
 app.get('/api/freqday/:unix', async (req: Request, res: Response) => {
     var myDate = new Date(Number(req.params.unix));
-    //console.log(myDate.toLocaleString())
     var freqEntries = await getFromDay('frequency', myDate);
     res.send(freqEntries)
 });
