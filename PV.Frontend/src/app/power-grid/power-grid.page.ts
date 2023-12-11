@@ -83,7 +83,7 @@ export class PowerGridPage implements ViewDidEnter, ViewDidLeave {
     var xMin = new Date();
     switch (this.chartView) {
       case 'today':
-        xMin = new Date(this.points[0]._time);
+        xMin = this.points.length > 0 ? new Date(this.points[0]._time) : new Date();
         break;
 
       case 'lastHour':

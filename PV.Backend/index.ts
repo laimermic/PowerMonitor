@@ -281,20 +281,22 @@ app.post('/uploadconsumption', express.text({ type: '*/*' }), async (req: Reques
         let end = new Date();
         end.setHours(23, 59, 59);
         var entryCursor = mongo.collection<DayEntry>('DayEntry').find();
-        var dayEntries = (await entryCursor.map(doc => {
+        let dayEntries = await entryCursor.map((doc: WithId<DayEntry>) => {
             let lastDate = new Date(doc.lastupdated);
             if (lastDate.getTime() > start.getTime() && lastDate.getTime() < end.getTime()) {
                 return doc;
             }
-        }).toArray());
-        var dayEntry = dayEntries[0];
+        }).toArray();
+        dayEntries = dayEntries.filter(doc => doc != null && doc != undefined);
+        let dayEntry = Object.values(dayEntries)[0];
         if (dayEntry) {
             dayEntry.consumption = dayEntry.consumption + consumptionAdd;
             dayEntry.usage = dayEntry.produced - dayEntry.delivery + dayEntry.consumption;
             dayEntry.lastupdated = new Date().getTime();
             await mongo.collection<DayEntry>('DayEntry').updateOne({ _id: dayEntry._id }, { $set: dayEntry });
         } else {
-            let newcurrentDayEntry = new DayEntry(0, consumptionAdd, 0, 0, new Date().getTime() / 1000);
+            let newcurrentDayEntry = new DayEntry(0, consumptionAdd, 0, 0, new Date().getTime());
+            console.log("inserting consumption")
             await mongo.collection<DayEntry>('DayEntry').insertOne(newcurrentDayEntry);
         }
     }
@@ -331,13 +333,14 @@ app.post('/uploaddelivery', express.text({ type: '*/*' }), async (req: Request, 
         let end = new Date();
         end.setHours(23, 59, 59);
         var entryCursor = mongo.collection<DayEntry>('DayEntry').find();
-        var dayEntries = (await entryCursor.map(doc => {
+        let dayEntries = await entryCursor.map((doc: WithId<DayEntry>) => {
             let lastDate = new Date(doc.lastupdated);
             if (lastDate.getTime() > start.getTime() && lastDate.getTime() < end.getTime()) {
                 return doc;
             }
-        }).toArray());
-        var dayEntry = dayEntries[0];
+        }).toArray();
+        dayEntries = dayEntries.filter(doc => doc != null && doc != undefined);
+        let dayEntry = Object.values(dayEntries)[0];
         if (dayEntry) {
             dayEntry.delivery = dayEntry.delivery + deliveryAdd;
             dayEntry.usage = dayEntry.produced - dayEntry.delivery + dayEntry.consumption;
@@ -345,6 +348,7 @@ app.post('/uploaddelivery', express.text({ type: '*/*' }), async (req: Request, 
             await mongo.collection<DayEntry>('DayEntry').updateOne({ _id: dayEntry._id }, { $set: dayEntry });
         } else {
             let newcurrentDayEntry = new DayEntry(0, 0, deliveryAdd, 0, new Date().getTime());
+            console.log("inserting consumption")
             await mongo.collection<DayEntry>('DayEntry').insertOne(newcurrentDayEntry);
         }
     }
