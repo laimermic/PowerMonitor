@@ -22,8 +22,8 @@
     <div *ngIf="!this.loading" class="chart-wrapper">
       <div *ngIf="this.currentView == 'today'" class="view-wrapper">
         <div class="chart-heading">
-          <ion-card-subtitle>30.11.2023</ion-card-subtitle>
-          <ion-card-subtitle>30.32 kWh</ion-card-subtitle>
+          <ion-card-subtitle>{{this.dayEntry?.day | date: 'dd.MM.yyyy'}}</ion-card-subtitle>
+          <ion-card-subtitle>{{(this.dayEntry?.produced ?? 0) /1000}} kWh</ion-card-subtitle>
         </div>
         <div class="canvas-wrapper">
           <canvasjs-chart class="chart" [options]="this.chartOptions"></canvasjs-chart>

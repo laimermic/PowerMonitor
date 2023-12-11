@@ -112,7 +112,7 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
   }
 
   public async getHistory() {
-    var date = Math.floor(this.selectedDay.getTime() / 1000);
+    var date = Math.floor(this.selectedDay.getTime());
     var response = (await lastValueFrom(this.http.get(AppConfig.backendUrl + "/api/day/" + date))) as HistoryResponse;
     this.prodDataPoints = response.production.map(entry => { return { x: new Date(entry._time), y: entry._value, label: 'Production' } });
     this.usageDataPoints = response.usage.map(entry => { return { x: new Date(entry._time), y: entry._value, label: 'Usage' } });
@@ -132,7 +132,7 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
     this.getFullDay(new Date());
     this.refresher = setInterval(() => {
       this.getHistory();
-    }, 30000)    
+    }, 30000)
   }
 
   ionViewDidLeave(): void {

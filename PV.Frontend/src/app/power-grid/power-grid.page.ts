@@ -52,7 +52,7 @@ export class PowerGridPage implements ViewDidEnter, ViewDidLeave {
   }
 
   public async getHistory() {
-    var date = Math.floor(new Date().getTime() / 1000);
+    var date = Math.floor(new Date().getTime());
     this.points = (await lastValueFrom(this.http.get(AppConfig.backendUrl + "/api/freqday/" + date))) as Array<InfluxResult>;
     this.frequencyDataPoints = this.points.map(point => { return { x: new Date(point._time), y: Math.round((point._value + Number.EPSILON) * 100) / 100 } });
     this.renderChart();
