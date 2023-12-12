@@ -5,6 +5,7 @@ import * as CanvasJS from 'canvasjs';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
 import { AppConfig } from '../models/AppConfig';
+import { DayEntry } from '../models/DayEntry';
 
 @Component({
   selector: 'app-tab1',
@@ -19,6 +20,8 @@ export class CurrentViewPage implements ViewDidEnter, ViewDidLeave {
   public interval: any = 0;
   public houseusage: number = 0;
   public selfsufficiency: number = 0;
+  public houseUsageChart: CanvasJS.ChartOptions | null = null;
+  public dayEntry: DayEntry | null = null;
   constructor(private http: HttpClient) { }
 
   public async getNow() {
@@ -40,6 +43,17 @@ export class CurrentViewPage implements ViewDidEnter, ViewDidLeave {
       this.selfsufficiency = (prod / usage) * 100;
     }
   }
+  public async getFullDay() {
+    this.http.get(AppConfig.backendUrl + '/api/fullday/' + new Date().getTime()).subscribe(response => {
+      console.log(response);
+      this.dayEntry = response as DayEntry;
+
+      this.houseUsageChart = {
+        animationEnabled: true
+      }
+    })
+  }
+  
   ionViewDidEnter() {
     this.interval = setInterval(() => {
       this.getNow();

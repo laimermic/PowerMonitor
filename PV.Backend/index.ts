@@ -229,13 +229,14 @@ app.post('/upload', express.json({ type(req) { return true } }), async (req: Req
     let end = new Date();
     end.setHours(23, 59, 59);
     var entryCursor = mongo.collection<DayEntry>('DayEntry').find();
-    var dayEntries = (await entryCursor.map(doc => {
+    let dayEntries = await entryCursor.map((doc: WithId<DayEntry>) => {
         let lastDate = new Date(doc.lastupdated);
         if (lastDate.getTime() > start.getTime() && lastDate.getTime() < end.getTime()) {
             return doc;
         }
-    }).toArray());
-    var dayEntry = dayEntries[0];
+    }).toArray();
+    dayEntries = dayEntries.filter(doc => doc != null && doc != undefined);
+    let dayEntry = Object.values(dayEntries)[0];
     if (dayEntry) {
         dayEntry.produced = body.Body.DAY_ENERGY.Values[1];
         dayEntry.usage = dayEntry.produced - dayEntry.delivery + dayEntry.consumption;

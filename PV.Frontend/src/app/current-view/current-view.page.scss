@@ -58,6 +58,19 @@
     }
 }
 
+.card-header-flex {
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
+    justify-content: space-between;
+}
+
+.graphic-grid {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 40% 60%;
+}
+
 .statistic-item {
     height: 60px;
     .statistic-title {
