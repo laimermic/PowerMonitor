@@ -69,7 +69,7 @@ export class PowerGridPage implements ViewDidEnter, ViewDidLeave {
     var minDate = new Date(Math.min.apply(Math, this.points.map(function (o) { return new Date(o._time)?.getTime(); })));
     var hourofDate = minDate.getUTCHours();
     for (let currentHour = hourofDate; currentHour <= 23; currentHour++) {
-      var currentHourPoints = this.points.filter(point => (new Date(point._time)?.getUTCHours() == currentHour));
+      var currentHourPoints = this.points.filter(point => (new Date(point._time)?.getHours() == currentHour));
       if (currentHourPoints.length > 0) {
         var min = Math.min.apply(Math, currentHourPoints.map(o => o._value));
         var max = Math.max.apply(Math, currentHourPoints.map(o => o._value));

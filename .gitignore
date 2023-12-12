@@ -130,8 +130,6 @@ dist
 .pnp.*
 
 PV_Frontend/node_modules
-ios
-android
 www
 PV.Backend/firebase-adminsdk-keys.json
 **/.DS_Store

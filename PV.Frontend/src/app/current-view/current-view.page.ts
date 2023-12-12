@@ -49,11 +49,15 @@ export class CurrentViewPage implements ViewDidEnter, ViewDidLeave {
       this.dayEntry = response as DayEntry;
 
       this.houseUsageChart = {
-        animationEnabled: true
+        animationEnabled: true,
+        title: {
+          text: ""
+        },
+        data: []
       }
     })
   }
-  
+
   ionViewDidEnter() {
     this.interval = setInterval(() => {
       this.getNow();
