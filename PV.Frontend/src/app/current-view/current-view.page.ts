@@ -24,6 +24,7 @@ export class CurrentViewPage implements ViewDidEnter, ViewDidLeave {
   public houseusage: number = 0;
   public selfsufficiency: number = 0;
   public houseUsageChart: CanvasJS.ChartOptions | null = null;
+  public selfSufficencyChart: CanvasJS.ChartOptions | null = null;
   public dayEntry: DayEntry | null = null;
   constructor(private http: HttpClient) { }
 
@@ -51,33 +52,78 @@ export class CurrentViewPage implements ViewDidEnter, ViewDidLeave {
       console.log(response);
       this.dayEntry = response as DayEntry;
 
-      let data: Array<CanvasJS.ChartDataPoint> = new Array<CanvasJS.ChartDataPoint>(
+      let houseUsageData: Array<CanvasJS.ChartDataPoint> = new Array<CanvasJS.ChartDataPoint>(
         {
           y: this.dayEntry.delivery,
           label: 'Netzeinspeisung',
-          color: '#b8b8b8'
+          color: '#b8b8b8',
+          toolTipContent: '<span style="color:#b8b8b8">{label}</span>: ' + (this.dayEntry.delivery / this.dayEntry.produced * 100).toFixed(0) + '%'
         },
         {
           y: this.dayEntry.produced - this.dayEntry.delivery,
           label: 'Eigenverbrauch',
-          color: '#ffae00'
+          color: '#ffae00',
+          toolTipContent: '<span style="color:#ffae00">{label}</span>: ' + (100 - this.dayEntry.delivery / this.dayEntry.produced * 100).toFixed(0) + '%'
         }
       )
 
       this.houseUsageChart = {
         animationEnabled: true,
+        theme: window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark2" : "light2",
+        backgroundColor: "transparent",
         title: {
           text: (100 - (this.dayEntry.delivery / this.dayEntry.produced) * 100).toFixed(0) + '%',
-          verticalAlign: 'center'
+          verticalAlign: 'center',
+          fontSize: 22,
+          fontFamily: 'Helvetica Neue',
+          fontWeight: 'bold'
         },
         height: 200,
         legend: {
-          
+
         },
         data: [{
-            type: 'doughnut',
-            dataPoints: data,
-            showInLegend: false
+          type: 'doughnut',
+          dataPoints: houseUsageData,
+          showInLegend: false
+        }]
+      }
+
+
+      let selfSufficencyData: Array<CanvasJS.ChartDataPoint> = new Array<CanvasJS.ChartDataPoint>(
+        {
+          y: this.dayEntry.usage - this.dayEntry.consumption,
+          label: 'Eigenerzeugung',
+          color: '#ffae00',
+          toolTipContent: '<span style="color:#ffae00">{label}</span>: ' + (((this.dayEntry?.usage ?? 0) - (this.dayEntry?.consumption ?? 0)) / this.dayEntry.usage * 100).toFixed(0) + '%'
+        },
+        {
+          y: this.dayEntry.consumption,
+          label: 'Netzbezug',
+          color: '#b8b8b8',
+          toolTipContent: '<span style="color:#b8b8b8">{label}</span>: ' + (this.dayEntry.consumption / this.dayEntry.usage * 100).toFixed(0) + '%'
+        }
+      )
+
+      this.selfSufficencyChart = {
+        animationEnabled: true,
+        theme: window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark2" : "light2",
+        backgroundColor: "transparent",
+        title: {
+          text: (((this.dayEntry?.usage ?? 0) - (this.dayEntry?.consumption ?? 0)) / this.dayEntry.usage * 100).toFixed(0) + '%',
+          verticalAlign: 'center',
+          fontSize: 22,
+          fontFamily: 'Helvetica Neue',
+          fontWeight: 'bold'
+        },
+        height: 200,
+        legend: {
+
+        },
+        data: [{
+          type: 'doughnut',
+          dataPoints: selfSufficencyData,
+          showInLegend: false
         }]
       }
     })
@@ -86,9 +132,9 @@ export class CurrentViewPage implements ViewDidEnter, ViewDidLeave {
   ionViewDidEnter() {
     this.interval = setInterval(() => {
       this.getNow();
+      this.getFullDay();
     }, 10000)
     this.getNow();
-    this.getFullDay();
   }
   ionViewDidLeave(): void {
     clearInterval(this.interval);

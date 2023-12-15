@@ -65,17 +65,72 @@
     justify-content: space-between;
 }
 
+.no-padding-header {
+    padding-bottom: 0px;
+}
 .graphic-grid {
     display: grid;
     width: 100%;
     grid-template-columns: 40% 60%;
     height: 200px;
     .housusage-data {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        
         .houseusage {
+            .data-label {
+                margin-left: 10px;
+                h3 {
+                    font-size: 1rem;
+                    font-weight: 300;
+                    color: var(--ion-color-primary-contrast);
+                }
+                h2 {
+                    font-size: 1.5rem;
+                    font-weight: 600;
+                    color: var(--ion-color-primary-contrast);
+                }
+            }
             display: flex;
             flex-direction: row;
             align-content: flex-start;
             align-items: flex-start;
+            ion-icon {
+                font-size: 25px;
+                // border: 1px solid var(--ion-color-primary);
+                // background-color: var(--ion-color-primary);;
+                border-radius: 50%;
+                padding: 10px;
+                color: white;
+            }
+        }
+        .grid-delivery {
+            margin-top: 20px;
+            .data-label {
+                margin-left: 10px;
+                h3 {
+                    font-size: 1rem;
+                    font-weight: 300;
+                    color: var(--ion-color-primary-contrast);
+                }
+                h2 {
+                    font-size: 1.5rem;
+                    font-weight: 600;
+                    color: var(--ion-color-primary-contrast);
+                }
+            }
+            display: flex;
+            flex-direction: row;
+            align-content: flex-start;
+            align-items: flex-start;
+            ion-icon {
+                font-size: 25px;
+                border: #2f4f8b;
+                border-radius: 50%;
+                padding: 10px;
+                // background-color: #2f4f8b;
+            }
         }
     }
 }

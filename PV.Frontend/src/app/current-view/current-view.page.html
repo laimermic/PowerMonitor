@@ -47,27 +47,64 @@
     </ion-card-content>
   </ion-card>
   <ion-card>
-    <ion-card-header>
+    <ion-card-header class="no-padding-header">
       <div class="card-header-flex">
         <ion-card-title>Produktion</ion-card-title>
-        <ion-card-title>32.4 kWH</ion-card-title>
+        <ion-card-title>{{((this.dayEntry?.produced ?? 0) / 1000).toFixed(2)}} kWH</ion-card-title>
       </div>
       <ion-card-subtitle>Eigenverbrauch heute</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
       <div class="graphic-grid">
         <div>
-          <canvasjs-chart [options]="this.houseUsageChart"></canvasjs-chart>
+          <canvasjs-chart *ngIf="this.houseUsageChart" [options]="this.houseUsageChart"></canvasjs-chart>
         </div>
         <div class="housusage-data">
           <div class="houseusage">
-            <ion-icon color="#2f4f8b" name="home-outline"></ion-icon>
-            <div>
-              <ion-card-subtitle>Eigenverbrauch</ion-card-subtitle>
+            <ion-icon color="primary" name="home-outline"></ion-icon>
+            <div class="data-label">
+              <h3>Eigenverbrauch</h3>
+              <h2>{{(((this.dayEntry?.produced ?? 0) - (this.dayEntry?.delivery ?? 0)) / 1000).toFixed(2)}} kWH</h2>
             </div>
           </div>
-          <div class="to-grud">
-
+          <div class="grid-delivery">
+            <ion-icon color="#cfcfcf" name="flash-outline"></ion-icon>
+            <div class="data-label">
+              <h3>Netzeinspeisung</h3>
+              <h2>{{((this.dayEntry?.delivery ?? 0) / 1000).toFixed(2)}} kWH</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header class="no-padding-header">
+      <div class="card-header-flex">
+        <ion-card-title>Verbrauch</ion-card-title>
+        <ion-card-title>{{((this.dayEntry?.usage ?? 0) / 1000).toFixed(2)}} kWH</ion-card-title>
+      </div>
+      <ion-card-subtitle>Autarkie heute</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="graphic-grid">
+        <div>
+          <canvasjs-chart *ngIf="this.selfSufficencyChart" [options]="this.selfSufficencyChart"></canvasjs-chart>
+        </div>
+        <div class="housusage-data">
+          <div class="houseusage">
+            <ion-icon color="primary" name="home-outline"></ion-icon>
+            <div class="data-label">
+              <h3>Eigenerzeugung</h3>
+              <h2>{{(((this.dayEntry?.usage ?? 0) - (this.dayEntry?.consumption ?? 0)) / 1000).toFixed(2)}} kWH</h2>
+            </div>
+          </div>
+          <div class="grid-delivery">
+            <ion-icon color="#cfcfcf" name="flash-outline"></ion-icon>
+            <div class="data-label">
+              <h3>Netzbezug</h3>
+              <h2>{{((this.dayEntry?.consumption ?? 0) / 1000).toFixed(2)}} kWH</h2>
+            </div>
           </div>
         </div>
       </div>
