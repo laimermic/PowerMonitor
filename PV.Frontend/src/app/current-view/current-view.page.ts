@@ -6,13 +6,16 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
 import { AppConfig } from '../models/AppConfig';
 import { DayEntry } from '../models/DayEntry';
+import { CanvasJSChart } from 'src/assets/canvasjs.angular.component';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-tab1',
   templateUrl: 'current-view.page.html',
   styleUrls: ['current-view.page.scss'],
   standalone: true,
-  imports: [IonicModule, HttpClientModule],
+  imports: [IonicModule, HttpClientModule, CommonModule, FormsModule, CanvasJSChart],
 })
 export class CurrentViewPage implements ViewDidEnter, ViewDidLeave {
 
@@ -48,12 +51,34 @@ export class CurrentViewPage implements ViewDidEnter, ViewDidLeave {
       console.log(response);
       this.dayEntry = response as DayEntry;
 
+      let data: Array<CanvasJS.ChartDataPoint> = new Array<CanvasJS.ChartDataPoint>(
+        {
+          y: this.dayEntry.delivery,
+          label: 'Netzeinspeisung',
+          color: '#b8b8b8'
+        },
+        {
+          y: this.dayEntry.produced - this.dayEntry.delivery,
+          label: 'Eigenverbrauch',
+          color: '#ffae00'
+        }
+      )
+
       this.houseUsageChart = {
         animationEnabled: true,
         title: {
-          text: ""
+          text: (100 - (this.dayEntry.delivery / this.dayEntry.produced) * 100).toFixed(0) + '%',
+          verticalAlign: 'center'
         },
-        data: []
+        height: 200,
+        legend: {
+          
+        },
+        data: [{
+            type: 'doughnut',
+            dataPoints: data,
+            showInLegend: false
+        }]
       }
     })
   }
@@ -63,6 +88,7 @@ export class CurrentViewPage implements ViewDidEnter, ViewDidLeave {
       this.getNow();
     }, 10000)
     this.getNow();
+    this.getFullDay();
   }
   ionViewDidLeave(): void {
     clearInterval(this.interval);

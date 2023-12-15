@@ -311,12 +311,15 @@ app.get('/api/fullday/:unix', async (req: Request, res: Response) => {
     startLimit.setHours(0, 0, 0);
     var endLimit = new Date(Number(req.params.unix));
     endLimit.setHours(23, 59, 59);
-    var dayEntry = await mongo.collection<DayEntry>('DayEntry').findOne({
-        day: {
-            $gte: startLimit,
-            $lte: endLimit
+    var entryCursor = mongo.collection<DayEntry>('DayEntry').find();
+        let dayEntries = await entryCursor.map((doc: WithId<DayEntry>) => {
+        let lastDate = new Date(doc.lastupdated);
+        if (lastDate.getTime() > startLimit.getTime() && lastDate.getTime() < endLimit.getTime()) {
+            return doc;
         }
-    });
+    }).toArray();
+    dayEntries = dayEntries.filter(doc => doc != null && doc != undefined);
+    let dayEntry = Object.values(dayEntries)[0];
     res.send(dayEntry)
 })
 

@@ -69,6 +69,15 @@
     display: grid;
     width: 100%;
     grid-template-columns: 40% 60%;
+    height: 200px;
+    .housusage-data {
+        .houseusage {
+            display: flex;
+            flex-direction: row;
+            align-content: flex-start;
+            align-items: flex-start;
+        }
+    }
 }
 
 .statistic-item {

@@ -56,7 +56,20 @@
     </ion-card-header>
     <ion-card-content>
       <div class="graphic-grid">
+        <div>
+          <canvasjs-chart [options]="this.houseUsageChart"></canvasjs-chart>
+        </div>
+        <div class="housusage-data">
+          <div class="houseusage">
+            <ion-icon color="#2f4f8b" name="home-outline"></ion-icon>
+            <div>
+              <ion-card-subtitle>Eigenverbrauch</ion-card-subtitle>
+            </div>
+          </div>
+          <div class="to-grud">
 
+          </div>
+        </div>
       </div>
     </ion-card-content>
   </ion-card>
