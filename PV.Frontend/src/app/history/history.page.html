@@ -13,7 +13,7 @@
     </ion-toolbar>
   </ion-header>
   <div class="content-wrapper">
-    <ion-segment mode="ios" value="today">
+    <ion-segment mode="ios" value="today" (ionChange)="this.viewChange($event)">
       <ion-segment-button value="today">Heute</ion-segment-button>
       <ion-segment-button value="month">Monat</ion-segment-button>
       <ion-segment-button value="year">Jahr</ion-segment-button>
@@ -22,7 +22,7 @@
     <div *ngIf="!this.loading" class="chart-wrapper">
       <div *ngIf="this.currentView == 'today'" class="view-wrapper">
         <div class="chart-heading">
-          <ion-card-subtitle>{{this.dayEntry?.day | date: 'dd.MM.yyyy'}}</ion-card-subtitle>
+          <ion-card-subtitle>{{this.dayEntry?.lastupdated | date: 'dd.MM.yyyy'}}</ion-card-subtitle>
           <ion-card-subtitle>{{(this.dayEntry?.produced ?? 0) /1000}} kWh</ion-card-subtitle>
         </div>
         <div class="canvas-wrapper">
@@ -39,6 +39,26 @@
             <ion-icon *ngIf="today.getDay() != selectedDay.getDay()" name="chevron-forward-outline"></ion-icon>
           </div>
         </div>
+      </div>
+      <div *ngIf="this.currentView == 'month'" class="view-wrapper">
+        <div class="chart-heading">
+          <ion-card-subtitle>{{this.selectedDay| date: 'MMMM yyyy'}}</ion-card-subtitle>
+          <!-- <ion-card-subtitle>{{(this.dayEntry?.produced ?? 0) /1000}} kWh</ion-card-subtitle> -->
+        </div>
+        <div class="canvas-wrapper">
+          <canvasjs-chart class="chart" [options]="this.monthChartOptions"></canvasjs-chart>
+        </div>
+        <!-- <div class="day-switcher">
+          <div (click)="removeDay()">
+            <ion-icon *ngIf="today.getDay() - 1 != selectedDay.getDay()" name="chevron-back-outline"></ion-icon>
+          </div>
+          <div>
+            <span>{{this.selectedDay | date: 'dd.MM.yyyy'}} <ion-icon name="calendar-outline"></ion-icon></span>
+          </div>
+          <div (click)="addDay()">
+            <ion-icon *ngIf="today.getDay() != selectedDay.getDay()" name="chevron-forward-outline"></ion-icon>
+          </div>
+        </div> -->
       </div>
     </div>
     <div *ngIf="this.loading" class="loading-wrapper">

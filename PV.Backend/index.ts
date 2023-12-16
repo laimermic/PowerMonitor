@@ -2,7 +2,7 @@ import express, { Express, Request, Response, json } from 'express';
 import { Db, MongoClient, WithId } from 'mongodb';
 import { get, reject } from 'lodash';
 import { DayEntry } from './models/History/DayEntry';
-import { PVEntry } from './models/PVEntry';
+import { MonthEntry } from './models/History/MonthEntry';
 import { InfluxDB, Point } from '@influxdata/influxdb-client'
 import { PowerDocument } from './models/PowerDocument';
 import { DOMParser } from 'xmldom';
@@ -15,6 +15,8 @@ import { messaging } from 'firebase-admin';
 import { CurrentField } from './models/CurrentField';
 import dotenv from 'dotenv'
 import _ from 'lodash';
+import { YearEntry } from './models/History/YearEntry';
+import { TotalEntry } from './models/History/TotalEntry';
 
 //E-Mail Monate
 const monthNames = ["January", "February", "March", "April", "May", "June",
@@ -95,7 +97,7 @@ async function calculateUsage() {
 
 async function inserttoMongo() {
     if (document.consumption && document.delivery && document.production && document.usage) {
-        console.log("logging to current")
+        // console.log("logging to current")
         await mongo.collection<CurrentEntry>('current').findOneAndUpdate({}, { $set: document }, { upsert: true });
     } else {
         console.log("Not logging to current due to missing data");
@@ -110,6 +112,9 @@ async function inserttoMongo() {
 }
 
 async function insertToInflux() {
+    if (document.production == null) {
+        document.production = new CurrentField(new Date(), 0, new Date());
+    }
     if (document.consumption && document.delivery && document.production && document.usage) {
         var deliveryPoint = new Point('delivery').floatField('value', document.delivery.value);
         var consumptionPoint = new Point('consumption').floatField('value', document.consumption.value);
@@ -158,7 +163,7 @@ function getFromDay(measurement: string, day: Date): Promise<Array<InfluxResult>
                     // console.log(day)
                     return new Date(point._time).getDate() == day.getDate()
                 });
-                console.log(filtered.length)
+                // console.log(filtered.length)
                 resolve(filtered)
             },
             error(error) {
@@ -312,7 +317,7 @@ app.get('/api/fullday/:unix', async (req: Request, res: Response) => {
     var endLimit = new Date(Number(req.params.unix));
     endLimit.setHours(23, 59, 59);
     var entryCursor = mongo.collection<DayEntry>('DayEntry').find();
-        let dayEntries = await entryCursor.map((doc: WithId<DayEntry>) => {
+    let dayEntries = await entryCursor.map((doc: WithId<DayEntry>) => {
         let lastDate = new Date(doc.lastupdated);
         if (lastDate.getTime() > startLimit.getTime() && lastDate.getTime() < endLimit.getTime()) {
             return doc;
@@ -374,14 +379,193 @@ app.get('/api/freqday/:unix', async (req: Request, res: Response) => {
     res.send(freqEntries)
 });
 
+app.get('/api/fullMonth/:unix', async (req: Request, res: Response) => {
+    let startLimit = new Date(Number(req.params.unix));
+    startLimit.setDate(1);
+    startLimit.setHours(0, 0, 0);
+
+    let pseudoEndLimit = new Date(Number(req.params.unix));
+    let endLimit = new Date(pseudoEndLimit.getFullYear(), pseudoEndLimit.getMonth() + 1, 0, 23, 59, 59);
+
+    var entryCursor = mongo.collection<DayEntry>('DayEntry').find();
+    let dayEntries = await entryCursor.map((doc: WithId<DayEntry>) => {
+        let lastDate = new Date(doc.lastupdated);
+        if (lastDate.getTime() > startLimit.getTime() && lastDate.getTime() < endLimit.getTime()) {
+            return doc;
+        }
+    }).toArray();
+    dayEntries = dayEntries.filter(doc => doc != null && doc != undefined);
+
+    res.send(dayEntries);
+})
+
 app.post('/api/registerNotification', express.json({ type: '*/*' }), async (req: Request, res: Response) => {
     var client = req.body as NotificationClient;
     mongo.collection<NotificationClient>('clients').updateOne({ token: client.token }, { $set: client }, { upsert: true });
     res.end();
 })
 
+function calculateMonth() {
+    let start = new Date();
+    start.setDate(1);
+    start.setHours(0, 0, 0);
+
+    let pseudoEndLimit = new Date();
+
+    let end = new Date(pseudoEndLimit.getFullYear(), pseudoEndLimit.getMonth() + 1, 0, 23, 59, 59);
+
+    var entryCursor = mongo.collection<DayEntry>('DayEntry').find();
+    entryCursor.map((doc: WithId<DayEntry>) => {
+        let lastDate = new Date(doc.lastupdated);
+        if (lastDate.getTime() > start.getTime() && lastDate.getTime() < end.getTime()) {
+            return doc;
+        }
+    }).toArray().then(async (dayEntries) => {
+        dayEntries = dayEntries.filter(doc => doc != null && doc != undefined);
+        var monthEntryCursor = mongo.collection<MonthEntry>('MonthEntry').find();
+        let monthEntries = await monthEntryCursor.map((doc: WithId<MonthEntry>) => {
+            let lastDate = new Date(doc.lastupdated);
+            if (lastDate.getTime() > start.getTime() && lastDate.getTime() < end.getTime()) {
+                return doc;
+            }
+        }).toArray();
+        monthEntries = monthEntries.filter(doc => doc != null && doc != undefined);
+        console.log(monthEntries.length)
+        if (monthEntries.length == 0) {
+            let newMonthEntry = new MonthEntry(new Date().getTime(), 0, 0, 0, 0);
+            dayEntries.forEach((dayEntry) => {
+                newMonthEntry.produced += dayEntry?.produced ?? 0;
+                newMonthEntry.consumption += dayEntry?.consumption ?? 0;
+                newMonthEntry.delivery += dayEntry?.delivery ?? 0;
+                newMonthEntry.usage += dayEntry?.usage ?? 0;
+            })
+            await mongo.collection<MonthEntry>('MonthEntry').insertOne(newMonthEntry);
+        } else {
+            let monthEntry = monthEntries[0];
+            if (monthEntry) {
+                monthEntry.produced = 0;
+                monthEntry.consumption = 0;
+                monthEntry.delivery = 0;
+                monthEntry.usage = 0;
+                dayEntries.forEach((dayEntry) => {
+                    if (monthEntry) {
+                        monthEntry.produced += dayEntry?.produced ?? 0;
+                        monthEntry.consumption += dayEntry?.consumption ?? 0;
+                        monthEntry.delivery += dayEntry?.delivery ?? 0;
+                        monthEntry.usage += dayEntry?.usage ?? 0;
+                    }
+                })
+                monthEntry.lastupdated = new Date().getTime();
+                await mongo.collection<MonthEntry>('MonthEntry').updateOne({ _id: monthEntry._id }, { $set: monthEntry });
+            }
+        }
+    })
+}
+
+function calculateYear() {
+    let start = new Date();
+    start.setDate(1);
+    start.setMonth(0);
+    start.setHours(0, 0, 0);
+
+    let pseudoEndLimit = new Date();
+
+    let end = new Date(pseudoEndLimit.getFullYear(), 12, 0, 23, 59, 59);
+
+    var entryCursor = mongo.collection<MonthEntry>('MonthEntry').find();
+    entryCursor.map((doc: WithId<MonthEntry>) => {
+        let lastDate = new Date(doc.lastupdated);
+        if (lastDate.getTime() > start.getTime() && lastDate.getTime() < end.getTime()) {
+            return doc;
+        }
+    }).toArray().then(async (monthEntries) => {
+        monthEntries = monthEntries.filter(doc => doc != null && doc != undefined);
+        var yearEntryCursor = mongo.collection<YearEntry>('YearEntry').find();
+        let yearEntries = await yearEntryCursor.map((doc: WithId<YearEntry>) => {
+            let lastDate = new Date(doc.lastupdated);
+            if (lastDate.getTime() > start.getTime() && lastDate.getTime() < end.getTime()) {
+                return doc;
+            }
+        }).toArray();
+        yearEntries = yearEntries.filter(doc => doc != null && doc != undefined);
+        console.log(yearEntries.length)
+        if (yearEntries.length == 0) {
+            let newYearEntry = new YearEntry(new Date().getTime(), 0, 0, 0, 0);
+            monthEntries.forEach((monthEntry) => {
+                newYearEntry.produced += monthEntry?.produced ?? 0;
+                newYearEntry.consumption += monthEntry?.consumption ?? 0;
+                newYearEntry.delivery += monthEntry?.delivery ?? 0;
+                newYearEntry.usage += monthEntry?.usage ?? 0;
+            })
+            await mongo.collection<YearEntry>('YearEntry').insertOne(newYearEntry);
+        } else {
+            let yearEntry = yearEntries[0];
+            if (yearEntry) {
+                yearEntry.produced = 0;
+                yearEntry.consumption = 0;
+                yearEntry.delivery = 0;
+                yearEntry.usage = 0;
+                monthEntries.forEach((monthEntry) => {
+                    if (yearEntry) {
+                        yearEntry.produced += monthEntry?.produced ?? 0;
+                        yearEntry.consumption += monthEntry?.consumption ?? 0;
+                        yearEntry.delivery += monthEntry?.delivery ?? 0;
+                        yearEntry.usage += monthEntry?.usage ?? 0;
+                    }
+                })
+                yearEntry.lastupdated = new Date().getTime();
+                await mongo.collection<YearEntry>('YearEntry').updateOne({ _id: yearEntry._id }, { $set: yearEntry });
+            }
+        }
+    })
+}
+
+function calculateTotalWithoutLimit() {
+    var entryCursor = mongo.collection<YearEntry>('YearEntry').find();
+    entryCursor.map((doc: WithId<YearEntry>) => {
+        return doc;
+    }).toArray().then(async (yearEntries) => {
+        yearEntries = yearEntries.filter(doc => doc != null && doc != undefined);
+        var totalEntryCursor = mongo.collection<TotalEntry>('TotalEntry').find();
+        let totalEntries = await totalEntryCursor.map((doc: WithId<TotalEntry>) => {
+            return doc;
+        }).toArray();
+        totalEntries = totalEntries.filter(doc => doc != null && doc != undefined);
+        if (totalEntries.length == 0) {
+            let newTotalEntry = new TotalEntry(0, 0, 0, 0);
+            yearEntries.forEach((yearEntry) => {
+                newTotalEntry.produced += yearEntry?.produced ?? 0;
+                newTotalEntry.consumption += yearEntry?.consumption ?? 0;
+                newTotalEntry.delivery += yearEntry?.delivery ?? 0;
+                newTotalEntry.usage += yearEntry?.usage ?? 0;
+            })
+            await mongo.collection<TotalEntry>('TotalEntry').insertOne(newTotalEntry);
+        } else {
+            let totalEntry = totalEntries[0];
+            if (totalEntry) {
+                totalEntry.produced = 0;
+                totalEntry.consumption = 0;
+                totalEntry.delivery = 0;
+                totalEntry.usage = 0;
+                yearEntries.forEach((yearEntry) => {
+                    if (totalEntry) {
+                        totalEntry.produced += yearEntry?.produced ?? 0;
+                        totalEntry.consumption += yearEntry?.consumption ?? 0;
+                        totalEntry.delivery += yearEntry?.delivery ?? 0;
+                        totalEntry.usage += yearEntry?.usage ?? 0;
+                    }
+                })
+                await mongo.collection<TotalEntry>('TotalEntry').updateOne({ _id: totalEntry._id }, { $set: totalEntry });
+            }
+        }
+    })
+}
+
 cron.schedule('*/5 * * * *', () => {
     insertToInflux();
+    calculateMonth();
+    calculateYear();
+    calculateTotalWithoutLimit();
 })
 
 cron.schedule('*/10 * * * * *', () => {
@@ -392,6 +576,4 @@ cron.schedule('*/10 * * * * *', () => {
 
 app.listen(4000, async () => {
     console.log("⚡️[server]: Server is running on port 4000");
-    let test = new Date();
-    console.log(test.toLocaleString());
 })

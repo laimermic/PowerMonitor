@@ -28,7 +28,13 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
   private refresher: any;
   public selectedDay: Date = new Date();
   public today: Date = new Date();
+  public dayEntries: DayEntry[] | null = null;
   public chartOptions: CanvasJS.ChartOptions | null = {
+    title: {},
+    data: []
+  };
+
+  public monthChartOptions: CanvasJS.ChartOptions | null = {
     title: {},
     data: []
   };
@@ -37,7 +43,10 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
   constructor(private http: HttpClient) { }
 
   public viewChange(ev: any) {
-
+    this.currentView = ev.detail.value;
+    if (this.currentView == 'month') {
+      this.getFullMonth(this.selectedDay);
+    }
   }
 
   public renderChart() {
@@ -96,6 +105,75 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
     console.log(this.chartOptions)
   }
 
+  public renderMonthChart(month: Date) {
+
+    var data = new Array<ChartDataSeriesOptions>();
+    data.push({
+      type: "column",
+      color: "#ffae00",
+      markerColor: "#ffae00",
+      name: "Production",
+      xValueFormatString: "DD.MM.YYYY",
+      dataPoints: this.dayEntries?.map(entry => {
+        var xDate = new Date(entry.lastupdated);
+        xDate.setHours(0, 0, 0);
+        return {
+          x: xDate,
+          y: entry.produced / 1000,
+          // toolTipContent: '<span style="color:#ffae00">Produktion</span>: ' + (entry.produced / 1000).toFixed(2) + 'kWH'
+        }
+      }) ?? new Array<CanvasJS.ChartDataPoint>(),
+      legendText: "Produktion",
+      showInLegend: true
+    });
+
+    data.push({
+      type: "column",
+      color: "#325ea8",
+      markerColor: "#325ea8",
+      name: "Verbrauch",
+      xValueFormatString: "DD.MM.YYYY",
+      dataPoints: this.dayEntries?.map(entry => {
+        var xDate = new Date(entry.lastupdated);
+        xDate.setHours(0, 0, 0);
+        return {
+          x: xDate,
+          y: entry.usage / 1000,
+          // toolTipContent: '<span style="color:#325ea8">Verbrauch</span>: ' + (entry.produced / 1000).toFixed(2) + 'kWH'
+        }
+      }) ?? new Array<CanvasJS.ChartDataPoint>(),
+      legendText: "Verbrauch",
+      showInLegend: true
+    });
+    let startLimit = month;
+    startLimit.setDate(1);
+    startLimit.setHours(0, 0, 0);
+
+    let pseudoEndLimit = month;
+    let endLimit = new Date(pseudoEndLimit.getFullYear(), pseudoEndLimit.getMonth() + 1, 0, 23, 59, 59);
+
+    console.log(data);
+
+    this.monthChartOptions = {
+      animationEnabled: true,
+      title: {
+      },
+      backgroundColor: "#ffffff00",
+      theme: window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark2" : "light2",
+      axisX: {
+        valueFormatString: "DD",
+        interval: 1,
+        minimum: startLimit.getTime(),
+        maximum: endLimit.getTime(),
+      },
+      toolTip: {
+        shared: true,
+
+      },
+      data: data
+    }
+  }
+
   public removeDay() {
     console.log("removing");
     this.selectedDay.setDate(this.selectedDay.getDate() - 1);
@@ -127,9 +205,16 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
     })
   }
 
+  public async getFullMonth(date: Date) {
+    this.http.get(AppConfig.backendUrl + '/api/fullMonth/' + date.getTime()).subscribe(response => {
+      console.log(response);
+      this.dayEntries = response as DayEntry[];
+      this.renderMonthChart(date);
+    })
+  }
+
   ionViewDidEnter(): void {
     this.getHistory();
-    this.getFullDay(new Date());
     this.refresher = setInterval(() => {
       this.getHistory();
     }, 30000)

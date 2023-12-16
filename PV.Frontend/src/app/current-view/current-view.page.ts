@@ -72,7 +72,7 @@ export class CurrentViewPage implements ViewDidEnter, ViewDidLeave {
         theme: window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark2" : "light2",
         backgroundColor: "transparent",
         title: {
-          text: (100 - (this.dayEntry.delivery / this.dayEntry.produced) * 100).toFixed(0) + '%',
+          text: this.dayEntry.produced == 0 ? 'n/a' : (100 - (this.dayEntry.delivery / this.dayEntry.produced) * 100).toFixed(0) + '%',
           verticalAlign: 'center',
           fontSize: 22,
           fontFamily: 'Helvetica Neue',
@@ -133,7 +133,8 @@ export class CurrentViewPage implements ViewDidEnter, ViewDidLeave {
     this.interval = setInterval(() => {
       this.getNow();
       this.getFullDay();
-    }, 10000)
+    }, 10000);
+    this.getFullDay();
     this.getNow();
   }
   ionViewDidLeave(): void {
