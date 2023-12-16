@@ -11,6 +11,7 @@ import { lastValueFrom } from 'rxjs';
 import { AppConfig } from '../models/AppConfig';
 import { DayEntry } from '../models/DayEntry';
 import { MonthEntry } from '../models/History/MonthEntry';
+import { YearEntry } from '../models/History/YearEntry';
 
 @Component({
   selector: 'app-history',
@@ -27,10 +28,12 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
   public currentView: string = 'today';
   public dayEntry: DayEntry | null = null;
   public monthEntry: MonthEntry | null = null;
+  public yearEntry: YearEntry | null = null;
   private refresher: any;
   public selectedDay: Date = new Date();
   public today: Date = new Date();
   public dayEntries: DayEntry[] | null = null;
+  public monthEntries: MonthEntry[] | null = null;
   public chartOptions: CanvasJS.ChartOptions | null = {
     title: {},
     data: []
@@ -40,6 +43,12 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
     title: {},
     data: []
   };
+
+  public yearChartOptions: CanvasJS.ChartOptions | null = {
+    title: {},
+    data: []
+  };
+
   public loading: boolean = true;
 
   constructor(private http: HttpClient) { }
@@ -50,6 +59,11 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
       this.getFullMonth(this.selectedDay);
       this.monthEntry = (await lastValueFrom(this.http.get(AppConfig.backendUrl + '/api/month/' + this.selectedDay.getTime()))) as MonthEntry;
       console.log(this.monthEntry);
+      clearInterval(this.refresher);
+    } else if (this.currentView == 'year') {
+      this.getFullYear(this.selectedDay);
+      this.yearEntry = (await lastValueFrom(this.http.get(AppConfig.backendUrl + '/api/year/' + this.selectedDay.getTime()))) as MonthEntry;
+      console.log(this.yearEntry);
       clearInterval(this.refresher);
     } else if (this.currentView == 'day') {
       this.getHistory();
@@ -88,6 +102,8 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
     }
     data.push(usageEntry)
 
+    var minDate = new Date(this.selectedDay.getTime());
+    minDate.setHours(0, 0, 0);
     var maxDate = this.selectedDay;
     maxDate.setHours(23);
     maxDate.setMinutes(59);
@@ -103,6 +119,7 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
       theme: window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark2" : "light2",
       axisX: {
         valueFormatString: "HH:mm",
+        minimum: minDate.getTime(),
         maximum: maxDate.getTime()
       },
       axisY: {
@@ -131,7 +148,7 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
         xDate.setHours(0, 0, 0);
         return {
           x: xDate,
-          y: entry.produced / 1000,
+          y: Math.round(((entry.produced / 1000) + Number.EPSILON) * 100) / 100,
           // toolTipContent: '<span style="color:#ffae00">Produktion</span>: ' + (entry.produced / 1000).toFixed(2) + 'kWH'
         }
       }) ?? new Array<CanvasJS.ChartDataPoint>(),
@@ -150,7 +167,7 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
         xDate.setHours(0, 0, 0);
         return {
           x: xDate,
-          y: entry.usage / 1000,
+          y: Math.round(((entry.usage / 1000) + Number.EPSILON) * 100) / 100,
           // toolTipContent: '<span style="color:#325ea8">Verbrauch</span>: ' + (entry.produced / 1000).toFixed(2) + 'kWH'
         }
       }) ?? new Array<CanvasJS.ChartDataPoint>(),
@@ -186,17 +203,91 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
     }
   }
 
+  public renderYearChart(year: Date) {
+    var data = new Array<ChartDataSeriesOptions>();
+    data.push({
+      type: "column",
+      color: "#ffae00",
+      markerColor: "#ffae00",
+      name: "Production",
+      xValueFormatString: "MMMM YYYY",
+      dataPoints: this.monthEntries?.map(entry => {
+        var xDate = new Date(entry.lastupdated);
+        xDate.setHours(0, 0, 0);
+        return {
+          x: xDate.getMonth() + 1,
+          y: Math.round(((entry.produced / 1000) + Number.EPSILON) * 100) / 100,
+          label: (xDate.getMonth() + 1).toString(),
+          // toolTipContent: '<span style="color:#ffae00">Produktion</span>: ' + (entry.produced / 1000).toFixed(2) + 'kWH'
+        }
+      }) ?? new Array<CanvasJS.ChartDataPoint>(),
+      legendText: "Produktion",
+      showInLegend: true
+    });
+
+    data.push({
+      type: "column",
+      color: "#325ea8",
+      markerColor: "#325ea8",
+      name: "Verbrauch",
+      xValueFormatString: "MMMM YYYY",
+      dataPoints: this.monthEntries?.map(entry => {
+        var xDate = new Date(entry.lastupdated);
+        xDate.setHours(0, 0, 0);
+        return {
+          x: xDate.getMonth() + 1,
+          y: Math.round(((entry.usage / 1000) + Number.EPSILON) * 100) / 100,
+          label: (xDate.getMonth() + 1).toString(),
+          // toolTipContent: '<span style="color:#325ea8">Verbrauch</span>: ' + (entry.produced / 1000).toFixed(2) + 'kWH'
+        }
+      }) ?? new Array<CanvasJS.ChartDataPoint>(),
+      legendText: "Verbrauch",
+      showInLegend: true
+    });
+    let startLimit = new Date(year.getTime());
+    startLimit.setMonth(0);
+    startLimit.setDate(1);
+    startLimit.setHours(0, 0, 0);
+
+    let pseudoEndLimit = new Date(year.getTime());
+    let endLimit = new Date(pseudoEndLimit.getFullYear() - 1, 12, 31, 23, 59, 59);
+
+    console.log(data);
+
+    this.yearChartOptions = {
+      animationEnabled: true,
+      title: {
+      },
+      dataPointWidth: 20,
+      backgroundColor: "#ffffff00",
+      theme: window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark2" : "light2",
+      axisX: {
+        // valueFormatString: "MM",
+        interval: 1,
+        minimum: 1,
+        maximum: 12.5,
+      },
+      toolTip: {
+        shared: true,
+
+      },
+      data: data
+    }
+  }
+
   public removeDay() {
     this.selectedDay.setDate(this.selectedDay.getDate() - 1);
     this.selectedDay = new Date(this.selectedDay.getTime());
     console.log(this.selectedDay.getTime());
     this.getHistory();
+    this.getFullDay(this.selectedDay);
   }
 
   public addDay() {
     this.selectedDay.setDate(this.selectedDay.getDate() + 1);
     this.selectedDay = new Date(this.selectedDay.getTime())
     this.getHistory();
+    this.getFullDay(this.selectedDay);
   }
 
   public async getHistory() {
@@ -220,6 +311,14 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
       console.log(response);
       this.dayEntries = response as DayEntry[];
       this.renderMonthChart(date);
+    })
+  }
+
+  public async getFullYear(date: Date) {
+    this.http.get(AppConfig.backendUrl + '/api/fullYear/' + date.getTime()).subscribe(response => {
+      console.log(response);
+      this.monthEntries = response as MonthEntry[];
+      this.renderYearChart(date);
     })
   }
 
