@@ -1,4 +1,4 @@
-export class YearEntry {
+export class MonthEntry {
     public lastupdated: number;
     public consumption: number;
     public delivery: number;

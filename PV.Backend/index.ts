@@ -373,6 +373,65 @@ app.get('/api/day/:unix', async (req: Request, res: Response) => {
     res.send(response);
 })
 
+app.get('/api/month/:unix', async (req: Request, res: Response) => {
+    let startLimit = new Date(Number(req.params.unix));
+    startLimit.setDate(1);
+    startLimit.setHours(0, 0, 0);
+
+    let pseudoEndLimit = new Date(Number(req.params.unix));
+    let endLimit = new Date(pseudoEndLimit.getFullYear(), pseudoEndLimit.getMonth() + 1, 0, 23, 59, 59);
+
+    var entryCursor = mongo.collection<MonthEntry>('MonthEntry').find();
+    let monthEntries = await entryCursor.map((doc: WithId<MonthEntry>) => {
+        let lastDate = new Date(doc.lastupdated);
+        if (lastDate.getTime() > startLimit.getTime() && lastDate.getTime() < endLimit.getTime()) {
+            return doc;
+        }
+    }).toArray();
+    monthEntries = monthEntries.filter(doc => doc != null && doc != undefined);
+    res.send(monthEntries[0]);
+})
+
+app.get('/api/year/:unix', async (req: Request, res: Response) => {
+    let startLimit = new Date(Number(req.params.unix));
+    startLimit.setDate(1);
+    startLimit.setMonth(0);
+    startLimit.setHours(0, 0, 0);
+
+    let pseudoEndLimit = new Date(Number(req.params.unix));
+    let endLimit = new Date(pseudoEndLimit.getFullYear(), 12, 31, 23, 59, 59);
+
+    var entryCursor = mongo.collection<YearEntry>('YearEntry').find();
+    let yearEntries = await entryCursor.map((doc: WithId<YearEntry>) => {
+        let lastDate = new Date(doc.lastupdated);
+        if (lastDate.getTime() > startLimit.getTime() && lastDate.getTime() < endLimit.getTime()) {
+            return doc;
+        }
+    }).toArray();
+    yearEntries = yearEntries.filter(doc => doc != null && doc != undefined);
+    res.send(yearEntries[0]);
+})
+
+app.get('/api/fullYear/:unix', async (req: Request, res: Response) => {
+    let startLimit = new Date(Number(req.params.unix));
+    startLimit.setDate(1);
+    startLimit.setMonth(0);
+    startLimit.setHours(0, 0, 0);
+
+    let pseudoEndLimit = new Date(Number(req.params.unix));
+    let endLimit = new Date(pseudoEndLimit.getFullYear(), 12, 31, 23, 59, 59);
+
+    var entryCursor = mongo.collection<MonthEntry>('MonthEntry').find();
+    let yearEntries = await entryCursor.map((doc: WithId<MonthEntry>) => {
+        let lastDate = new Date(doc.lastupdated);
+        if (lastDate.getTime() > startLimit.getTime() && lastDate.getTime() < endLimit.getTime()) {
+            return doc;
+        }
+    }).toArray();
+    yearEntries = yearEntries.filter(doc => doc != null && doc != undefined);
+    res.send(yearEntries);
+})
+
 app.get('/api/freqday/:unix', async (req: Request, res: Response) => {
     var myDate = new Date(Number(req.params.unix));
     var freqEntries = await getFromDay('frequency', myDate);

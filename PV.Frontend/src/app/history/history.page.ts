@@ -10,6 +10,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
 import { AppConfig } from '../models/AppConfig';
 import { DayEntry } from '../models/DayEntry';
+import { MonthEntry } from '../models/History/MonthEntry';
 
 @Component({
   selector: 'app-history',
@@ -25,6 +26,7 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
   public usageDataPoints: Array<CanvasJS.ChartDataPoint> | null = null;
   public currentView: string = 'today';
   public dayEntry: DayEntry | null = null;
+  public monthEntry: MonthEntry | null = null;
   private refresher: any;
   public selectedDay: Date = new Date();
   public today: Date = new Date();
@@ -42,10 +44,20 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
 
   constructor(private http: HttpClient) { }
 
-  public viewChange(ev: any) {
+  public async viewChange(ev: any) {
     this.currentView = ev.detail.value;
     if (this.currentView == 'month') {
       this.getFullMonth(this.selectedDay);
+      this.monthEntry = (await lastValueFrom(this.http.get(AppConfig.backendUrl + '/api/month/' + this.selectedDay.getTime()))) as MonthEntry;
+      console.log(this.monthEntry);
+      clearInterval(this.refresher);
+    } else if (this.currentView == 'day') {
+      this.getHistory();
+      this.getFullDay(this.selectedDay);
+      this.refresher = setInterval(() => {
+        this.getHistory();
+        this.getFullDay(this.selectedDay);
+      }, 30000)
     }
   }
 
@@ -145,11 +157,11 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
       legendText: "Verbrauch",
       showInLegend: true
     });
-    let startLimit = month;
+    let startLimit = new Date(month.getTime());
     startLimit.setDate(1);
     startLimit.setHours(0, 0, 0);
 
-    let pseudoEndLimit = month;
+    let pseudoEndLimit = new Date(month.getTime());
     let endLimit = new Date(pseudoEndLimit.getFullYear(), pseudoEndLimit.getMonth() + 1, 0, 23, 59, 59);
 
     console.log(data);
@@ -175,7 +187,6 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
   }
 
   public removeDay() {
-    console.log("removing");
     this.selectedDay.setDate(this.selectedDay.getDate() - 1);
     this.selectedDay = new Date(this.selectedDay.getTime());
     console.log(this.selectedDay.getTime());
@@ -183,7 +194,6 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
   }
 
   public addDay() {
-    console.log("adding");
     this.selectedDay.setDate(this.selectedDay.getDate() + 1);
     this.selectedDay = new Date(this.selectedDay.getTime())
     this.getHistory();
@@ -215,8 +225,10 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
 
   ionViewDidEnter(): void {
     this.getHistory();
+    this.getFullDay(this.selectedDay);
     this.refresher = setInterval(() => {
       this.getHistory();
+      this.getFullDay(this.selectedDay);
     }, 30000)
   }
 

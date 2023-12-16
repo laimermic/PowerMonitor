@@ -1,16 +1,16 @@
 PODS:
   - Capacitor (5.2.1):
     - CapacitorCordova
-  - CapacitorApp (5.0.3):
+  - CapacitorApp (5.0.6):
     - Capacitor
   - CapacitorCordova (5.2.1)
-  - CapacitorHaptics (5.0.4):
+  - CapacitorHaptics (5.0.6):
     - Capacitor
-  - CapacitorKeyboard (5.0.4):
+  - CapacitorKeyboard (5.0.7):
     - Capacitor
-  - CapacitorPushNotifications (5.0.6):
+  - CapacitorPushNotifications (5.1.0):
     - Capacitor
-  - CapacitorStatusBar (5.0.4):
+  - CapacitorStatusBar (5.0.6):
     - Capacitor
 
 DEPENDENCIES:
@@ -40,12 +40,12 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Capacitor: 36510199454641113344c2e5ef43bf3f54b5af79
-  CapacitorApp: 7a5dec8b33573707164b293475d5c89ba684364a
+  CapacitorApp: 024e1b1bea5f883d79f6330d309bc441c88ad04a
   CapacitorCordova: d173eeb1635e62aa95a20874a5d5cbbf0aa1e0df
-  CapacitorHaptics: e36653b37326d71bb35ae42b944124037dbc3d97
-  CapacitorKeyboard: d1b25fde6f19744ad09c890862aefc6e2a7ded3d
-  CapacitorPushNotifications: 7eb70469f1fcc3dec07126336d4896520e4991db
-  CapacitorStatusBar: 190e0321b8734f4244d0c81baa183a00d5806ddf
+  CapacitorHaptics: 1fffc1217c7e64a472d7845be50fb0c2f7d4204c
+  CapacitorKeyboard: ce5e01064cf57a2c05b32565310713b7fe6cc6f9
+  CapacitorPushNotifications: b31e326c6e4eb216a622041d6ca21a973f34943f
+  CapacitorStatusBar: 565c0a1ebd79bb40d797606a8992b4a105885309
 
 PODFILE CHECKSUM: ac9b1e01d80c614db5da80e2a9d1e1391970697e
 

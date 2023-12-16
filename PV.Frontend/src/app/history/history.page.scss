@@ -12,14 +12,47 @@
         height: 100%;
         .view-wrapper {
             height: 100%;
-            .chart-heading {
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-                align-content: space-between;
+            .history-data-wrapper {
                 padding: 20px;
-                ion-card-subtitle {
-                    font-size: medium;
+                height: 75%;
+                .chart-heading {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    align-content: space-between;
+                    padding: 5px;
+                    ion-card-subtitle {
+                        font-size: large;
+                    }
+                }
+
+                .chart-heading.date {
+                    border-bottom: 2px solid var(--ion-color-primary-contrast);
+                    width: fit-content;
+                }
+
+                .chart-heading.production {
+                    border-bottom: 2px solid var(--ion-color-primary);
+                }
+
+                .chart-heading.production {
+                    border-bottom: 2px solid var(--ion-color-primary);
+                }
+
+                .chart-heading.production {
+                    border-bottom: 2px solid var(--ion-color-primary);
+                }
+
+                .chart-heading.usage {
+                    border-bottom: 2px solid var(--color-usage);
+                }
+
+                .chart-heading.delivery {
+                    border-bottom: 2px solid var(--color-delivery);
+                }
+
+                .chart-heading.consumption {
+                    border-bottom: 2px solid var(--color-consumption);
                 }
             }
             .canvas-wrapper {

@@ -21,12 +21,29 @@
     </ion-segment>
     <div *ngIf="!this.loading" class="chart-wrapper">
       <div *ngIf="this.currentView == 'today'" class="view-wrapper">
-        <div class="chart-heading">
-          <ion-card-subtitle>{{this.dayEntry?.lastupdated | date: 'dd.MM.yyyy'}}</ion-card-subtitle>
-          <ion-card-subtitle>{{(this.dayEntry?.produced ?? 0) /1000}} kWh</ion-card-subtitle>
-        </div>
-        <div class="canvas-wrapper">
-          <canvasjs-chart class="chart" [options]="this.chartOptions"></canvasjs-chart>
+        <div class="history-data-wrapper">
+          <div class="chart-heading date">
+            <ion-card-subtitle><b>{{this.selectedDay| date: 'dd.MM.yyyy'}}</b></ion-card-subtitle>
+          </div>
+          <div class="chart-heading production">
+            <ion-card-subtitle>Produktion</ion-card-subtitle>
+            <ion-card-subtitle>{{((this.dayEntry?.produced ?? 0) /1000).toFixed(2)}} kWh</ion-card-subtitle>
+          </div>
+          <div class="chart-heading usage">
+            <ion-card-subtitle>Verbrauch</ion-card-subtitle>
+            <ion-card-subtitle>{{((this.dayEntry?.usage ?? 0) /1000).toFixed(2)}} kWh</ion-card-subtitle>
+          </div>
+          <div class="chart-heading delivery">
+            <ion-card-subtitle>Einspeisung</ion-card-subtitle>
+            <ion-card-subtitle>{{((this.dayEntry?.delivery ?? 0) / 1000).toFixed(2)}} kWh</ion-card-subtitle>
+          </div>
+          <div class="chart-heading consumption">
+            <ion-card-subtitle>Bezug</ion-card-subtitle>
+            <ion-card-subtitle>{{((this.dayEntry?.consumption ?? 0) /1000).toFixed(2)}} kWh</ion-card-subtitle>
+          </div>
+          <div class="canvas-wrapper">
+            <canvasjs-chart class="chart" [options]="this.chartOptions"></canvasjs-chart>
+          </div>
         </div>
         <div class="day-switcher">
           <div (click)="removeDay()">
@@ -41,12 +58,29 @@
         </div>
       </div>
       <div *ngIf="this.currentView == 'month'" class="view-wrapper">
-        <div class="chart-heading">
-          <ion-card-subtitle>{{this.selectedDay| date: 'MMMM yyyy'}}</ion-card-subtitle>
-          <!-- <ion-card-subtitle>{{(this.dayEntry?.produced ?? 0) /1000}} kWh</ion-card-subtitle> -->
-        </div>
-        <div class="canvas-wrapper">
-          <canvasjs-chart class="chart" [options]="this.monthChartOptions"></canvasjs-chart>
+        <div class="history-data-wrapper">
+          <div class="chart-heading date">
+            <ion-card-subtitle><b>{{this.selectedDay| date: 'MMMM yyyy'}}</b></ion-card-subtitle>
+          </div>
+          <div class="chart-heading production">
+            <ion-card-subtitle>Produktion</ion-card-subtitle>
+            <ion-card-subtitle>{{((this.monthEntry?.produced ?? 0) /1000).toFixed(2)}} kWh</ion-card-subtitle>
+          </div>
+          <div class="chart-heading usage">
+            <ion-card-subtitle>Verbrauch</ion-card-subtitle>
+            <ion-card-subtitle>{{((this.monthEntry?.usage ?? 0) /1000).toFixed(2)}} kWh</ion-card-subtitle>
+          </div>
+          <div class="chart-heading delivery">
+            <ion-card-subtitle>Einspeisung</ion-card-subtitle>
+            <ion-card-subtitle>{{((this.monthEntry?.delivery ?? 0) / 1000).toFixed(2)}} kWh</ion-card-subtitle>
+          </div>
+          <div class="chart-heading consumption">
+            <ion-card-subtitle>Bezug</ion-card-subtitle>
+            <ion-card-subtitle>{{((this.monthEntry?.consumption ?? 0) /1000).toFixed(2)}} kWh</ion-card-subtitle>
+          </div>
+          <div class="canvas-wrapper">
+            <canvasjs-chart class="chart" [options]="this.monthChartOptions"></canvasjs-chart>
+          </div>
         </div>
         <!-- <div class="day-switcher">
           <div (click)="removeDay()">
