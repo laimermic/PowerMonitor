@@ -452,6 +452,12 @@ app.get('/api/fullYear/:unix', async (req: Request, res: Response) => {
     res.send(yearEntries);
 })
 
+app.get('/api/total',async (req:Request, res: Response) => {
+    let entryCursor = mongo.collection<YearEntry>('YearEntry').find();
+    let yearEntries = await entryCursor.map((doc: WithId<YearEntry>) => doc).toArray();
+    res.send(yearEntries);
+})
+
 app.get('/api/freqday/:unix', async (req: Request, res: Response) => {
     var myDate = new Date(Number(req.params.unix));
     var freqEntries = await getFromDay('frequency', myDate);
@@ -490,7 +496,6 @@ function calculateMonth() {
             }
         }).toArray();
         monthEntries = monthEntries.filter(doc => doc != null && doc != undefined);
-        console.log(monthEntries.length)
         if (monthEntries.length == 0) {
             let newMonthEntry = new MonthEntry(new Date().getTime(), 0, 0, 0, 0);
             dayEntries.forEach((dayEntry) => {
@@ -548,7 +553,6 @@ function calculateYear() {
             }
         }).toArray();
         yearEntries = yearEntries.filter(doc => doc != null && doc != undefined);
-        console.log(yearEntries.length)
         if (yearEntries.length == 0) {
             let newYearEntry = new YearEntry(new Date().getTime(), 0, 0, 0, 0);
             monthEntries.forEach((monthEntry) => {

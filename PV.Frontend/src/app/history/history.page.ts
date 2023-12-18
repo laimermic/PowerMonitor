@@ -12,6 +12,7 @@ import { AppConfig } from '../models/AppConfig';
 import { DayEntry } from '../models/DayEntry';
 import { MonthEntry } from '../models/History/MonthEntry';
 import { YearEntry } from '../models/History/YearEntry';
+import * as CanvasJS from 'canvasjs';
 
 @Component({
   selector: 'app-history',
@@ -26,28 +27,35 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
   public prodDataPoints: Array<CanvasJS.ChartDataPoint> | null = null;
   public usageDataPoints: Array<CanvasJS.ChartDataPoint> | null = null;
   public currentView: string = 'today';
+
   public dayEntry: DayEntry | null = null;
   public monthEntry: MonthEntry | null = null;
   public yearEntry: YearEntry | null = null;
+
   private refresher: any;
   public selectedDay: Date = new Date();
   public today: Date = new Date();
+
   public dayEntries: DayEntry[] | null = null;
   public monthEntries: MonthEntry[] | null = null;
+  public yearEntries: YearEntry[] | null = null;
+
   public chartOptions: CanvasJS.ChartOptions | null = {
     title: {},
     data: []
   };
-
   public monthChartOptions: CanvasJS.ChartOptions | null = {
     title: {},
     data: []
   };
-
   public yearChartOptions: CanvasJS.ChartOptions | null = {
     title: {},
     data: []
   };
+  public totalChartOptions: CanvasJS.ChartOptions | null = {
+    title: {},
+    data: []
+  }
 
   public loading: boolean = true;
 
@@ -72,6 +80,11 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
         this.getHistory();
         this.getFullDay(this.selectedDay);
       }, 30000)
+    } else if (this.currentView == 'total') {
+      this.getTotal();
+      //this.yearEntry = (await lastValueFrom(this.http.get(AppConfig.backendUrl + '/api/year/' + this.selectedDay.getTime()))) as MonthEntry;
+      //console.log(this.yearEntry);
+      clearInterval(this.refresher);
     }
   }
 
@@ -281,6 +294,71 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
     }
   }
 
+  public renderTotalChart() {
+    var data = new Array<ChartDataSeriesOptions>();
+    data.push({
+      type: "column",
+      color: "#ffae00",
+      markerColor: "#ffae00",
+      name: "Production",
+      xValueFormatString: "MMMM YYYY",
+      dataPoints: this.yearEntries?.map(entry => {
+        var xDate = new Date(entry.lastupdated);
+        xDate.setHours(0, 0, 0);
+        return {
+          x: xDate.getFullYear(),
+          y: Math.round(((entry.produced / 1000) + Number.EPSILON) * 100) / 100,
+          label: xDate.getFullYear().toString(),
+          // toolTipContent: '<span style="color:#ffae00">Produktion</span>: ' + (entry.produced / 1000).toFixed(2) + 'kWH'
+        }
+      }) ?? new Array<CanvasJS.ChartDataPoint>(),
+      legendText: "Produktion",
+      showInLegend: true
+    });
+
+    data.push({
+      type: "column",
+      color: "#325ea8",
+      markerColor: "#325ea8",
+      name: "Verbrauch",
+      xValueFormatString: "MMMM YYYY",
+      dataPoints: this.yearEntries?.map(entry => {
+        var xDate = new Date(entry.lastupdated);
+        xDate.setHours(0, 0, 0);
+        return {
+          x: xDate.getFullYear(),
+          y: Math.round(((entry.usage / 1000) + Number.EPSILON) * 100) / 100,
+          label: xDate.getFullYear().toString(),
+          // toolTipContent: '<span style="color:#325ea8">Verbrauch</span>: ' + (entry.produced / 1000).toFixed(2) + 'kWH'
+        }
+      }) ?? new Array<CanvasJS.ChartDataPoint>(),
+      legendText: "Verbrauch",
+      showInLegend: true
+    });
+
+    this.totalChartOptions =  {
+      animationEnabled: true,
+      title: {
+      },
+      culture: 'de',
+      //dataPointWidth: 50,
+      backgroundColor: "#ffffff00",
+      theme: window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark2" : "light2",
+      axisX: {
+        interval: 1,
+        intervalType: 'year'
+      },
+      axisY: {
+        minimum: 0
+      },
+      toolTip: {
+        shared: true,
+
+      },
+      data: data
+    }
+  }
+
   public removeDay() {
     this.selectedDay.setDate(this.selectedDay.getDate() - 1);
     this.selectedDay = new Date(this.selectedDay.getTime());
@@ -325,6 +403,14 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
       console.log(response);
       this.monthEntries = response as MonthEntry[];
       this.renderYearChart(date);
+    })
+  }
+
+  public async getTotal() {
+    this.http.get(AppConfig.backendUrl + '/api/total').subscribe(response => {
+      console.log(response);
+      this.yearEntries = response as YearEntry[];
+      this.renderTotalChart();
     })
   }
 
