@@ -195,6 +195,9 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
         minimum: startLimit.getTime(),
         maximum: endLimit.getTime(),
       },
+      axisY: {
+        minimum: 0
+      },
       toolTip: {
         shared: true,
 
@@ -266,6 +269,9 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
         interval: 1,
         minimum: 1,
         maximum: 12.5,
+      },
+      axisY: {
+        minimum: 0
       },
       toolTip: {
         shared: true,

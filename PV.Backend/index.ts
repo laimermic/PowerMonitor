@@ -310,24 +310,6 @@ app.post('/uploadconsumption', express.text({ type: '*/*' }), async (req: Reques
     res.send();
 })
 
-app.get('/api/fullday/:unix', async (req: Request, res: Response) => {
-    var dayDate = new Date(Number(req.params.unix));
-    var startLimit = new Date(Number(req.params.unix));
-    startLimit.setHours(0, 0, 0);
-    var endLimit = new Date(Number(req.params.unix));
-    endLimit.setHours(23, 59, 59);
-    var entryCursor = mongo.collection<DayEntry>('DayEntry').find();
-    let dayEntries = await entryCursor.map((doc: WithId<DayEntry>) => {
-        let lastDate = new Date(doc.lastupdated);
-        if (lastDate.getTime() > startLimit.getTime() && lastDate.getTime() < endLimit.getTime()) {
-            return doc;
-        }
-    }).toArray();
-    dayEntries = dayEntries.filter(doc => doc != null && doc != undefined);
-    let dayEntry = Object.values(dayEntries)[0];
-    res.send(dayEntry)
-})
-
 app.post('/uploaddelivery', express.text({ type: '*/*' }), async (req: Request, res: Response) => {
     var delivery = Number(req.body);
     document.delivery = new CurrentField(new Date(), delivery, document.delivery?.time ?? new Date());
@@ -412,6 +394,44 @@ app.get('/api/year/:unix', async (req: Request, res: Response) => {
     res.send(yearEntries[0]);
 })
 
+app.get('/api/fullday/:unix', async (req: Request, res: Response) => {
+    var dayDate = new Date(Number(req.params.unix));
+    var startLimit = new Date(Number(req.params.unix));
+    startLimit.setHours(0, 0, 0);
+    var endLimit = new Date(Number(req.params.unix));
+    endLimit.setHours(23, 59, 59);
+    var entryCursor = mongo.collection<DayEntry>('DayEntry').find();
+    let dayEntries = await entryCursor.map((doc: WithId<DayEntry>) => {
+        let lastDate = new Date(doc.lastupdated);
+        if (lastDate.getTime() > startLimit.getTime() && lastDate.getTime() < endLimit.getTime()) {
+            return doc;
+        }
+    }).toArray();
+    dayEntries = dayEntries.filter(doc => doc != null && doc != undefined);
+    let dayEntry = Object.values(dayEntries)[0];
+    res.send(dayEntry)
+})
+
+app.get('/api/fullMonth/:unix', async (req: Request, res: Response) => {
+    let startLimit = new Date(Number(req.params.unix));
+    startLimit.setDate(1);
+    startLimit.setHours(0, 0, 0);
+
+    let pseudoEndLimit = new Date(Number(req.params.unix));
+    let endLimit = new Date(pseudoEndLimit.getFullYear(), pseudoEndLimit.getMonth() + 1, 0, 23, 59, 59);
+
+    var entryCursor = mongo.collection<DayEntry>('DayEntry').find();
+    let dayEntries = await entryCursor.map((doc: WithId<DayEntry>) => {
+        let lastDate = new Date(doc.lastupdated);
+        if (lastDate.getTime() > startLimit.getTime() && lastDate.getTime() < endLimit.getTime()) {
+            return doc;
+        }
+    }).toArray();
+    dayEntries = dayEntries.filter(doc => doc != null && doc != undefined);
+
+    res.send(dayEntries);
+})
+
 app.get('/api/fullYear/:unix', async (req: Request, res: Response) => {
     let startLimit = new Date(Number(req.params.unix));
     startLimit.setDate(1);
@@ -438,25 +458,6 @@ app.get('/api/freqday/:unix', async (req: Request, res: Response) => {
     res.send(freqEntries)
 });
 
-app.get('/api/fullMonth/:unix', async (req: Request, res: Response) => {
-    let startLimit = new Date(Number(req.params.unix));
-    startLimit.setDate(1);
-    startLimit.setHours(0, 0, 0);
-
-    let pseudoEndLimit = new Date(Number(req.params.unix));
-    let endLimit = new Date(pseudoEndLimit.getFullYear(), pseudoEndLimit.getMonth() + 1, 0, 23, 59, 59);
-
-    var entryCursor = mongo.collection<DayEntry>('DayEntry').find();
-    let dayEntries = await entryCursor.map((doc: WithId<DayEntry>) => {
-        let lastDate = new Date(doc.lastupdated);
-        if (lastDate.getTime() > startLimit.getTime() && lastDate.getTime() < endLimit.getTime()) {
-            return doc;
-        }
-    }).toArray();
-    dayEntries = dayEntries.filter(doc => doc != null && doc != undefined);
-
-    res.send(dayEntries);
-})
 
 app.post('/api/registerNotification', express.json({ type: '*/*' }), async (req: Request, res: Response) => {
     var client = req.body as NotificationClient;
