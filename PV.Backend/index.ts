@@ -371,7 +371,12 @@ app.get('/api/month/:unix', async (req: Request, res: Response) => {
         }
     }).toArray();
     monthEntries = monthEntries.filter(doc => doc != null && doc != undefined);
-    res.send(monthEntries[0]);
+    if (monthEntries.length == 0) {
+        let newMonthEntry = new MonthEntry(new Date().getTime(), 0, 0, 0, 0);
+        res.send(newMonthEntry);
+    } else {
+        res.send(monthEntries[0]);
+    }
 })
 
 app.get('/api/year/:unix', async (req: Request, res: Response) => {
@@ -452,7 +457,7 @@ app.get('/api/fullYear/:unix', async (req: Request, res: Response) => {
     res.send(yearEntries);
 })
 
-app.get('/api/total',async (req:Request, res: Response) => {
+app.get('/api/total', async (req: Request, res: Response) => {
     let entryCursor = mongo.collection<YearEntry>('YearEntry').find();
     let yearEntries = await entryCursor.map((doc: WithId<YearEntry>) => doc).toArray();
     res.send(yearEntries);

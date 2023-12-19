@@ -68,12 +68,12 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
     if (this.currentView == 'month') {
       this.getFullMonth(this.selectedDay);
       this.getCurrentMonth();
-      console.log(this.monthEntry);
+      // console.log(this.monthEntry);
       clearInterval(this.refresher);
     } else if (this.currentView == 'year') {
       this.getFullYear(this.selectedDay);
       this.yearEntry = await this.getCurrentYear();
-      console.log(this.yearEntry);
+      // console.log(this.yearEntry);
       clearInterval(this.refresher);
     } else if (this.currentView == 'day') {
       this.getHistory();
@@ -90,16 +90,19 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
     }
   }
 
-  public async getCurrentMonth() {
-    this.monthEntry = (await lastValueFrom(this.http.get(AppConfig.backendUrl + '/api/month/' + this.selectedDay.getTime()))) as MonthEntry;
+  public getCurrentMonth() {
+    this.http.get(AppConfig.backendUrl + '/api/month/' + this.selectedDay.getTime()).subscribe(response => {
+      // console.log(response);
+      this.monthEntry = response as MonthEntry;
+    });
   }
 
-  public async getCurrentYear() : Promise<YearEntry> {
+  public async getCurrentYear(): Promise<YearEntry> {
     return (await lastValueFrom(this.http.get(AppConfig.backendUrl + '/api/year/' + this.selectedDay.getTime())) as YearEntry);
   }
 
   public renderChart() {
-    console.log("rendering");
+    // console.log("rendering");
     var data = new Array<ChartDataSeriesOptions>();
     var prodEntry = {
       type: "area",
@@ -154,11 +157,10 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
       },
       data: data
     }
-    console.log(this.chartOptions)
+    // console.log(this.chartOptions)
   }
 
   public renderMonthChart(month: Date) {
-
     var data = new Array<ChartDataSeriesOptions>();
     data.push({
       type: "column",
@@ -201,10 +203,10 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
     startLimit.setDate(1);
     startLimit.setHours(0, 0, 0);
 
-    let pseudoEndLimit = new Date(month.getTime());
-    let endLimit = new Date(pseudoEndLimit.getFullYear(), pseudoEndLimit.getMonth() + 1, 0, 23, 59, 59);
+    var pseudoEndLimit = new Date(month.getTime());
+    var endLimit = new Date(pseudoEndLimit.getFullYear(), pseudoEndLimit.getMonth() + 1, 0, 23, 59, 59);
 
-    console.log(data);
+    // console.log(data);
 
     this.monthChartOptions = {
       animationEnabled: true,
@@ -216,7 +218,7 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
         valueFormatString: "DD",
         interval: 1,
         minimum: startLimit.getTime(),
-        maximum: endLimit.getTime(),
+        // maximum: endLimit.getTime(), This line causes a memory leak
       },
       axisY: {
         minimum: 0
@@ -276,7 +278,7 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
     let pseudoEndLimit = new Date(year.getTime());
     let endLimit = new Date(pseudoEndLimit.getFullYear() - 1, 12, 31, 23, 59, 59);
 
-    console.log(data);
+    // console.log(data);
 
     this.yearChartOptions = {
       animationEnabled: true,
@@ -341,7 +343,7 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
       showInLegend: true
     });
 
-    this.totalChartOptions =  {
+    this.totalChartOptions = {
       animationEnabled: true,
       title: {
       },
@@ -381,19 +383,33 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
   public async removeMonth() {
     console.log("removing month")
     this.selectedDay.setMonth(this.selectedDay.getMonth() - 1);
-    //this.selectedDay = new Date(this.selectedDay.getTime());
-    console.log(this.selectedDay)
+    this.selectedDay = new Date(this.selectedDay.getTime());
+    // console.log(this.selectedDay)
     this.getCurrentMonth();
     this.getFullMonth(this.selectedDay);
   }
 
   public async addMonth() {
     console.log("adding month")
-    /*this.selectedDay.setMonth(this.selectedDay.getMonth() + 1);
+    this.selectedDay.setMonth(this.selectedDay.getMonth() + 1);
     this.selectedDay = new Date(this.selectedDay.getTime());
-    console.log(this.selectedDay);
+    // console.log(this.selectedDay);
     this.getCurrentMonth();
-    this.getFullMonth(this.selectedDay);*/
+    this.getFullMonth(this.selectedDay);
+  }
+
+  public async removeYear() {
+    this.selectedDay.setFullYear(this.selectedDay.getFullYear() - 1);
+    this.selectedDay = new Date(this.selectedDay.getTime());
+    this.yearEntry = await this.getCurrentYear();
+    this.getFullYear(this.selectedDay);
+  }
+
+  public async addYear() {
+    this.selectedDay.setFullYear(this.selectedDay.getFullYear() + 1);
+    this.selectedDay = new Date(this.selectedDay.getTime());
+    this.yearEntry = await this.getCurrentYear();
+    this.getFullYear(this.selectedDay);
   }
 
   public async getHistory() {
@@ -407,22 +423,20 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
 
   public async getFullDay(date: Date) {
     this.http.get(AppConfig.backendUrl + '/api/fullday/' + date.getTime()).subscribe(response => {
-      console.log(response);
+      // console.log(response);
       this.dayEntry = response as DayEntry;
     })
   }
 
   public async getFullMonth(date: Date) {
-    this.http.get(AppConfig.backendUrl + '/api/fullMonth/' + date.getTime()).subscribe(response => {
-      console.log(response);
-      this.dayEntries = response as DayEntry[];
-      this.renderMonthChart(date);
-    })
+    console.log("moin");
+    this.dayEntries = await lastValueFrom(this.http.get(AppConfig.backendUrl + '/api/fullMonth/' + date.getTime())) as DayEntry[];
+    this.renderMonthChart(date);
   }
 
   public async getFullYear(date: Date) {
     this.http.get(AppConfig.backendUrl + '/api/fullYear/' + date.getTime()).subscribe(response => {
-      console.log(response);
+      // console.log(response);
       this.monthEntries = response as MonthEntry[];
       this.renderYearChart(date);
     })
@@ -430,7 +444,7 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
 
   public async getTotal() {
     this.http.get(AppConfig.backendUrl + '/api/total').subscribe(response => {
-      console.log(response);
+      // console.log(response);
       this.yearEntries = response as YearEntry[];
       this.totalEntry = new TotalEntry(
         this.yearEntries.map(entry => entry.produced).reduce((a, b) => a + b, 0),
