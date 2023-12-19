@@ -6,7 +6,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="false">
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Historie</ion-title>
@@ -41,9 +41,9 @@
             <ion-card-subtitle>Bezug</ion-card-subtitle>
             <ion-card-subtitle>{{((this.dayEntry?.consumption ?? 0) /1000).toFixed(2)}} kWh</ion-card-subtitle>
           </div>
-          <div class="canvas-wrapper">
-            <canvasjs-chart class="chart" [options]="this.chartOptions"></canvasjs-chart>
-          </div>
+        </div>
+        <div class="canvas-wrapper">
+          <canvasjs-chart class="chart" [options]="this.chartOptions"></canvasjs-chart>
         </div>
         <div class="day-switcher">
           <div (click)="removeDay()">
@@ -78,21 +78,21 @@
             <ion-card-subtitle>Bezug</ion-card-subtitle>
             <ion-card-subtitle>{{((this.monthEntry?.consumption ?? 0) /1000).toFixed(2)}} kWh</ion-card-subtitle>
           </div>
-          <div class="canvas-wrapper">
-            <canvasjs-chart class="chart" [options]="this.monthChartOptions"></canvasjs-chart>
-          </div>
         </div>
-        <!-- <div class="day-switcher">
-          <div (click)="removeDay()">
-            <ion-icon *ngIf="today.getDay() - 1 != selectedDay.getDay()" name="chevron-back-outline"></ion-icon>
+        <div class="canvas-wrapper">
+          <canvasjs-chart class="chart" [options]="this.monthChartOptions"></canvasjs-chart>
+        </div>
+        <div class="day-switcher">
+          <div (click)="removeMonth()">
+            <ion-icon name="chevron-back-outline"></ion-icon>
           </div>
           <div>
-            <span>{{this.selectedDay | date: 'dd.MM.yyyy'}} <ion-icon name="calendar-outline"></ion-icon></span>
+            <span>{{this.selectedDay | date: 'MMMM yyyy'}} <ion-icon name="calendar-outline"></ion-icon></span>
           </div>
-          <div (click)="addDay()">
-            <ion-icon *ngIf="today.getDay() != selectedDay.getDay()" name="chevron-forward-outline"></ion-icon>
+          <div (click)="addMonth()">
+            <ion-icon *ngIf="this.selectedDay.getMonth() != this.today.getMonth()" name="chevron-forward-outline"></ion-icon>
           </div>
-        </div> -->
+        </div>
       </div>
       <div *ngIf="this.currentView == 'year'" class="view-wrapper">
         <div class="history-data-wrapper">
@@ -138,33 +138,22 @@
           </div>
           <div class="chart-heading production">
             <ion-card-subtitle>Produktion</ion-card-subtitle>
-            <ion-card-subtitle>{{((this.dayEntry?.produced ?? 0) /1000).toFixed(2)}} kWh</ion-card-subtitle>
+            <ion-card-subtitle>{{((this.totalEntry?.produced ?? 0) /1000).toFixed(2)}} kWh</ion-card-subtitle>
           </div>
           <div class="chart-heading usage">
             <ion-card-subtitle>Verbrauch</ion-card-subtitle>
-            <ion-card-subtitle>{{((this.dayEntry?.usage ?? 0) /1000).toFixed(2)}} kWh</ion-card-subtitle>
+            <ion-card-subtitle>{{((this.totalEntry?.usage ?? 0) /1000).toFixed(2)}} kWh</ion-card-subtitle>
           </div>
           <div class="chart-heading delivery">
             <ion-card-subtitle>Einspeisung</ion-card-subtitle>
-            <ion-card-subtitle>{{((this.dayEntry?.delivery ?? 0) / 1000).toFixed(2)}} kWh</ion-card-subtitle>
+            <ion-card-subtitle>{{((this.totalEntry?.delivery ?? 0) / 1000).toFixed(2)}} kWh</ion-card-subtitle>
           </div>
           <div class="chart-heading consumption">
             <ion-card-subtitle>Bezug</ion-card-subtitle>
-            <ion-card-subtitle>{{((this.dayEntry?.consumption ?? 0) /1000).toFixed(2)}} kWh</ion-card-subtitle>
+            <ion-card-subtitle>{{((this.totalEntry?.consumption ?? 0) /1000).toFixed(2)}} kWh</ion-card-subtitle>
           </div>
           <div class="canvas-wrapper">
             <canvasjs-chart class="chart" [options]="this.totalChartOptions"></canvasjs-chart>
-          </div>
-        </div>
-        <div class="day-switcher">
-          <div (click)="removeDay()">
-            <ion-icon *ngIf="today.getDay() - 1 != selectedDay.getDay()" name="chevron-back-outline"></ion-icon>
-          </div>
-          <div>
-            <span>{{this.selectedDay | date: 'dd.MM.yyyy'}} <ion-icon name="calendar-outline"></ion-icon></span>
-          </div>
-          <div (click)="addDay()">
-            <ion-icon *ngIf="today.getDay() != selectedDay.getDay()" name="chevron-forward-outline"></ion-icon>
           </div>
         </div>
       </div>

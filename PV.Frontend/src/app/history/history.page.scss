@@ -14,7 +14,7 @@
             height: 100%;
             .history-data-wrapper {
                 padding: 20px;
-                height: 85%;
+                //height: 20%;
                 .chart-heading {
                     display: flex;
                     flex-direction: row;
@@ -55,12 +55,13 @@
                     border-bottom: 2px solid var(--color-consumption);
                 }
             }
-            // .canvas-wrapper {
-            //     height: 75%;
-            // }
+            .canvas-wrapper {
+                height: 55%;
+            }
             .day-switcher {
                 width: 100%;
-                margin-top: 20px;
+                margin-top: 10px;
+                height: 25px;
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;

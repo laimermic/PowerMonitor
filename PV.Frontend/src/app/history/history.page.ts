@@ -13,6 +13,7 @@ import { DayEntry } from '../models/DayEntry';
 import { MonthEntry } from '../models/History/MonthEntry';
 import { YearEntry } from '../models/History/YearEntry';
 import * as CanvasJS from 'canvasjs';
+import { TotalEntry } from '../models/History/TotalEntry';
 
 @Component({
   selector: 'app-history',
@@ -31,6 +32,7 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
   public dayEntry: DayEntry | null = null;
   public monthEntry: MonthEntry | null = null;
   public yearEntry: YearEntry | null = null;
+  public totalEntry: TotalEntry | null = null;
 
   private refresher: any;
   public selectedDay: Date = new Date();
@@ -65,12 +67,12 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
     this.currentView = ev.detail.value;
     if (this.currentView == 'month') {
       this.getFullMonth(this.selectedDay);
-      this.monthEntry = (await lastValueFrom(this.http.get(AppConfig.backendUrl + '/api/month/' + this.selectedDay.getTime()))) as MonthEntry;
+      this.getCurrentMonth();
       console.log(this.monthEntry);
       clearInterval(this.refresher);
     } else if (this.currentView == 'year') {
       this.getFullYear(this.selectedDay);
-      this.yearEntry = (await lastValueFrom(this.http.get(AppConfig.backendUrl + '/api/year/' + this.selectedDay.getTime()))) as MonthEntry;
+      this.yearEntry = await this.getCurrentYear();
       console.log(this.yearEntry);
       clearInterval(this.refresher);
     } else if (this.currentView == 'day') {
@@ -86,6 +88,14 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
       //console.log(this.yearEntry);
       clearInterval(this.refresher);
     }
+  }
+
+  public async getCurrentMonth() {
+    this.monthEntry = (await lastValueFrom(this.http.get(AppConfig.backendUrl + '/api/month/' + this.selectedDay.getTime()))) as MonthEntry;
+  }
+
+  public async getCurrentYear() : Promise<YearEntry> {
+    return (await lastValueFrom(this.http.get(AppConfig.backendUrl + '/api/year/' + this.selectedDay.getTime())) as YearEntry);
   }
 
   public renderChart() {
@@ -231,7 +241,6 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
         var xDate = new Date(entry.lastupdated);
         xDate.setHours(0, 0, 0);
         return {
-          x: xDate.getMonth() + 1,
           y: Math.round(((entry.produced / 1000) + Number.EPSILON) * 100) / 100,
           label: (xDate.getMonth() + 1).toString(),
           // toolTipContent: '<span style="color:#ffae00">Produktion</span>: ' + (entry.produced / 1000).toFixed(2) + 'kWH'
@@ -251,7 +260,6 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
         var xDate = new Date(entry.lastupdated);
         xDate.setHours(0, 0, 0);
         return {
-          x: xDate.getMonth() + 1,
           y: Math.round(((entry.usage / 1000) + Number.EPSILON) * 100) / 100,
           label: (xDate.getMonth() + 1).toString(),
           // toolTipContent: '<span style="color:#325ea8">Verbrauch</span>: ' + (entry.produced / 1000).toFixed(2) + 'kWH'
@@ -279,9 +287,6 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
       theme: window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark2" : "light2",
       axisX: {
         // valueFormatString: "MM",
-        interval: 1,
-        minimum: 1,
-        maximum: 12.5,
       },
       axisY: {
         minimum: 0
@@ -362,7 +367,6 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
   public removeDay() {
     this.selectedDay.setDate(this.selectedDay.getDate() - 1);
     this.selectedDay = new Date(this.selectedDay.getTime());
-    console.log(this.selectedDay.getTime());
     this.getHistory();
     this.getFullDay(this.selectedDay);
   }
@@ -372,6 +376,24 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
     this.selectedDay = new Date(this.selectedDay.getTime())
     this.getHistory();
     this.getFullDay(this.selectedDay);
+  }
+
+  public async removeMonth() {
+    console.log("removing month")
+    this.selectedDay.setMonth(this.selectedDay.getMonth() - 1);
+    //this.selectedDay = new Date(this.selectedDay.getTime());
+    console.log(this.selectedDay)
+    this.getCurrentMonth();
+    this.getFullMonth(this.selectedDay);
+  }
+
+  public async addMonth() {
+    console.log("adding month")
+    /*this.selectedDay.setMonth(this.selectedDay.getMonth() + 1);
+    this.selectedDay = new Date(this.selectedDay.getTime());
+    console.log(this.selectedDay);
+    this.getCurrentMonth();
+    this.getFullMonth(this.selectedDay);*/
   }
 
   public async getHistory() {
@@ -410,6 +432,12 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
     this.http.get(AppConfig.backendUrl + '/api/total').subscribe(response => {
       console.log(response);
       this.yearEntries = response as YearEntry[];
+      this.totalEntry = new TotalEntry(
+        this.yearEntries.map(entry => entry.produced).reduce((a, b) => a + b, 0),
+        this.yearEntries.map(entry => entry.consumption).reduce((a, b) => a + b, 0),
+        this.yearEntries.map(entry => entry.delivery).reduce((a, b) => a + b, 0),
+        this.yearEntries.map(entry => entry.usage).reduce((a, b) => a + b, 0),
+      )
       this.renderTotalChart();
     })
   }
