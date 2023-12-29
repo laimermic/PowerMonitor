@@ -203,9 +203,11 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
     startLimit.setDate(1);
     startLimit.setHours(0, 0, 0);
 
-    var pseudoEndLimit = new Date(month.getTime());
-    var endLimit = new Date(pseudoEndLimit.getFullYear(), pseudoEndLimit.getMonth() + 1, 0, 23, 59, 59);
+    //var pseudoEndLimit = new Date(month.getTime());
+    var endLimit = new Date(month.getFullYear(), month.getMonth() + 1, 0, 23, 59, 59);
+    console.log(endLimit);
 
+    var fuckingfuckendLimit = endLimit.getTime();
     // console.log(data);
 
     this.monthChartOptions = {
@@ -218,7 +220,7 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
         valueFormatString: "DD",
         interval: 1,
         minimum: startLimit.getTime(),
-        // maximum: endLimit.getTime(), This line causes a memory leak
+        maximum: new Date(2023, 10 , 30, 23, 59, 59).getTime() //This line causes a memory leak
       },
       axisY: {
         minimum: 0
