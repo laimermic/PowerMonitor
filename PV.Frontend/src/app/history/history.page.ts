@@ -218,7 +218,7 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
         valueFormatString: "DD",
         interval: 1,
         minimum: startLimit.getTime(),
-        // maximum: endLimit.getTime(), This line causes a memory leak
+        maximum: endLimit.getTime()
       },
       axisY: {
         minimum: 0

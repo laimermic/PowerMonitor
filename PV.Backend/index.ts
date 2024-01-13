@@ -54,45 +54,16 @@ const app: Express = express();
 
 async function calculateUsage() {
     if (document.delivery?.value == 0) {
-        document.usage = new CurrentField(new Date(), (document?.production?.value ?? 0) + (document?.consumption?.value ?? 0), document.usage?.time ?? new Date());
-    } else {
-        document.usage = new CurrentField(new Date(), (document.production?.value ?? 0) - (document.delivery?.value ?? 0), document.usage?.time ?? new Date());
-    }
-
-    /*var usageAdd = document.usage ? calculateWh(document.usage?.oldTime ?? new Date(), document.usage?.value ?? 0) : 0;    
-    if (usageAdd > 0) {
-        let start = new Date();
-        start.setHours(0);
-        start.setMinutes(0);
-        start.setSeconds(0);
-
-        let end = new Date();
-        end.setHours(23, 59, 59);
-        var currentDayEntry = await mongo.collection<DayEntry>('DayEntry').findOne({
-            day: {
-                $gte: start,
-                $lte: end
-            }
-        })
-        if (currentDayEntry) {
-            console.log("Updating current day entry (usage)");
-            currentDayEntry.usage = currentDayEntry.usage + usageAdd;
-            currentDayEntry.day = new Date();
-            await mongo.collection<DayEntry>('DayEntry').updateOne({ _id: currentDayEntry._id }, { $set: currentDayEntry });
-        } else {
-            console.log("Creating new current day entry (usage)");
-            let newcurrentDayEntry = new DayEntry(0, 0, 0, usageAdd, new Date());
-            await mongo.collection<DayEntry>('DayEntry').insertOne(newcurrentDayEntry);
+        let newUsageValue = (document?.production?.value ?? 0) + (document?.consumption?.value ?? 0);
+        if (newUsageValue > 0) {
+            document.usage = new CurrentField(new Date(), newUsageValue, document.usage?.time ?? new Date());
         }
-    }*/
-
-    // console.log("==============================================");
-    // console.log("Recalculated the numbers");
-    // console.log("Production: " + document.production?.value);
-    // console.log("Delivery: " + document.delivery?.value);
-    // console.log("Consumption: " + document.consumption?.value);
-    // console.log("Usage: " + document.usage?.value);
-    // console.log("==============================================");
+    } else {
+        let newUsageValue = (document.production?.value ?? 0) - (document.delivery?.value ?? 0);
+        if (newUsageValue > 0) {
+            document.usage = new CurrentField(new Date(), newUsageValue, document.usage?.time ?? new Date());
+        }
+    }
 }
 
 async function inserttoMongo() {
