@@ -30,11 +30,8 @@ export class CurrentViewPage implements ViewDidEnter, ViewDidLeave {
 
   public async getNow() {
     this.currentEntry = (await lastValueFrom(this.http.get(AppConfig.backendUrl + "/api/now"))) as CurrentEntry;
-    console.log(this.currentEntry);
     var usage = this.currentEntry?.usage?.value ?? 0;
     var prod = this.currentEntry?.production?.value ?? 1;
-    console.log("Usage: " + usage);
-    console.log("Prod: " + prod);
     if ((usage / prod) > 1) {
       this.houseusage = 100;
     } else {
@@ -49,7 +46,6 @@ export class CurrentViewPage implements ViewDidEnter, ViewDidLeave {
   }
   public async getFullDay() {
     this.http.get(AppConfig.backendUrl + '/api/fullday/' + new Date().getTime()).subscribe(response => {
-      console.log(response);
       this.dayEntry = response as DayEntry;
 
       let houseUsageData: Array<CanvasJS.ChartDataPoint> = new Array<CanvasJS.ChartDataPoint>(
@@ -139,7 +135,6 @@ export class CurrentViewPage implements ViewDidEnter, ViewDidLeave {
   }
   ionViewDidLeave(): void {
     clearInterval(this.interval);
-    console.log("View left")
   }
 
 }

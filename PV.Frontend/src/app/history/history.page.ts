@@ -68,12 +68,10 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
     if (this.currentView == 'month') {
       this.getFullMonth(this.selectedDay);
       this.getCurrentMonth();
-      // console.log(this.monthEntry);
       clearInterval(this.refresher);
     } else if (this.currentView == 'year') {
       this.getFullYear(this.selectedDay);
       this.yearEntry = await this.getCurrentYear();
-      // console.log(this.yearEntry);
       clearInterval(this.refresher);
     } else if (this.currentView == 'day') {
       this.getHistory();
@@ -84,15 +82,12 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
       }, 30000)
     } else if (this.currentView == 'total') {
       this.getTotal();
-      //this.yearEntry = (await lastValueFrom(this.http.get(AppConfig.backendUrl + '/api/year/' + this.selectedDay.getTime()))) as MonthEntry;
-      //console.log(this.yearEntry);
       clearInterval(this.refresher);
     }
   }
 
   public getCurrentMonth() {
     this.http.get(AppConfig.backendUrl + '/api/month/' + this.selectedDay.getTime()).subscribe(response => {
-      // console.log(response);
       this.monthEntry = response as MonthEntry;
     });
   }
@@ -102,7 +97,6 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
   }
 
   public renderChart() {
-    // console.log("rendering");
     var data = new Array<ChartDataSeriesOptions>();
     var prodEntry = {
       type: "area",
@@ -157,7 +151,6 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
       },
       data: data
     }
-    // console.log(this.chartOptions)
   }
 
   public renderMonthChart(month: Date) {
@@ -172,7 +165,7 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
         var xDate = new Date(entry.lastupdated);
         xDate.setHours(0, 0, 0);
         return {
-          x: xDate,
+          x: xDate.getDate(),
           y: Math.round(((entry.produced / 1000) + Number.EPSILON) * 100) / 100,
           // toolTipContent: '<span style="color:#ffae00">Produktion</span>: ' + (entry.produced / 1000).toFixed(2) + 'kWH'
         }
@@ -191,8 +184,9 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
         var xDate = new Date(entry.lastupdated);
         xDate.setHours(0, 0, 0);
         return {
-          x: xDate,
+          x: xDate.getDate(),
           y: Math.round(((entry.usage / 1000) + Number.EPSILON) * 100) / 100,
+          label: xDate.getDate().toString(),
           // toolTipContent: '<span style="color:#325ea8">Verbrauch</span>: ' + (entry.produced / 1000).toFixed(2) + 'kWH'
         }
       }) ?? new Array<CanvasJS.ChartDataPoint>(),
@@ -205,10 +199,8 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
 
     //var pseudoEndLimit = new Date(month.getTime());
     var endLimit = new Date(month.getFullYear(), month.getMonth() + 1, 0, 23, 59, 59);
-    console.log(endLimit);
 
-    var fuckingfuckendLimit = endLimit.getTime();
-    // console.log(data);
+    // var fuckingfuckendLimit = endLimit.getTime();
 
     this.monthChartOptions = {
       animationEnabled: true,
@@ -218,9 +210,9 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
       theme: window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark2" : "light2",
       axisX: {
         valueFormatString: "DD",
-        interval: 1,
-        minimum: startLimit.getTime(),
-        maximum: endLimit.getTime()
+        // interval: 1,
+        minimum: startLimit.getDate(),
+        maximum: endLimit.getDate(),
       },
       axisY: {
         minimum: 0
@@ -247,6 +239,7 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
         return {
           y: Math.round(((entry.produced / 1000) + Number.EPSILON) * 100) / 100,
           label: (xDate.getMonth() + 1).toString(),
+          x: xDate.getMonth() + 1,
           // toolTipContent: '<span style="color:#ffae00">Produktion</span>: ' + (entry.produced / 1000).toFixed(2) + 'kWH'
         }
       }) ?? new Array<CanvasJS.ChartDataPoint>(),
@@ -265,6 +258,7 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
         xDate.setHours(0, 0, 0);
         return {
           y: Math.round(((entry.usage / 1000) + Number.EPSILON) * 100) / 100,
+          x: xDate.getMonth() + 1,
           label: (xDate.getMonth() + 1).toString(),
           // toolTipContent: '<span style="color:#325ea8">Verbrauch</span>: ' + (entry.produced / 1000).toFixed(2) + 'kWH'
         }
@@ -280,7 +274,6 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
     let pseudoEndLimit = new Date(year.getTime());
     let endLimit = new Date(pseudoEndLimit.getFullYear() - 1, 12, 31, 23, 59, 59);
 
-    // console.log(data);
 
     this.yearChartOptions = {
       animationEnabled: true,
@@ -291,6 +284,10 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
       theme: window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark2" : "light2",
       axisX: {
         // valueFormatString: "MM",
+        interval: 1,
+        // intervalType: 'month',
+        minimum: 1,
+        maximum: 12,
       },
       axisY: {
         minimum: 0
@@ -383,19 +380,15 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
   }
 
   public async removeMonth() {
-    console.log("removing month")
     this.selectedDay.setMonth(this.selectedDay.getMonth() - 1);
     this.selectedDay = new Date(this.selectedDay.getTime());
-    // console.log(this.selectedDay)
     this.getCurrentMonth();
     this.getFullMonth(this.selectedDay);
   }
 
   public async addMonth() {
-    console.log("adding month")
     this.selectedDay.setMonth(this.selectedDay.getMonth() + 1);
     this.selectedDay = new Date(this.selectedDay.getTime());
-    // console.log(this.selectedDay);
     this.getCurrentMonth();
     this.getFullMonth(this.selectedDay);
   }
@@ -425,20 +418,17 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
 
   public async getFullDay(date: Date) {
     this.http.get(AppConfig.backendUrl + '/api/fullday/' + date.getTime()).subscribe(response => {
-      // console.log(response);
       this.dayEntry = response as DayEntry;
     })
   }
 
   public async getFullMonth(date: Date) {
-    console.log("moin");
     this.dayEntries = await lastValueFrom(this.http.get(AppConfig.backendUrl + '/api/fullMonth/' + date.getTime())) as DayEntry[];
     this.renderMonthChart(date);
   }
 
   public async getFullYear(date: Date) {
     this.http.get(AppConfig.backendUrl + '/api/fullYear/' + date.getTime()).subscribe(response => {
-      // console.log(response);
       this.monthEntries = response as MonthEntry[];
       this.renderYearChart(date);
     })
@@ -446,7 +436,6 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
 
   public async getTotal() {
     this.http.get(AppConfig.backendUrl + '/api/total').subscribe(response => {
-      // console.log(response);
       this.yearEntries = response as YearEntry[];
       this.totalEntry = new TotalEntry(
         this.yearEntries.map(entry => entry.produced).reduce((a, b) => a + b, 0),
