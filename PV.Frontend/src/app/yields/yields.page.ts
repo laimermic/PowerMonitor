@@ -31,6 +31,8 @@ export class YieldsPage implements ViewDidEnter, ViewDidLeave {
 
   public income: number = 0;
   public costs: number = 0;
+  public savedCosts: number = 0;
+  public savedCostsEnergy: number = 0;
 
   public calculatedDelivery: number = 0;
   public calculatedConsumption: number = 0;
@@ -74,6 +76,8 @@ export class YieldsPage implements ViewDidEnter, ViewDidLeave {
     }
     this.income = 0;
     this.costs = 0;
+    this.savedCosts = 0;
+    this.savedCostsEnergy = 0;
     this.calculatedDelivery = 0;
     this.calculatedConsumption = 0;
     start.setHours(0, 0, 0, 0);
@@ -84,6 +88,8 @@ export class YieldsPage implements ViewDidEnter, ViewDidLeave {
       let consumptionPrice = this.prices?.find(p => p.type == 'consume' && (p.start == null || p.start <= e.lastupdated) && (p.end == null || p.end >= e.lastupdated));
       if (consumptionPrice) {
         this.costs += (e.consumption / 1000) * consumptionPrice.pricePerKwH;
+        this.savedCosts += (e.usage - e.consumption) / 1000 * consumptionPrice.pricePerKwH;
+        this.savedCostsEnergy += (e.usage - e.consumption) / 1000;
         this.calculatedConsumption += e.consumption;
       }
       let feedInPrice = this.prices?.find(p => p.type == 'feed' && (p.start == null || p.start <= e.lastupdated) && (p.end == null || p.end >= e.lastupdated));

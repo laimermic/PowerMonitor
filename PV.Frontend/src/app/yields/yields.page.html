@@ -32,7 +32,7 @@
     <h3>Energiepreise können über das + hinzugefügt werden</h3>
   </div>
   <div *ngIf="(this.prices?.length ?? -1) > 0" class="view">
-    <ion-card-title class="consumption-yield">Bezug</ion-card-title>
+    <ion-card-title class="consumption-yield new-item">Bezug</ion-card-title>
     <ion-list>
       <ion-item class="consumption-yield">
         <ion-label slot="start">Menge</ion-label>
@@ -44,7 +44,7 @@
       </ion-item>
     </ion-list>
 
-    <ion-card-title class="delivery-yield">Einspeisung</ion-card-title>
+    <ion-card-title class="delivery-yield new-item">Einspeisung</ion-card-title>
     <ion-list>
       <ion-item class="delivery-yield">
         <ion-label slot="start">Menge</ion-label>
@@ -57,7 +57,12 @@
     </ion-list>
     <div class="result">
       <h1 [ngClass]="{'positive' : (this.income - this.costs) > 0, 'negative': (this.income - this.costs) < 0}">
-        Ergebnis: {{(this.income - this.costs).toFixed(2)}} €</h1>
+        {{(this.income - this.costs) > 0 ? 'Gewinn' : 'Kosten'}}: {{(this.income - this.costs).toFixed(2)}} €</h1>
+    </div>
+
+    <div class="result">
+      <h1>
+        Durch PV eingesparte Kosten: {{this.savedCosts.toFixed(2)}} € ({{this.savedCostsEnergy.toFixed(2)}} kWh)</h1>
     </div>
   </div>
 </ion-content>
@@ -71,7 +76,7 @@
         </ion-buttons>
         <ion-segment [(ngModel)]="this.newPrice.type">
           <ion-segment-button value="consume">
-            Bezugspreis
+            Bezugstarif
           </ion-segment-button>
           <ion-segment-button value="feed">
             Einspeisetarif
