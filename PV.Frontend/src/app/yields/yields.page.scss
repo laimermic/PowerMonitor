@@ -28,6 +28,13 @@
   .consumption-yield {
     color: var(--color-consumption);
   }
+  .saved-costs {
+    color: var(--ion-color-primary);
+  }
+
+  .new-item.saved-costs {
+    margin-top: 40px;
+  }
   .new-item {
     margin-top: 20px;
   }
