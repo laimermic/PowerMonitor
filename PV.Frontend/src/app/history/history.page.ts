@@ -209,7 +209,7 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
       backgroundColor: "#ffffff00",
       theme: window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark2" : "light2",
       axisX: {
-        valueFormatString: "DD",
+        // valueFormatString: "DD",
         // interval: 1,
         minimum: startLimit.getDate(),
         maximum: endLimit.getDate(),

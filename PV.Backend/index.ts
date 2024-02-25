@@ -17,6 +17,7 @@ import dotenv from 'dotenv'
 import _ from 'lodash';
 import { YearEntry } from './models/History/YearEntry';
 import { TotalEntry } from './models/History/TotalEntry';
+import { EnergyPrice } from './models/EnergyPrice';
 
 //E-Mail Monate
 const monthNames = ["January", "February", "March", "April", "May", "June",
@@ -441,12 +442,40 @@ app.get('/api/freqday/:unix', async (req: Request, res: Response) => {
     res.send(freqEntries)
 });
 
+app.get('/api/allDays', async (req: Request, res: Response) => {
+    var cursor = mongo.collection<DayEntry>('DayEntry').find();
+    var dayEntries = await cursor.map(doc => {
+        return doc;
+    }).toArray();
+    res.send(dayEntries);
+});
+
+app.post('/api/createElectricyPrice', express.json({ type: '*/*' }), async (req: Request, res: Response) => {
+    var body = req.body;
+    console.log(body);
+    var start = body.start;
+    var end = body.end;
+    var type = body.type;
+    var pricePerKwH = body.pricePerKwH;
+    var newElectricityPrice = new EnergyPrice(start, end, type, pricePerKwH);
+    await mongo.collection<EnergyPrice>('electricityPrices').insertOne(newElectricityPrice);
+    res.end();
+});
+
+app.get('/api/electricityPrices', async (req: Request, res: Response) => {
+    var cursor = mongo.collection<EnergyPrice>('electricityPrices').find();
+    var prices = await cursor.map(doc => {
+        return doc;
+    }).toArray();
+    res.send(prices);
+});
 
 app.post('/api/registerNotification', express.json({ type: '*/*' }), async (req: Request, res: Response) => {
     var client = req.body as NotificationClient;
     mongo.collection<NotificationClient>('clients').updateOne({ token: client.token }, { $set: client }, { upsert: true });
     res.end();
 })
+
 
 function calculateMonth() {
     let start = new Date();

@@ -1,0 +1,31 @@
+.no-prices {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--ion-color-warning);
+  .no-prices-icn {
+    font-size: 10rem;
+  }
+}
+
+.view {
+  margin-top: 20px;
+  .result {
+    text-align: center;
+    h1 {
+        font-size: 2.2rem;
+    }
+    .positive {
+      color: var(--ion-color-success);
+    }
+    .negative {
+      color: var(--ion-color-danger);
+    }
+  }
+  .delivery-yield {
+    color: var(--color-delivery);
+  }
+  .consumption-yield {
+    color: var(--color-consumption);
+  }
+}
