@@ -78,6 +78,7 @@ async function inserttoMongo() {
         if ((new Date().getTime() - document.frequency.time.getTime()) / (1000 * 60) < 2) {
             var frequencyPoint = new Point('frequency').floatField('value', document.frequency?.value);
             writeApi.writePoint(frequencyPoint);
+            await mongo.collection<CurrentEntry>('current').findOneAndUpdate({}, { $set: { frequency: document.frequency } }, { upsert: true });
         }
     }
 }

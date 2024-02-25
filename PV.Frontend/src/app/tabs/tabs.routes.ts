@@ -22,6 +22,11 @@ export const routes: Routes = [
           import('../power-grid/power-grid.page').then((m) => m.PowerGridPage),
       },
       {
+        path: 'yields',
+        loadComponent: () =>
+          import('../yields/yields.page').then((m) => m.YieldsPage),
+      },
+      {
         path: '',
         redirectTo: '/PV/current/',
         pathMatch: 'full',
