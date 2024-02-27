@@ -1,0 +1,11 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="close()">Back</ion-button>
+    </ion-buttons>
+    <ion-title>Stromnetzfrequenz von {{this.start | date : 'HH:mm'}} - {{this.end | date : 'HH:mm'}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <canvasjs-chart class="chart" [options]="this.graphOptions"></canvasjs-chart>
+</ion-content>

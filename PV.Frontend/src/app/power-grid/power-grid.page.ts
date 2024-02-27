@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { IonicModule, ViewDidEnter, ViewDidLeave } from '@ionic/angular';
+import { IonicModule, ModalController, ViewDidEnter, ViewDidLeave } from '@ionic/angular';
 import { InfluxResult } from '../models/InfluxResult';
 import { HttpClient, HttpClientModule } from '@angular/common/http'
 import { lastValueFrom } from 'rxjs';
@@ -11,6 +11,7 @@ import { ChartDataPoint } from 'canvasjs';
 import { BlinkComponent } from 'src/assets/blink.component';
 import { AppConfig } from '../models/AppConfig';
 import { FrequencyHour } from '../models/FrequencyHour';
+import { FrequencyDetailComponent } from '../frequency-detail/frequency-detail.component';
 
 @Component({
   selector: 'app-power-grid',
@@ -36,7 +37,7 @@ export class PowerGridPage implements ViewDidEnter, ViewDidLeave {
 
   public hoursEntries: Array<FrequencyHour> = new Array<FrequencyHour>();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private modalCtrl: ModalController) { }
 
   public async getFreq() {
     this.currentEntry = (await lastValueFrom(this.http.get(AppConfig.backendUrl + "/api/now"))) as CurrentEntry;
@@ -73,10 +74,34 @@ export class PowerGridPage implements ViewDidEnter, ViewDidLeave {
       if (currentHourPoints.length > 0) {
         var min = Math.min.apply(Math, currentHourPoints.map(o => o._value));
         var max = Math.max.apply(Math, currentHourPoints.map(o => o._value));
-        newHoursEntries.push(new FrequencyHour(currentHour, min, max));
+        if (newHoursEntries.length == 0) {
+          let endDate = new Date(minDate);
+          endDate.setHours(currentHour + 1);
+          endDate.setMinutes(0);
+          newHoursEntries.push(new FrequencyHour(minDate.getTime(), endDate.getTime(), min, max));
+        } else {
+          let endDate = new Date(minDate);
+          endDate.setHours(currentHour + 1);
+          endDate.setMinutes(0);
+          newHoursEntries.push(new FrequencyHour(newHoursEntries[newHoursEntries.length - 1].endTime, endDate.getTime(), min, max));
+        }
       }
-      this.hoursEntries = newHoursEntries;
     }
+    var maxDate = new Date(Math.max.apply(Math, this.points.map(function (o) { return new Date(o._time)?.getTime(); })));
+    newHoursEntries[newHoursEntries.length - 1].endTime = maxDate.getTime();
+    this.hoursEntries = newHoursEntries;
+  }
+
+  public async openDetails(start: number, end: number) {
+    const modal = await this.modalCtrl.create({
+      component: FrequencyDetailComponent,
+      componentProps: {
+        start: start,
+        end: end,
+        points: this.points
+      }
+    });
+    await modal.present();
   }
 
   public renderChart() {
@@ -149,7 +174,7 @@ export class PowerGridPage implements ViewDidEnter, ViewDidLeave {
     this.getFreq();
     this.historyInterval = setInterval(async () => {
       await this.getHistory();
-    }, 60000)
+    }, 300000)
     await this.getHistory();
   }
 

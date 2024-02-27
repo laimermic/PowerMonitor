@@ -13,7 +13,8 @@
     </ion-toolbar>
   </ion-header>
   <div class="content-wrapper">
-    <ion-card class="frequency-card" [ngClass]="{'stable': ((this.currentEntry?.frequency?.value ?? 49.85) > 49.85) && !this.dataOutDated, 'warning': ((this.currentEntry?.frequency?.value ?? 49.85) <= 49.85) || this.dataOutDated, 'critical': (this.currentEntry?.frequency?.value ?? 49.85) <= 49.8}">
+    <ion-card class="frequency-card"
+      [ngClass]="{'stable': ((this.currentEntry?.frequency?.value ?? 49.85) > 49.85) && !this.dataOutDated, 'warning': ((this.currentEntry?.frequency?.value ?? 49.85) <= 49.85) || this.dataOutDated, 'critical': (this.currentEntry?.frequency?.value ?? 49.85) <= 49.8}">
       <ion-card-header>
         <ion-card-subtitle>Frequenz</ion-card-subtitle>
       </ion-card-header>
@@ -21,7 +22,9 @@
         <h1>{{!this.dataOutDated ? this.currentEntry?.frequency?.value?.toFixed(2) ?? "-" : "-"}} Hz</h1>
       </ion-card-content>
     </ion-card>
-    <app-blink *ngIf="(this.currentEntry?.frequency?.value ?? 49.85) <= 49.8" [active]="true" [visibleMS]="1000" [inVisibleMS]="1000" [totalMS]="2000">
+    <app-blink
+      *ngIf="(this.currentEntry?.frequency?.value ?? 49.85) <= 49.8 || (this.currentEntry?.frequency?.value ?? 49.85) >= 50.2"
+      [active]="true" [visibleMS]="1000" [inVisibleMS]="1000" [totalMS]="2000">
       <div class="power-grid-alert">
         <ion-icon color="danger" name="warning-outline"></ion-icon>
         <h3>Power Grid Frequency critical</h3>
@@ -34,12 +37,15 @@
         <h2>Stromnetzfrequenz nicht verfügbar.</h2>
       </ion-card-content>
     </ion-card>
-    <ion-card class="frequency-card" [ngClass]="{'consume': (this.currentEntry?.consumption?.value ?? 0) > 0, 'stable': (this.currentEntry?.delivery?.value ?? 0) > 0}">
+    <ion-card class="frequency-card"
+      [ngClass]="{'consume': (this.currentEntry?.consumption?.value ?? 0) > 0, 'stable': (this.currentEntry?.delivery?.value ?? 0) > 0}">
       <ion-card-header>
         <ion-card-subtitle>Status</ion-card-subtitle>
       </ion-card-header>
       <ion-card-content class="frequency-card-content">
-        <h1>{{this.currentEntry?.delivery != null ? (this.currentEntry?.delivery?.value ?? 0) > 0  ? 'Einspeisung' : 'Bezug' : 'n/a'}}</h1>
+        <h1>
+          {{this.currentEntry?.delivery != null ? (this.currentEntry?.delivery?.value ?? 0) > 0  ? 'Einspeisung' : 'Bezug' : 'n/a'}}
+        </h1>
       </ion-card-content>
     </ion-card>
     <div *ngIf="!this.loading" class="data-wrapper">
@@ -51,9 +57,12 @@
       <canvasjs-chart class="chart" [options]="this.chartOptions"></canvasjs-chart>
     </div>
     <div class="hours-grid" *ngIf="this.hoursEntries.length > 0">
-      <ion-card *ngFor="let hourEntry of this.hoursEntries" [ngClass]="{'stable': ((this.hourEntry?.min ?? 49.85) >= 49.85), 'warning': ((this.hourEntry?.min ?? 49.85) < 49.85), 'critical': (this.hourEntry?.min ?? 49.85) <= 49.8}">
+      <ion-card *ngFor="let hourEntry of this.hoursEntries"
+        [ngClass]="{'stable': ((hourEntry?.min ?? 49.85) >= 49.85), 'warning': ((hourEntry?.min ?? 49.85) < 49.85), 'critical': (hourEntry?.min ?? 49.85) <= 49.8}"
+        (click)="openDetails(hourEntry.startTime, hourEntry.endTime)">
         <ion-card-header>
-          <ion-card-title>{{hourEntry.hour < 10 ? '0' + hourEntry.hour : hourEntry.hour}}:00 - {{hourEntry.hour < 9 ? '0' + (hourEntry.hour + 1) : hourEntry.hour + 1}}:00</ion-card-title>
+          <ion-card-title>{{hourEntry.startTime | date: 'HH:mm'}} -
+            {{hourEntry.endTime | date: 'HH:mm'}}</ion-card-title>
         </ion-card-header>
         <ion-card-content>
           <h2>Min: {{hourEntry.min.toFixed(2)}} Hz</h2>
