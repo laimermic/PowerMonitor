@@ -59,7 +59,7 @@
     <div class="hours-grid" *ngIf="this.hoursEntries.length > 0">
       <ion-card *ngFor="let hourEntry of this.hoursEntries"
         [ngClass]="{'stable': ((hourEntry?.min ?? 49.85) >= 49.85), 'warning': ((hourEntry?.min ?? 49.85) < 49.85), 'critical': (hourEntry?.min ?? 49.85) <= 49.8}"
-        (click)="openDetails(hourEntry.startTime, hourEntry.endTime)">
+        (click)="openDetails(hourEntry.startTime, hourEntry.endTime, hourEntry.min, hourEntry.max)">
         <ion-card-header>
           <ion-card-title>{{hourEntry.startTime | date: 'HH:mm'}} -
             {{hourEntry.endTime | date: 'HH:mm'}}</ion-card-title>

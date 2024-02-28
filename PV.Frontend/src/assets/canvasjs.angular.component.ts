@@ -19,7 +19,7 @@ var CanvasJS = require('./canvasjs.min');
 	standalone: true,
 	selector: 'canvasjs-chart',
 	template: '<div id="{{chartContainerId}}" class="custom-container-class"></div>',
-	styles: ['.custom-container-class {width: 100%; height: 100%; .canvasjs-chart-credit { display: none; }}']
+	styles: ['.custom-container-class {height: 100%;}']
 })
 
 class CanvasJSChart implements AfterViewInit, OnChanges, OnDestroy {

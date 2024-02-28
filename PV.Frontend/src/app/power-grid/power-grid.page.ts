@@ -92,12 +92,14 @@ export class PowerGridPage implements ViewDidEnter, ViewDidLeave {
     this.hoursEntries = newHoursEntries;
   }
 
-  public async openDetails(start: number, end: number) {
+  public async openDetails(start: number, end: number, min: number, max: number) {
     const modal = await this.modalCtrl.create({
       component: FrequencyDetailComponent,
       componentProps: {
         start: start,
         end: end,
+        min: min,
+        max: max,
         points: this.points
       }
     });

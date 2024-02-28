@@ -17,6 +17,8 @@ import { ChartDataPoint } from 'canvasjs';
 export class FrequencyDetailComponent implements OnInit {
   public start: number = 0;
   public end: number = 0;
+  public min: number = 0;
+  public max: number = 0;
   public filteredPoints: InfluxResult[] = new Array<InfluxResult>();
   public graphOptions: CanvasJS.ChartOptions = {
     title: {},
@@ -34,6 +36,9 @@ export class FrequencyDetailComponent implements OnInit {
   ngOnInit() {
     this.start = this.navParams.get('start');
     this.end = this.navParams.get('end');
+    this.min = this.navParams.get('min');
+    this.max = this.navParams.get('max');
+
     let allPoints: InfluxResult[] = this.navParams.get('points');
     this.filteredPoints = allPoints.filter(p => new Date(p._time).getTime() >= this.start && new Date(p._time).getTime() <= this.end);
     this.frequencyDataPoints = this.filteredPoints.map(point => { return { x: new Date(point._time), y: Math.round((point._value + Number.EPSILON) * 100) / 100 } });
@@ -43,13 +48,13 @@ export class FrequencyDetailComponent implements OnInit {
       title: {},
       backgroundColor: "#ffffff00",
       theme: window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark2" : "light2",
+      width: 300,
       axisX: {
         valueFormatString: "HH:mm",
         minimum: this.start,
         maximum: this.end,
       },
       axisY: {
-        title: "Frequency in Hz",
         minimum: 49.5,
         maximum: 50.5,
         stripLines: [

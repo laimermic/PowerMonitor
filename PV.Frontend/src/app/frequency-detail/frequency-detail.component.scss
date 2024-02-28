@@ -1,0 +1,41 @@
+.chart-container {
+    width: 100%;
+    height: 500px;
+    .chart {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.history-data-wrapper {
+    padding: 20px;
+    //height: 20%;
+    .chart-heading {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-content: space-between;
+        padding: 5px;
+        ion-card-subtitle {
+            font-size: large;
+        }
+        border-bottom: 2px solid var(--ion-color-primary-contrast);
+    }
+    .chart-heading.danger .freq-value {
+        color: var(--ion-color-danger);
+    }
+
+    .chart-heading.warning .freq-value {
+        color: var(--ion-color-warning);
+    }
+
+    .chart-heading.stable .freq-value {
+        color: var(--ion-color-success);
+    }
+
+
+
+    .chart-heading.date {
+        width: fit-content;
+    }
+}
