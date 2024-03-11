@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule, ViewDidEnter, ViewDidLeave } from '@ionic/angular';
+import { IonicModule, ModalController, ViewDidEnter, ViewDidLeave } from '@ionic/angular';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AppConfig } from '../models/AppConfig';
 import { EnergyPrice } from '../models/EnergyPrice';
 import { DayEntry } from '../models/DayEntry';
 import { lastValueFrom } from 'rxjs';
+import { YieldsDetailsPage } from '../yields-details/yields-details.page';
 
 @Component({
   selector: 'app-yields',
@@ -21,7 +22,7 @@ export class YieldsPage implements ViewDidEnter, ViewDidLeave {
   public dayEntries: Array<DayEntry> = [];
   public pricesModalOpen: boolean = false;
 
-  public newPrice: EnergyPrice = new EnergyPrice(null, null, 'consume', 0);
+  public newPrice: EnergyPrice = new EnergyPrice(null, null, null, 'consume', 0);
 
   public newPriceStart: string = new Date().toISOString();
   public newPriceEnd: string = new Date().toISOString();
@@ -37,7 +38,7 @@ export class YieldsPage implements ViewDidEnter, ViewDidLeave {
   public calculatedDelivery: number = 0;
   public calculatedConsumption: number = 0;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private modalCtrl: ModalController) { }
 
   public calcYield() {
     let start = new Date();
@@ -98,6 +99,53 @@ export class YieldsPage implements ViewDidEnter, ViewDidLeave {
         this.calculatedDelivery += e.delivery;
       }
     });
+  }
+
+  public async showDetails() {
+    let start = new Date();
+    let end = new Date();
+    switch (this.currentView) {
+      case 'today':
+        start = new Date();
+        end = new Date();
+        break;
+
+      case 'month':
+        let monthStart = new Date();
+        monthStart.setDate(1);
+
+        let monthEnd = new Date();
+        monthEnd.setMonth(monthEnd.getMonth() + 1);
+        monthEnd.setDate(0);
+
+        start = monthStart;
+        end = monthEnd;
+        break;
+      case 'year':
+        let yearStart = new Date();
+        yearStart.setMonth(0);
+        yearStart.setDate(1);
+
+        let yearEnd = new Date();
+        yearEnd.setMonth(11);
+        yearEnd.setDate(31);
+
+        start = yearStart;
+        end = yearEnd;
+        break;
+      default:
+        break;
+    }
+    const modal = await this.modalCtrl.create({
+      component: YieldsDetailsPage,
+      componentProps: {
+        dayEntries: this.dayEntries,
+        prices: this.prices,
+        start: start,
+        end: end
+      }
+    });
+    await modal.present();
   }
 
   public changeView(ev: any) {

@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppConfigService } from './app/services/appConfig.service';
 import { AppConfig } from './app/models/AppConfig';
 import { provideServiceWorker } from '@angular/service-worker';
+import { FindPricePipe } from './app/pipes/find-price.pipe';
 
 if (environment.production) {
   enableProdMode();
@@ -23,21 +24,22 @@ const appInitializerFn = (appConfigService: AppConfigService) => {
 bootstrapApplication(AppComponent, {
   providers: [
     {
-        provide: RouteReuseStrategy,
-        useClass: IonicRouteStrategy
+      provide: RouteReuseStrategy,
+      useClass: IonicRouteStrategy
     },
     AppConfigService,
     {
-        provide: APP_INITIALIZER,
-        useFactory: appInitializerFn,
-        deps: [AppConfigService],
-        multi: true
+      provide: APP_INITIALIZER,
+      useFactory: appInitializerFn,
+      deps: [AppConfigService],
+      multi: true
     },
+    FindPricePipe,
     importProvidersFrom(IonicModule.forRoot({}), HttpClientModule),
     provideRouter(routes),
     provideServiceWorker('ngsw-worker.js', {
-        enabled: !isDevMode(),
-        registrationStrategy: 'registerWhenStable:30000'
+      enabled: !isDevMode(),
+      registrationStrategy: 'registerWhenStable:30000'
     })
-]
+  ]
 });
