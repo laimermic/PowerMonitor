@@ -38,6 +38,8 @@ bower_components
 #angular packs
 .angular
 
+bin
+
 # Compiled binary addons (https://nodejs.org/api/addons.html)
 build/Release
 
