@@ -47,13 +47,13 @@
         </div>
         <div class="day-switcher">
           <div (click)="removeDay()">
-            <ion-icon *ngIf="today.getDay() - 1 != selectedDay.getDay()" name="chevron-back-outline"></ion-icon>
+            <ion-icon *ngIf="today.getDay() - 6 < selectedDay.getDay()" name="chevron-back-outline"></ion-icon>
           </div>
           <div>
             <span>{{this.selectedDay | date: 'dd.MM.yyyy'}} <ion-icon name="calendar-outline"></ion-icon></span>
           </div>
           <div (click)="addDay()">
-            <ion-icon *ngIf="today.getDay() != selectedDay.getDay()" name="chevron-forward-outline"></ion-icon>
+            <ion-icon name="chevron-forward-outline"></ion-icon>
           </div>
         </div>
       </div>
@@ -90,7 +90,8 @@
             <span>{{this.selectedDay | date: 'MMMM yyyy'}} <ion-icon name="calendar-outline"></ion-icon></span>
           </div>
           <div (click)="addMonth()">
-            <ion-icon *ngIf="this.selectedDay.getMonth() != this.today.getMonth()" name="chevron-forward-outline"></ion-icon>
+            <ion-icon *ngIf="this.selectedDay.getMonth() != this.today.getMonth()"
+              name="chevron-forward-outline"></ion-icon>
           </div>
         </div>
       </div>
@@ -127,7 +128,8 @@
             <span>{{this.selectedDay | date: 'yyyy'}} <ion-icon name="calendar-outline"></ion-icon></span>
           </div>
           <div (click)="addYear()">
-            <ion-icon *ngIf="this.selectedDay.getFullYear() != this.today.getFullYear()" name="chevron-forward-outline"></ion-icon>
+            <ion-icon *ngIf="this.selectedDay.getFullYear() != this.today.getFullYear()"
+              name="chevron-forward-outline"></ion-icon>
           </div>
         </div>
       </div>
