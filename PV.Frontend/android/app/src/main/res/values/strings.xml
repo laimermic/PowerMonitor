@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">PVMonitor</string>
+    <string name="title_activity_main">PVMonitor</string>
+    <string name="package_name">pv.frontend</string>
+    <string name="custom_url_scheme">pv.frontend</string>
+</resources>

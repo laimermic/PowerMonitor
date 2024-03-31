@@ -15,6 +15,6 @@ export class TabsPage {
   public environmentInjector = inject(EnvironmentInjector);
 
   constructor(private notService: NotificationService) {
-    this.notService.initPush();
+    // this.notService.initPush();
   }
 }
