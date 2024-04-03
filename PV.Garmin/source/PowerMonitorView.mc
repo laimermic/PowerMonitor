@@ -7,7 +7,7 @@ import Toybox.WatchUi;
 
 class PowerMonitorView extends WatchUi.View {
     
-    var mycount = 0;
+    var timer = new Timer.Timer();
 
     function initialize() {
         View.initialize();
@@ -18,7 +18,7 @@ class PowerMonitorView extends WatchUi.View {
         };
         var params = {                          
         };
-        Communications.makeJsonRequest("https://pv.terrex.at/PV/current", params, options, method(:onReceive));
+        Communications.makeJsonRequest("https://api.pv.terrex.at/api/now", params, options, method(:onReceive));
     }
 
 
@@ -26,7 +26,26 @@ class PowerMonitorView extends WatchUi.View {
     function onReceive(responseCode as Number, data as Dictionary?) as Void {
         if (responseCode == 200) {
             System.println("Request Successful"); 
-            System.println(data["production"]["value"]);                  // print success
+            var production = data["production"]["value"];
+            var usage = data["usage"]["value"];
+            var feed = data["delivery"]["value"];
+            var consumption = data["consumption"]["value"];
+            var prodText = self.findDrawableById("production") as Text;
+            prodText.setText("Production: " + production.toString() + " W");
+            
+            var usageText = self.findDrawableById("usage") as Text;
+            usageText.setText("Usage: " + usage.toString() + " W");
+
+            var feedConsText = self.findDrawableById("feedcons") as Text;
+            if (production > usage) {
+                feedConsText.setText("Feed: " + feed.toString() + " W");
+                //feedConsText.setColor("#26b100")
+            } else {
+                feedConsText.setText("Consumption: " + consumption.toString() + " W");
+                //feedConsText.setColor("#8900f8")
+            }
+
+            WatchUi.requestUpdate();
         } else {
             System.println("Response: " + responseCode);            // print response code
             System.println(data);                                   // print response data
@@ -42,10 +61,8 @@ class PowerMonitorView extends WatchUi.View {
     // the state of this View and prepare it to be shown. This includes
     // loading resources into memory.
     function onShow() as Void {
-        //var timer = new Timer.Timer();
-        //timerCallback();
-        //timer.start(method(:timerCallback), 20000, true);
-        
+        timerCallback();
+        timer.start(method(:timerCallback), 20000, true);
     }
 
     // Update the view
@@ -58,6 +75,7 @@ class PowerMonitorView extends WatchUi.View {
     // state of this View here. This includes freeing resources from
     // memory.
     function onHide() as Void {
+        timer.stop();
     }
 
 }
