@@ -1,0 +1,58 @@
+[ @file = "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorDelegate.mc"; @line = 1; ]
+import Toybox.WatchUi;
+[ @file = "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorDelegate.mc"; @line = 2; ]
+class PowerMonitorDelegate extends WatchUi.InputDelegate{
+    [ @file = "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorDelegate.mc"; @line = 2; ]
+    <init> {
+    }
+    [ @file = "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorDelegate.mc"; @line = 2; ]
+    static
+    <init> {
+    }
+    [ @file = "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorDelegate.mc"; @line = 3; @position = 8; ]
+    var view;
+    [ @file = "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorDelegate.mc"; @line = 4; ]
+    function initialize(_view) as Void {
+_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorDelegate_mc_4_31_start:
+[ "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorDelegate.mc" 5 8 ]
+        %tmp.2 = getv ? :InputDelegate;
+        %tmp.3 = getv function %tmp.2 :initialize;
+        invoke %tmp.2 %tmp.3();
+[ "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorDelegate.mc" 6 8 ]
+        %tmp.5 = getv ? :System;
+        %tmp.6 = getv function %tmp.5 :println;
+        %tmp.7 = "PowerMonitorDelegate.initialize()";
+        invoke %tmp.5 %tmp.6(%tmp.7);
+[ "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorDelegate.mc" 7 8 ]
+        %tmp.9 = lgetv %_view;
+        putv self :view %tmp.9;
+_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorDelegate_mc_4_31_stop:
+    }
+    [ @file = "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorDelegate.mc"; @line = 10; ]
+    function onTap(evt) {
+_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorDelegate_mc_10_24_start:
+[ "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorDelegate.mc" 11 8 ]
+        [ "_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorDelegate_mc_10_24_start" "_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorDelegate_mc_10_24_stop" ]
+        %gridView.1 = local;
+        %tmp.4 = getv ? :PowerGridView;
+        %tmp.1 = newc %tmp.4 ();
+        lputv %gridView.1 %tmp.1;
+[ "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorDelegate.mc" 12 8 ]
+        %tmp.5 = getm $.Toybox.WatchUi;
+        %tmp.6 = getv function %tmp.5 :pushView;
+        %tmp.8 = lgetv %gridView.1;
+        %tmp.12 = getv ? :PowerGridDelegate;
+        %tmp.14 = lgetv %gridView.1;
+        %tmp.9 = newc %tmp.12 (%tmp.14);
+        %tmp.15 = getm $.Toybox.WatchUi;
+        %tmp.16 = getv %tmp.15 :SLIDE_LEFT;
+        invoke %tmp.5 %tmp.6(%tmp.8, %tmp.9, %tmp.16);
+[ "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorDelegate.mc" 13 8 ]
+        %tmp.17 = true;
+        ret %tmp.17;
+_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorDelegate_mc_10_24_stop:
+    }
+}
+[ @file = "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorDelegate.mc"; @line = 1; ]
+<init> {
+}

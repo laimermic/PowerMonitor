@@ -25,7 +25,7 @@ class PowerMonitorView extends WatchUi.View {
 
     function onReceive(responseCode as Number, data as Dictionary?) as Void {
         if (responseCode == 200) {
-            System.println("Request Successful"); 
+            System.println("Main View Request Successful"); 
             var production = data["production"]["value"];
             var usage = data["usage"]["value"];
             var feed = data["delivery"]["value"];
@@ -62,7 +62,7 @@ class PowerMonitorView extends WatchUi.View {
     // loading resources into memory.
     function onShow() as Void {
         timerCallback();
-        timer.start(method(:timerCallback), 20000, true);
+        timer.start(method(:timerCallback), 5000, true);
     }
 
     // Update the view

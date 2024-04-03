@@ -8,10 +8,8 @@ class PowerMonitorDelegate extends WatchUi.InputDelegate {
     }
 
     function onTap(evt) {
-        System.println("onKey");
-        var text = view.findDrawableById("production") as Text;
-        text.setText("text changed by delegate");
-        WatchUi.pushView(view, delegate, transition)
+        var gridView = new PowerGridView();
+        WatchUi.pushView(gridView, new PowerGridDelegate(gridView), WatchUi.SLIDE_LEFT);
         return true;
     }
 }
