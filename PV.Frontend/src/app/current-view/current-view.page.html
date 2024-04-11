@@ -17,7 +17,9 @@
       <div class="production-graph-wrapper">
         <div class="photovoltaic">
           <ion-icon color="#fefe12" name="sunny-outline"></ion-icon>
-          <ion-card-subtitle class="graph-value">{{this.currentEntry ? this.currentEntry.production?.value?.toString() : "?" }} W<br>Produktion</ion-card-subtitle>
+          <ion-card-subtitle
+            class="graph-value">{{this.currentEntry ? this.currentEntry.production?.value?.toString() : "?" }}
+            W<br>Produktion</ion-card-subtitle>
         </div>
         <div class="home">
           <ion-icon color="#2f4f8b" name="home-outline"></ion-icon>
@@ -25,7 +27,9 @@
         </div>
         <div class="power-grid">
           <ion-icon color="#cfcfcf" name="flash-outline"></ion-icon>
-          <ion-card-subtitle class="graph-value">{{this.currentEntry ? this.currentEntry.consumption?.value ?? 0 > 0 ? this.currentEntry.consumption?.value : this.currentEntry.delivery?.value : "?" }} W<br>{{this.currentEntry ? this.currentEntry.consumption?.value ?? 0 > 0 ? "Bezug" : "Einspeisung" : "Einspeisung" }}</ion-card-subtitle>
+          <ion-card-subtitle
+            class="graph-value">{{this.currentEntry ? this.currentEntry.consumption?.value ?? 0 > 0 ? this.currentEntry.consumption?.value : this.currentEntry.delivery?.value : "?" }}
+            W<br>{{this.currentEntry ? this.currentEntry.consumption?.value ?? 0 > 0 ? "Bezug" : "Einspeisung" : "Einspeisung" }}</ion-card-subtitle>
         </div>
       </div>
     </ion-card-content>
@@ -48,11 +52,16 @@
   </ion-card>
   <ion-card>
     <ion-card-header class="no-padding-header">
+      <ion-segment value="today">
+        <ion-segment-button value="today">Heute</ion-segment-button>
+        <ion-segment-button value="month">Monat</ion-segment-button>
+        <ion-segment-button value="year">Jahr</ion-segment-button>
+      </ion-segment>
+      <ion-card-title>Eigenverbrauch</ion-card-title>
       <div class="card-header-flex">
-        <ion-card-title>Produktion</ion-card-title>
-        <ion-card-title>{{((this.dayEntry?.produced ?? 0) / 1000).toFixed(2)}} kWH</ion-card-title>
+        <ion-card-subtitle>Produktion</ion-card-subtitle>
+        <ion-card-subtitle>{{((this.dayEntry?.produced ?? 0) / 1000).toFixed(2)}} kWH</ion-card-subtitle>
       </div>
-      <ion-card-subtitle>Eigenverbrauch heute</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
       <div class="graphic-grid">
@@ -80,11 +89,16 @@
   </ion-card>
   <ion-card>
     <ion-card-header class="no-padding-header">
+      <ion-segment value="today">
+        <ion-segment-button value="today">Heute</ion-segment-button>
+        <ion-segment-button value="month">Monat</ion-segment-button>
+        <ion-segment-button value="year">Jahr</ion-segment-button>
+      </ion-segment>
+      <ion-card-title>Autarkie</ion-card-title>
       <div class="card-header-flex">
-        <ion-card-title>Verbrauch</ion-card-title>
-        <ion-card-title>{{((this.dayEntry?.usage ?? 0) / 1000).toFixed(2)}} kWH</ion-card-title>
+        <ion-card-subtitle>Verbrauch</ion-card-subtitle>
+        <ion-card-subtitle>{{((this.dayEntry?.usage ?? 0) / 1000).toFixed(2)}} kWH</ion-card-subtitle>
       </div>
-      <ion-card-subtitle>Autarkie heute</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
       <div class="graphic-grid">
