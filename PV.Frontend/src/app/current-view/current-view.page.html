@@ -35,6 +35,25 @@
     </ion-card-content>
   </ion-card>
   <ion-card>
+    <ion-card-header>
+      <ion-card-title>System Status</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label slot="start">Wechselrichter</ion-label>
+          <ion-icon slot="end" [color]="this.inverterOnline ? 'success' : 'danger'"
+            [name]="this.inverterOnline ? 'checkmark-circle' : 'close-circle'"></ion-icon>
+        </ion-item>
+        <ion-item>
+          <ion-label slot="start">Smart Meter</ion-label>
+          <ion-icon slot="end" [color]="this.smartMeterOnline ? 'success' : 'danger'"
+            [name]="this.smartMeterOnline ? 'checkmark-circle' : 'close-circle'"></ion-icon>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
     <ion-card-content>
       <ion-list lines="full">
         <ion-item class="statistic-item">

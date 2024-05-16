@@ -23,6 +23,8 @@ export class CurrentViewPage implements ViewDidEnter, ViewDidLeave {
   public interval: any = 0;
   public houseusage: number = 0;
   public selfsufficiency: number = 0;
+  public smartMeterOnline: boolean = false;
+  public inverterOnline: boolean = false;
   public houseUsageChart: CanvasJS.ChartOptions | null = null;
   public selfSufficencyChart: CanvasJS.ChartOptions | null = null;
   public dayEntry: DayEntry | null = null;
@@ -42,6 +44,14 @@ export class CurrentViewPage implements ViewDidEnter, ViewDidLeave {
       this.selfsufficiency = 100;
     } else {
       this.selfsufficiency = (prod / usage) * 100;
+    }
+
+    if (this.currentEntry?.production?.time) {
+      this.inverterOnline = (new Date().getTime() - new Date(this.currentEntry.production.time).getTime()) < 30000;
+    }
+    if (this.currentEntry?.usage?.time) {
+      var lastsentdate = new Date(this.currentEntry.usage.time);
+      this.smartMeterOnline = (new Date().getTime() - new Date(this.currentEntry.usage.time).getTime()) < 30000;
     }
   }
   public async getFullDay() {
