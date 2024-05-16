@@ -25,6 +25,7 @@
     "@angular/router": "^17.0.5",
     "@angular/service-worker": "^17.0.5",
     "@capacitor/android": "5.2.1",
+    "@capacitor/background-runner": "^1.1.0",
     "@capacitor/app": "5.0.6",
     "@capacitor/core": "5.2.1",
     "@capacitor/haptics": "5.0.6",

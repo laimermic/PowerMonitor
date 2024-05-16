@@ -9,6 +9,7 @@ import { DayEntry } from '../models/DayEntry';
 import { CanvasJSChart } from 'src/assets/canvasjs.angular.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { BackgroundRunner } from '@capacitor/background-runner';
 
 @Component({
   selector: 'app-tab1',
@@ -28,7 +29,30 @@ export class CurrentViewPage implements ViewDidEnter, ViewDidLeave {
   public houseUsageChart: CanvasJS.ChartOptions | null = null;
   public selfSufficencyChart: CanvasJS.ChartOptions | null = null;
   public dayEntry: DayEntry | null = null;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.init();
+  }
+
+
+  async init() {
+    try {
+      const permissions = await BackgroundRunner.requestPermissions({
+        apis: ['notifications', 'geolocation'],
+      })
+      console.log('permissions', permissions)
+    } catch (error) {
+      console.error('error', error);
+    }
+  }
+
+  async testSave() {
+    const result = await BackgroundRunner.dispatchEvent({
+      label: 'pv.frontend.background.check',
+      event: 'testSave',
+      details: {}
+    });
+    console.log('result', result);
+  }
 
   public async getNow() {
     this.currentEntry = (await lastValueFrom(this.http.get(AppConfig.backendUrl + "/api/now"))) as CurrentEntry;

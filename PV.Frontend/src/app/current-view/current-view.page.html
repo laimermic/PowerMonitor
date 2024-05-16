@@ -32,6 +32,7 @@
             W<br>{{this.currentEntry ? this.currentEntry.consumption?.value ?? 0 > 0 ? "Bezug" : "Einspeisung" : "Einspeisung" }}</ion-card-subtitle>
         </div>
       </div>
+      <ion-button (click)="testSave()">dispatch</ion-button>
     </ion-card-content>
   </ion-card>
   <ion-card>

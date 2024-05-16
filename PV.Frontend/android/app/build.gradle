@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     namespace "pv.frontend"
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    compileSdk rootProject.ext.compileSdkVersion
     defaultConfig {
         applicationId "pv.frontend"
         minSdkVersion rootProject.ext.minSdkVersion
@@ -27,6 +27,7 @@ android {
 repositories {
     flatDir{
         dirs '../capacitor-cordova-android-plugins/src/main/libs', 'libs'
+		dirs '../../node_modules/@capacitor/background-runner/android/src/main/libs', 'libs'
     }
 }
 

@@ -2,6 +2,7 @@ import { APP_INITIALIZER, Component, EnvironmentInjector, inject } from '@angula
 import { IonicModule } from '@ionic/angular';
 import { NotificationService } from '../services/notification.service';
 import { AppConfigService } from '../services/appConfig.service';
+import { BackgroundRunner } from '@capacitor/background-runner';
 
 @Component({
   selector: 'app-tabs',
@@ -17,4 +18,5 @@ export class TabsPage {
   constructor(private notService: NotificationService) {
     // this.notService.initPush();
   }
+
 }
