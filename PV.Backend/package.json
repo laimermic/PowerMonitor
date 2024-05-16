@@ -43,17 +43,12 @@
     "lodash": "^4.17.21",
     "mongodb": "^5.9.1",
     "node-cron": "^3.0.3",
-    "nodemailer-html-to-text": "^3.2.0",
-    "nodemailer-smtp-transport": "^2.7.4",
     "session": "^0.1.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.17",
     "@types/lodash": "^4.14.202",
     "@types/node": "^18.13.0",
-    "@types/nodemailer": "^6.4.7",
-    "@types/nodemailer-html-to-text": "^3.1.0",
-    "@types/nodemailer-smtp-transport": "^2.7.5",
     "concurrently": "^7.6.0",
     "nodemon": "^2.0.20",
     "typescript": "^4.9.5"
