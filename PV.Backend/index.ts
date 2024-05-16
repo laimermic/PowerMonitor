@@ -107,6 +107,13 @@ app.use(cors({
     credentials: true,
 }))
 
+var rateLimit = require("express-rate-limit");
+var limiter = rateLimit({
+    windowMs: 60 * 1000,
+    max: 40
+})
+app.use(limiter);
+
 //Initialize MongoDB
 function initMongo(): Db {
     var client = new MongoClient(process.env.MONGO_STRING ?? '');
@@ -470,11 +477,11 @@ app.get('/api/electricityPrices', async (req: Request, res: Response) => {
     res.send(prices);
 });
 
-app.post('/api/registerNotification', express.json({ type: '*/*' }), async (req: Request, res: Response) => {
-    var client = req.body as NotificationClient;
-    mongo.collection<NotificationClient>('clients').updateOne({ token: client.token }, { $set: client }, { upsert: true });
-    res.end();
-})
+// app.post('/api/registerNotification', express.json({ type: '*/*' }), async (req: Request, res: Response) => {
+//     var client = req.body as NotificationClient;
+//     mongo.collection<NotificationClient>('clients').updateOne({ token: client.token }, { $set: client }, { upsert: true });
+//     res.end();
+// })
 
 
 function calculateMonth() {
