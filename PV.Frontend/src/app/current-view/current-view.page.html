@@ -32,12 +32,23 @@
             W<br>{{this.currentEntry ? this.currentEntry.consumption?.value ?? 0 > 0 ? "Bezug" : "Einspeisung" : "Einspeisung" }}</ion-card-subtitle>
         </div>
       </div>
-      <ion-button (click)="testSave()">dispatch</ion-button>
+      <ion-list lines="full">
+        <ion-item class="statistic-item">
+          <ion-icon name="home-outline"></ion-icon>
+          <ion-label class="statistic-title">Eigenverbrauch:</ion-label>
+          <ion-label class="statistic-value">{{this.houseusage.toFixed(0)}}%</ion-label>
+        </ion-item>
+        <ion-item class="statistic-item">
+          <ion-icon name="bar-chart-outline"></ion-icon>
+          <ion-label class="statistic-title">Autarkie:</ion-label>
+          <ion-label class="statistic-value">{{this.selfsufficiency.toFixed(0)}}%</ion-label>
+        </ion-item>
+      </ion-list>
     </ion-card-content>
   </ion-card>
   <ion-card>
     <ion-card-header>
-      <ion-card-title>System Status</ion-card-title>
+      <ion-card-title>System status</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <ion-list>
@@ -50,22 +61,6 @@
           <ion-label slot="start">Smart Meter</ion-label>
           <ion-icon slot="end" [color]="this.smartMeterOnline ? 'success' : 'danger'"
             [name]="this.smartMeterOnline ? 'checkmark-circle' : 'close-circle'"></ion-icon>
-        </ion-item>
-      </ion-list>
-    </ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-content>
-      <ion-list lines="full">
-        <ion-item class="statistic-item">
-          <ion-icon name="home-outline"></ion-icon>
-          <ion-label class="statistic-title">Eigenverbrauch:</ion-label>
-          <ion-label class="statistic-value">{{this.houseusage.toFixed(0)}}%</ion-label>
-        </ion-item>
-        <ion-item class="statistic-item">
-          <ion-icon name="bar-chart-outline"></ion-icon>
-          <ion-label class="statistic-title">Autarkie:</ion-label>
-          <ion-label class="statistic-value">{{this.selfsufficiency.toFixed(0)}}%</ion-label>
         </ion-item>
       </ion-list>
     </ion-card-content>

@@ -5,7 +5,6 @@ import { DayEntry } from './models/History/DayEntry';
 import { MonthEntry } from './models/History/MonthEntry';
 import { InfluxDB, Point } from '@influxdata/influxdb-client'
 import { PowerDocument } from './models/PowerDocument';
-import { DOMParser } from 'xmldom';
 import { InfluxResult } from './models/InfluxResult';
 import { CurrentEntry } from './models/CurrentEntry';
 import { HistoryResponse } from './models/HistoryResponse';
@@ -15,6 +14,7 @@ import { messaging } from 'firebase-admin';
 import { CurrentField } from './models/CurrentField';
 import dotenv from 'dotenv'
 import _ from 'lodash';
+import { DOMParser } from '@xmldom/xmldom';
 import { YearEntry } from './models/History/YearEntry';
 import { TotalEntry } from './models/History/TotalEntry';
 import { EnergyPrice } from './models/EnergyPrice';
@@ -52,6 +52,7 @@ var cron = require('node-cron');
 //     credential: applicationDefault()
 // });
 const app: Express = express();
+app.set('trust proxy', 1);
 
 async function calculateUsage() {
     if (document.delivery?.value == 0) {
@@ -235,7 +236,7 @@ app.post('/upload', express.json({ type(req) { return true } }), async (req: Req
 });
 
 app.post('/uploadfreq', express.text({ type: '*/*' }), async (req: Request, res: Response) => {
-    var xmldocument = new DOMParser().parseFromString(req.body);
+    var xmldocument = new DOMParser().parseFromString(req.body, 'application/xml');
     if (xmldocument) {
         var frequency = Number(xmldocument.getElementById("Hz")?.lastChild?.nodeValue ?? "-1");
         if (frequency != -1) {
