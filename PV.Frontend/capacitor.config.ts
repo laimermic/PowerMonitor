@@ -14,9 +14,9 @@ const config: CapacitorConfig = {
     BackgroundRunner: {
       label: 'pv.frontend.background.task',
       src: 'runners/runner.js',
-      event: 'testSave',
+      event: 'testNotification',
       repeat: true,
-      interval: 4,
+      interval: 2,
       autoStart: true,
     },
     LocalNotifications: {

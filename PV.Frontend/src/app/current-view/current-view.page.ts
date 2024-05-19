@@ -41,7 +41,7 @@ export class CurrentViewPage implements ViewDidEnter, ViewDidLeave {
       })
       console.log('permissions', permissions)
     } catch (error) {
-      console.error('error', error);
+      console.error('error', JSON.stringify(error));
     }
   }
 
