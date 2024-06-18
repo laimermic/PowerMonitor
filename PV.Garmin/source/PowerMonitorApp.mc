@@ -18,9 +18,9 @@ class PowerMonitorApp extends Application.AppBase {
     }
 
     // Return the initial view of your application here
-    function getInitialView() as Array<Views or InputDelegates>? {
+    function getInitialView() as [Views] or [Views, InputDelegates] {
         var view = new PowerMonitorView();
-        return [ view, new PowerMonitorDelegate(view) ] as Array<Views or InputDelegates>;
+        return [ view, new PowerMonitorDelegate(view) ];
     }
 
 }

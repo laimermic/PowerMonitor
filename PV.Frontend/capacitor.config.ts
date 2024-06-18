@@ -11,16 +11,16 @@ const config: CapacitorConfig = {
     PushNotifications: {
       presentationOptions: ['badge', 'sound', 'alert']
     },
-    BackgroundRunner: {
-      label: 'pv.frontend.background.task',
-      src: 'runners/runner.js',
-      event: 'testNotification',
-      repeat: true,
-      interval: 2,
-      autoStart: true,
-    },
-    LocalNotifications: {
-    }
+    // BackgroundRunner: {
+    //   label: 'pv.frontend.background.task',
+    //   src: 'runners/runner.js',
+    //   event: 'testNotification',
+    //   repeat: true,
+    //   interval: 20,
+    //   autoStart: true,
+    // },
+    // LocalNotifications: {
+    // }
   }
 };
 

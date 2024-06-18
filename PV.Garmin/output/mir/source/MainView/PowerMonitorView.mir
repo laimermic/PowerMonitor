@@ -28,18 +28,18 @@ class PowerMonitorView extends WatchUi.View{
     var timer;
     [ @file = "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc"; @line = 12; ]
     function initialize() as Void {
-_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_12_26_start:
+_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_12_26_14_4_start:
 [ "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" 13 8 ]
         %tmp.2 = getv ? :View;
         %tmp.3 = getv function %tmp.2 :initialize;
         invoke %tmp.2 %tmp.3();
-_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_12_26_stop:
+_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_12_26_14_4_stop:
     }
     [ @file = "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc"; @line = 15; ]
     function timerCallback() as Void {
-_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_15_37_start:
+_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_15_37_22_4_start:
 [ "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" 16 8 ]
-        [ "_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_15_37_start" "_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_15_37_stop" ]
+        [ "_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_15_37_22_4_start" "_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_15_37_22_4_stop" ]
         %options.1 = local;
         %tmp.1 = newd 1;
         %tmp.3 = const :method;
@@ -49,7 +49,7 @@ _Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonit
         %tmp.8 = aputv %tmp.7 %tmp.3 %tmp.6;
         lputv %options.1 %tmp.8;
 [ "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" 19 8 ]
-        [ "_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_15_37_start" "_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_15_37_stop" ]
+        [ "_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_15_37_22_4_start" "_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_15_37_22_4_stop" ]
         %params.2 = local;
         %tmp.9 = newd 0;
         lputv %params.2 %tmp.9;
@@ -64,26 +64,26 @@ _Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonit
         %tmp.21 = const :onReceive;
         %tmp.22 = invoke %tmp.18 %tmp.19(%tmp.21);
         invoke %tmp.11 %tmp.12(%tmp.13, %tmp.15, %tmp.17, %tmp.22);
-_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_15_37_stop:
+_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_15_37_22_4_stop:
     }
     [ @file = "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc"; @line = 26; ]
     function onReceive(responseCode as Number, data as Dictionary or Null) as Void {
-_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_26_76_start:
+_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_26_76_53_4_start:
 [ "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" 27 8 ]
-_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_27_8_if_stmt:
+_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_27_8_52_8_if_stmt:
         %tmp.2 = lgetv %responseCode;
         %tmp.3 = 200;
         %tmp.4 = eq %tmp.2 %tmp.3;
-        bf %tmp.4 @_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_27_8_if_false;
-_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_27_8_if_true:
-_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_27_33_start:
+        bf %tmp.4 @_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_27_8_52_8_if_false;
+_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_27_8_52_8_if_true:
+_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_27_33_49_8_start:
 [ "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" 28 12 ]
         %tmp.6 = getv ? :System;
         %tmp.7 = getv function %tmp.6 :println;
         %tmp.8 = "Main View Request Successful";
         invoke %tmp.6 %tmp.7(%tmp.8);
 [ "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" 29 12 ]
-        [ "_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_27_33_start" "_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_27_33_stop" ]
+        [ "_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_27_33_49_8_start" "_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_27_33_49_8_stop" ]
         %production.1 = local;
         %tmp.10 = lgetv %data;
         %tmp.11 = "production";
@@ -92,7 +92,7 @@ _Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonit
         %tmp.14 = agetv %tmp.12 %tmp.13;
         lputv %production.1 %tmp.14;
 [ "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" 30 12 ]
-        [ "_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_27_33_start" "_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_27_33_stop" ]
+        [ "_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_27_33_49_8_start" "_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_27_33_49_8_stop" ]
         %usage.2 = local;
         %tmp.16 = lgetv %data;
         %tmp.17 = "usage";
@@ -101,7 +101,7 @@ _Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonit
         %tmp.20 = agetv %tmp.18 %tmp.19;
         lputv %usage.2 %tmp.20;
 [ "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" 31 12 ]
-        [ "_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_27_33_start" "_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_27_33_stop" ]
+        [ "_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_27_33_49_8_start" "_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_27_33_49_8_stop" ]
         %feed.3 = local;
         %tmp.22 = lgetv %data;
         %tmp.23 = "delivery";
@@ -110,7 +110,7 @@ _Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonit
         %tmp.26 = agetv %tmp.24 %tmp.25;
         lputv %feed.3 %tmp.26;
 [ "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" 32 12 ]
-        [ "_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_27_33_start" "_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_27_33_stop" ]
+        [ "_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_27_33_49_8_start" "_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_27_33_49_8_stop" ]
         %consumption.4 = local;
         %tmp.28 = lgetv %data;
         %tmp.29 = "consumption";
@@ -119,7 +119,7 @@ _Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonit
         %tmp.32 = agetv %tmp.30 %tmp.31;
         lputv %consumption.4 %tmp.32;
 [ "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" 33 12 ]
-        [ "_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_27_33_start" "_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_27_33_stop" ]
+        [ "_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_27_33_49_8_start" "_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_27_33_49_8_stop" ]
         %prodText.5 = local;
         %tmp.33 = lgetv %self;
         %tmp.34 = getv function %tmp.33 :findDrawableById;
@@ -139,7 +139,7 @@ _Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonit
         %tmp.46 = add %tmp.44 %tmp.45;
         invoke %tmp.38 %tmp.39(%tmp.46);
 [ "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" 36 12 ]
-        [ "_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_27_33_start" "_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_27_33_stop" ]
+        [ "_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_27_33_49_8_start" "_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_27_33_49_8_stop" ]
         %usageText.6 = local;
         %tmp.47 = lgetv %self;
         %tmp.48 = getv function %tmp.47 :findDrawableById;
@@ -159,7 +159,7 @@ _Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonit
         %tmp.60 = add %tmp.58 %tmp.59;
         invoke %tmp.52 %tmp.53(%tmp.60);
 [ "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" 39 12 ]
-        [ "_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_27_33_start" "_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_27_33_stop" ]
+        [ "_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_27_33_49_8_start" "_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_27_33_49_8_stop" ]
         %feedConsText.7 = local;
         %tmp.61 = lgetv %self;
         %tmp.62 = getv function %tmp.61 :findDrawableById;
@@ -168,13 +168,13 @@ _Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonit
         %tmp.65 = as %tmp.64 Text;
         lputv %feedConsText.7 %tmp.65;
 [ "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" 40 12 ]
-_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_40_12_if_stmt:
+_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_40_12_46_12_if_stmt:
         %tmp.67 = lgetv %production.1;
         %tmp.69 = lgetv %usage.2;
         %tmp.70 = gt %tmp.67 %tmp.69;
-        bf %tmp.70 @_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_40_12_if_false;
-_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_40_12_if_true:
-_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_40_36_start:
+        bf %tmp.70 @_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_40_12_46_12_if_false;
+_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_40_12_46_12_if_true:
+_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_40_36_43_12_start:
 [ "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" 41 16 ]
         %tmp.71 = lgetv %feedConsText.7;
         %tmp.72 = getv function %tmp.71 :setText;
@@ -186,10 +186,10 @@ _Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonit
         %tmp.78 = " W";
         %tmp.79 = add %tmp.77 %tmp.78;
         invoke %tmp.71 %tmp.72(%tmp.79);
-_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_40_36_stop:
-        goto @_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_40_12_if_end;
-_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_40_12_if_false:
-_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_43_19_start:
+_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_40_36_43_12_stop:
+        goto @_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_40_12_46_12_if_end;
+_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_40_12_46_12_if_false:
+_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_43_19_46_12_start:
 [ "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" 44 16 ]
         %tmp.80 = lgetv %feedConsText.7;
         %tmp.81 = getv function %tmp.80 :setText;
@@ -201,16 +201,16 @@ _Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonit
         %tmp.87 = " W";
         %tmp.88 = add %tmp.86 %tmp.87;
         invoke %tmp.80 %tmp.81(%tmp.88);
-_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_43_19_stop:
-_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_40_12_if_end:
+_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_43_19_46_12_stop:
+_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_40_12_46_12_if_end:
 [ "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" 48 12 ]
         %tmp.89 = getm $.Toybox.WatchUi;
         %tmp.90 = getv function %tmp.89 :requestUpdate;
         invoke %tmp.89 %tmp.90();
-_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_27_33_stop:
-        goto @_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_27_8_if_end;
-_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_27_8_if_false:
-_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_49_15_start:
+_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_27_33_49_8_stop:
+        goto @_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_27_8_52_8_if_end;
+_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_27_8_52_8_if_false:
+_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_49_15_52_8_start:
 [ "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" 50 12 ]
         %tmp.92 = getv ? :System;
         %tmp.93 = getv function %tmp.92 :println;
@@ -223,13 +223,13 @@ _Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonit
         %tmp.100 = getv function %tmp.99 :println;
         %tmp.102 = lgetv %data;
         invoke %tmp.99 %tmp.100(%tmp.102);
-_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_49_15_stop:
-_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_27_8_if_end:
-_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_26_76_stop:
+_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_49_15_52_8_stop:
+_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_27_8_52_8_if_end:
+_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_26_76_53_4_stop:
     }
     [ @file = "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc"; @line = 56; ]
     function onLayout(dc as Dc) as Void {
-_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_56_40_start:
+_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_56_40_58_4_start:
 [ "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" 57 8 ]
         %tmp.1 = self;
         %tmp.2 = getv function %tmp.1 :setLayout;
@@ -239,11 +239,11 @@ _Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonit
         %tmp.8 = lgetv %dc;
         %tmp.9 = invoke %tmp.5 %tmp.6(%tmp.8);
         invoke %tmp.1 %tmp.2(%tmp.9);
-_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_56_40_stop:
+_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_56_40_58_4_stop:
     }
     [ @file = "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc"; @line = 63; ]
     function onShow() as Void {
-_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_63_30_start:
+_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_63_30_66_4_start:
 [ "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" 64 8 ]
         %tmp.1 = self;
         %tmp.2 = getv function %tmp.1 :timerCallback;
@@ -258,26 +258,26 @@ _Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonit
         %tmp.11 = 5000;
         %tmp.12 = true;
         invoke %tmp.4 %tmp.5(%tmp.10, %tmp.11, %tmp.12);
-_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_63_30_stop:
+_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_63_30_66_4_stop:
     }
     [ @file = "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc"; @line = 69; ]
     function onUpdate(dc as Dc) as Void {
-_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_69_40_start:
+_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_69_40_72_4_start:
 [ "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" 71 8 ]
         %tmp.2 = getv ? :View;
         %tmp.3 = getv function %tmp.2 :onUpdate;
         %tmp.5 = lgetv %dc;
         invoke %tmp.2 %tmp.3(%tmp.5);
-_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_69_40_stop:
+_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_69_40_72_4_stop:
     }
     [ @file = "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc"; @line = 77; ]
     function onHide() as Void {
-_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_77_30_start:
+_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_77_30_79_4_start:
 [ "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" 78 8 ]
         %tmp.2 = getv ? :timer;
         %tmp.3 = getv function %tmp.2 :stop;
         invoke %tmp.2 %tmp.3();
-_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_77_30_stop:
+_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorView_mc_77_30_79_4_stop:
     }
 }
 [ @file = "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc"; @line = 1; ]

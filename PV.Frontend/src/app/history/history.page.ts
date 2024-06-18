@@ -210,9 +210,9 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
       theme: window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark2" : "light2",
       axisX: {
         // valueFormatString: "DD",
-        // interval: 1,
-        minimum: startLimit.getDate(),
-        maximum: endLimit.getDate(),
+        interval: 2,
+        minimum: startLimit.getDate() - 0.5,
+        maximum: endLimit.getDate() + 0.5,
       },
       axisY: {
         minimum: 0
@@ -279,15 +279,15 @@ export class HistoryPage implements ViewDidEnter, ViewDidLeave {
       animationEnabled: true,
       title: {
       },
-      dataPointWidth: 20,
+      dataPointWidth: 10,
       backgroundColor: "#ffffff00",
       theme: window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark2" : "light2",
       axisX: {
         // valueFormatString: "MM",
         interval: 1,
         // intervalType: 'month',
-        minimum: 1,
-        maximum: 12,
+        minimum: 0.5,
+        maximum: 12.5,
       },
       axisY: {
         minimum: 0

@@ -13,7 +13,7 @@ class PowerMonitorDelegate extends WatchUi.InputDelegate{
     var view;
     [ @file = "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorDelegate.mc"; @line = 4; ]
     function initialize(_view) as Void {
-_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorDelegate_mc_4_31_start:
+_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorDelegate_mc_4_31_8_4_start:
 [ "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorDelegate.mc" 5 8 ]
         %tmp.2 = getv ? :InputDelegate;
         %tmp.3 = getv function %tmp.2 :initialize;
@@ -26,13 +26,13 @@ _Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonit
 [ "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorDelegate.mc" 7 8 ]
         %tmp.9 = lgetv %_view;
         putv self :view %tmp.9;
-_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorDelegate_mc_4_31_stop:
+_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorDelegate_mc_4_31_8_4_stop:
     }
     [ @file = "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorDelegate.mc"; @line = 10; ]
     function onTap(evt) {
-_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorDelegate_mc_10_24_start:
+_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorDelegate_mc_10_24_14_4_start:
 [ "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorDelegate.mc" 11 8 ]
-        [ "_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorDelegate_mc_10_24_start" "_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorDelegate_mc_10_24_stop" ]
+        [ "_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorDelegate_mc_10_24_14_4_start" "_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorDelegate_mc_10_24_14_4_stop" ]
         %gridView.1 = local;
         %tmp.4 = getv ? :PowerGridView;
         %tmp.1 = newc %tmp.4 ();
@@ -50,7 +50,7 @@ _Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonit
 [ "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorDelegate.mc" 13 8 ]
         %tmp.17 = true;
         ret %tmp.17;
-_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorDelegate_mc_10_24_stop:
+_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_MainView_PowerMonitorDelegate_mc_10_24_14_4_stop:
     }
 }
 [ @file = "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorDelegate.mc"; @line = 1; ]
