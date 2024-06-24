@@ -2,9 +2,13 @@ import UIKit
 import Capacitor
 import BackgroundTasks
 import CapacitorBackgroundRunner
+import ActivityKit
+import SwiftUI
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    @State private var activity: Activity<MonitorAttributes>? = nil
 
     var window: UIWindow?
 
@@ -14,8 +18,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         BackgroundRunnerPlugin.registerBackgroundTask()
         BackgroundRunnerPlugin.handleApplicationDidFinishLaunching(launchOptions: launchOptions)
         // ....
-
+        
+        startActivity()
         return true
+    }
+    
+    func startActivity() {
+        print("Activating widget")
+        let attributes = MonitorAttributes(name: "PowerMonitor")
+        let state = MonitorAttributes.MonitorStatus(currentProduction: 20, description: "Test")
+        do {
+            activity = try? Activity<MonitorAttributes>.request(attributes: attributes, contentState: state, pushType: nil)
+            print("widget activated")
+        }  catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func stopActivity() {
+        let state = MonitorAttributes.MonitorStatus(currentProduction: 0, description: "test")
+        Task {
+            await activity?.end(using: state, dismissalPolicy: .immediate)
+        }
+    }
+    
+    func updateActivity() {
+        let state = MonitorAttributes.MonitorStatus(currentProduction: 1, description: "test2")
+        Task {
+            await activity?.update(using: state)
+        }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

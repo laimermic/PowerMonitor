@@ -6,6 +6,7 @@
 //
 
 import WidgetKit
+import ActivityKit
 import SwiftUI
 
 struct Provider: AppIntentTimelineProvider {
@@ -51,14 +52,48 @@ struct currentEntryView : View {
     }
 }
 
+struct MonitorActivityView : View {
+    let context: ActivityViewContext<MonitorAttributes>
+    var body: some View {
+        VStack  {
+            Text(context.attributes.name).font(.headline)
+            
+            Text("Production: " + String(context.state.currentProduction))
+        }
+        .padding(.horizontal)
+    }
+}
+
 struct current: Widget {
     let kind: String = "current"
 
     var body: some WidgetConfiguration {
-        AppIntentConfiguration(kind: kind, intent: ConfigurationAppIntent.self, provider: Provider()) { entry in
-            currentEntryView(entry: entry)
-                .containerBackground(.fill.tertiary, for: .widget)
+        ActivityConfiguration(for: MonitorAttributes.self) { context in
+            MonitorActivityView(context: context)
+        } dynamicIsland: { context in
+            DynamicIsland {
+                DynamicIslandExpandedRegion(.center)  {
+                    MonitorActivityView(context: context)
+                }
+            } compactLeading: {
+                Image(systemName: "circle").foregroundStyle(.green)
+            } compactTrailing: {
+                Text(verbatim: "Test")
+            } minimal: {
+                Image(systemName: "circle")
+            }
         }
+    }
+}
+
+struct monitorcurrent: Widget {
+    let kind: String = "Monitoring"
+    
+    var body: some WidgetConfiguration {
+        AppIntentConfiguration(kind: kind, intent: ConfigurationAppIntent.self, provider: Provider()) { entry in
+                    currentEntryView(entry: entry)
+                        .containerBackground(.fill.tertiary, for: .widget)
+                }
     }
 }
 

@@ -11,7 +11,7 @@ module Rez {
 
     module Layouts {
         function MainLayout(dc as Graphics.Dc) as Array<WatchUi.Drawable> {
-            var rez_cmp_local_text_1997502387 = new WatchUi.Text({:color=>0xffae00, :locX=>(360 * (50 / 100.0)), :locY=>(360 * (15 / 100.0)), :text=>"Power Monitor", :justification=>Graphics.TEXT_JUSTIFY_CENTER, :font=>Gfx.FONT_MEDIUM});
+            var rez_cmp_local_text_1067699142 = new WatchUi.Text({:color=>0xffae00, :locX=>(360 * (50 / 100.0)), :locY=>(360 * (15 / 100.0)), :text=>"Power Monitor", :justification=>Graphics.TEXT_JUSTIFY_CENTER, :font=>Gfx.FONT_MEDIUM});
 
             var rez_cmp_local_text_production = new WatchUi.Text({:identifier=>"production", :color=>0xFFFF00, :locX=>(360 * (50 / 100.0)), :locY=>(360 * (35 / 100.0)), :text=>"Production: ?", :justification=>Graphics.TEXT_JUSTIFY_CENTER, :font=>Gfx.FONT_SMALL});
 
@@ -19,17 +19,17 @@ module Rez {
 
             var rez_cmp_local_text_feedcons = new WatchUi.Text({:identifier=>"feedcons", :color=>Gfx.COLOR_WHITE, :locX=>(360 * (50 / 100.0)), :locY=>(360 * (65 / 100.0)), :text=>"Feed: ?", :justification=>Graphics.TEXT_JUSTIFY_CENTER, :font=>Graphics.FONT_SMALL});
 
-            return [rez_cmp_local_text_1997502387, rez_cmp_local_text_production, rez_cmp_local_text_usage, rez_cmp_local_text_feedcons] as Array<WatchUi.Drawable>;
+            return [rez_cmp_local_text_1067699142, rez_cmp_local_text_production, rez_cmp_local_text_usage, rez_cmp_local_text_feedcons] as Array<WatchUi.Drawable>;
         }
 
         function PowerGridLayout(dc as Graphics.Dc) as Array<WatchUi.Drawable> {
-            var rez_cmp_local_text_1840194072 = new WatchUi.Text({:color=>0xffae00, :locX=>(360 * (50 / 100.0)), :locY=>(360 * (15 / 100.0)), :text=>"Power Grid", :justification=>Graphics.TEXT_JUSTIFY_CENTER, :font=>Gfx.FONT_MEDIUM});
+            var rez_cmp_local_text_9181483214 = new WatchUi.Text({:color=>0xffae00, :locX=>(360 * (50 / 100.0)), :locY=>(360 * (15 / 100.0)), :text=>"Power Grid", :justification=>Graphics.TEXT_JUSTIFY_CENTER, :font=>Gfx.FONT_MEDIUM});
 
             var rez_cmp_local_text_gridlabel = new WatchUi.Text({:identifier=>"gridlabel", :color=>Gfx.COLOR_WHITE, :locX=>(360 * (50 / 100.0)), :locY=>(360 * (45 / 100.0)), :text=>"Frequency:", :justification=>Graphics.TEXT_JUSTIFY_CENTER, :font=>Gfx.FONT_SMALL});
 
             var rez_cmp_local_text_grid = new WatchUi.Text({:identifier=>"grid", :color=>Gfx.COLOR_WHITE, :locX=>(360 * (50 / 100.0)), :locY=>(360 * (60 / 100.0)), :text=>"loading...", :justification=>Graphics.TEXT_JUSTIFY_CENTER, :font=>Gfx.FONT_LARGE});
 
-            return [rez_cmp_local_text_1840194072, rez_cmp_local_text_gridlabel, rez_cmp_local_text_grid] as Array<WatchUi.Drawable>;
+            return [rez_cmp_local_text_9181483214, rez_cmp_local_text_gridlabel, rez_cmp_local_text_grid] as Array<WatchUi.Drawable>;
         }
     } // Layouts
 

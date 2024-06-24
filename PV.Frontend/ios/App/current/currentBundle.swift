@@ -11,7 +11,7 @@ import SwiftUI
 @main
 struct currentBundle: WidgetBundle {
     var body: some Widget {
-        current()
-        currentLiveActivity()
+//        current()
+        monitorcurrent()
     }
 }

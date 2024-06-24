@@ -2,122 +2,159 @@
 <debugInfo>
 <manifest filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/manifest.xml"/>
 <pcToLineNum>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridDelegate.mc" id="1" lineNum="2" parent="globals/PowerGridDelegate" pc="268435457" symbol="&lt;init&gt;"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerMonitorApp.mc" id="2" lineNum="28" parent="globals" pc="268435469" symbol="getApp"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerMonitorApp.mc" id="2" lineNum="29" parent="globals" pc="268435479" symbol="getApp"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="3" lineNum="8" parent="globals/PowerMonitorView" pc="268435490" symbol="&lt;init&gt;"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="3" lineNum="10" parent="globals/PowerMonitorView" pc="268435501" symbol="&lt;init&gt;"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/output/gen/006-B3704-00/source/Rez.mcgen" id="4" lineNum="7" parent="globals/Rez" pc="268435531" symbol="&lt;init&gt;"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorDelegate.mc" id="5" lineNum="2" parent="globals/PowerMonitorDelegate" pc="268435551" symbol="&lt;init&gt;"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="6" lineNum="8" parent="globals/PowerGridView" pc="268435563" symbol="&lt;init&gt;"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="6" lineNum="10" parent="globals/PowerGridView" pc="268435574" symbol="&lt;init&gt;"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerMonitorApp.mc" id="7" lineNum="5" parent="globals/PowerMonitorApp" pc="268435604" symbol="&lt;init&gt;"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridDelegate.mc" id="8" lineNum="4" parent="globals/PowerGridDelegate" pc="268435616" symbol="initialize"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridDelegate.mc" id="8" lineNum="5" parent="globals/PowerGridDelegate" pc="268435618" symbol="initialize"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridDelegate.mc" id="8" lineNum="6" parent="globals/PowerGridDelegate" pc="268435630" symbol="initialize"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridDelegate.mc" id="8" lineNum="7" parent="globals/PowerGridDelegate" pc="268435649" symbol="initialize"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridDelegate.mc" id="9" lineNum="10" parent="globals/PowerGridDelegate" pc="268435659" symbol="onTap"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridDelegate.mc" id="9" lineNum="11" parent="globals/PowerGridDelegate" pc="268435662" symbol="onTap"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridDelegate.mc" id="9" lineNum="12" parent="globals/PowerGridDelegate" pc="268435686" symbol="onTap"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridDelegate.mc" id="9" lineNum="13" parent="globals/PowerGridDelegate" pc="268435701" symbol="onTap"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="10" lineNum="63" parent="globals/PowerMonitorView" pc="268435703" symbol="onShow"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="10" lineNum="64" parent="globals/PowerMonitorView" pc="268435705" symbol="onShow"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="10" lineNum="65" parent="globals/PowerMonitorView" pc="268435712" symbol="onShow"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="11" lineNum="56" parent="globals/PowerMonitorView" pc="268435744" symbol="onLayout"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="11" lineNum="57" parent="globals/PowerMonitorView" pc="268435746" symbol="onLayout"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="12" lineNum="12" parent="globals/PowerMonitorView" pc="268435780" symbol="initialize"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="12" lineNum="13" parent="globals/PowerMonitorView" pc="268435782" symbol="initialize"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="13" lineNum="77" parent="globals/PowerMonitorView" pc="268435795" symbol="onHide"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="13" lineNum="78" parent="globals/PowerMonitorView" pc="268435797" symbol="onHide"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="14" lineNum="26" parent="globals/PowerMonitorView" pc="268435810" symbol="onReceive"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="14" lineNum="27" parent="globals/PowerMonitorView" pc="268435813" symbol="onReceive"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="14" lineNum="28" parent="globals/PowerMonitorView" pc="268435822" symbol="onReceive"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="14" lineNum="29" parent="globals/PowerMonitorView" pc="268435841" symbol="onReceive"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="14" lineNum="30" parent="globals/PowerMonitorView" pc="268435857" symbol="onReceive"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="14" lineNum="31" parent="globals/PowerMonitorView" pc="268435873" symbol="onReceive"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="14" lineNum="32" parent="globals/PowerMonitorView" pc="268435889" symbol="onReceive"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="14" lineNum="33" parent="globals/PowerMonitorView" pc="268435905" symbol="onReceive"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="14" lineNum="34" parent="globals/PowerMonitorView" pc="268435920" symbol="onReceive"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="14" lineNum="36" parent="globals/PowerMonitorView" pc="268435949" symbol="onReceive"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="14" lineNum="37" parent="globals/PowerMonitorView" pc="268435964" symbol="onReceive"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="14" lineNum="39" parent="globals/PowerMonitorView" pc="268435993" symbol="onReceive"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="14" lineNum="40" parent="globals/PowerMonitorView" pc="268436008" symbol="onReceive"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="14" lineNum="41" parent="globals/PowerMonitorView" pc="268436016" symbol="onReceive"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="14" lineNum="44" parent="globals/PowerMonitorView" pc="268436048" symbol="onReceive"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="14" lineNum="48" parent="globals/PowerMonitorView" pc="268436077" symbol="onReceive"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="14" lineNum="50" parent="globals/PowerMonitorView" pc="268436089" symbol="onReceive"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="14" lineNum="51" parent="globals/PowerMonitorView" pc="268436111" symbol="onReceive"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="15" lineNum="69" parent="globals/PowerMonitorView" pc="268436128" symbol="onUpdate"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="15" lineNum="71" parent="globals/PowerMonitorView" pc="268436130" symbol="onUpdate"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="16" lineNum="15" parent="globals/PowerMonitorView" pc="268436147" symbol="timerCallback"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="16" lineNum="16" parent="globals/PowerMonitorView" pc="268436150" symbol="timerCallback"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="16" lineNum="19" parent="globals/PowerMonitorView" pc="268436165" symbol="timerCallback"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="16" lineNum="21" parent="globals/PowerMonitorView" pc="268436169" symbol="timerCallback"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorDelegate.mc" id="17" lineNum="4" parent="globals/PowerMonitorDelegate" pc="268436206" symbol="initialize"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorDelegate.mc" id="17" lineNum="5" parent="globals/PowerMonitorDelegate" pc="268436208" symbol="initialize"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorDelegate.mc" id="17" lineNum="6" parent="globals/PowerMonitorDelegate" pc="268436220" symbol="initialize"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorDelegate.mc" id="17" lineNum="7" parent="globals/PowerMonitorDelegate" pc="268436239" symbol="initialize"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorDelegate.mc" id="18" lineNum="10" parent="globals/PowerMonitorDelegate" pc="268436249" symbol="onTap"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorDelegate.mc" id="18" lineNum="11" parent="globals/PowerMonitorDelegate" pc="268436252" symbol="onTap"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorDelegate.mc" id="18" lineNum="12" parent="globals/PowerMonitorDelegate" pc="268436276" symbol="onTap"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorDelegate.mc" id="18" lineNum="13" parent="globals/PowerMonitorDelegate" pc="268436317" symbol="onTap"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="19" lineNum="60" parent="globals/PowerGridView" pc="268436319" symbol="onShow"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="19" lineNum="61" parent="globals/PowerGridView" pc="268436321" symbol="onShow"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="19" lineNum="62" parent="globals/PowerGridView" pc="268436328" symbol="onShow"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="20" lineNum="53" parent="globals/PowerGridView" pc="268436360" symbol="onLayout"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="20" lineNum="54" parent="globals/PowerGridView" pc="268436362" symbol="onLayout"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="21" lineNum="12" parent="globals/PowerGridView" pc="268436396" symbol="initialize"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="21" lineNum="13" parent="globals/PowerGridView" pc="268436398" symbol="initialize"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="22" lineNum="74" parent="globals/PowerGridView" pc="268436411" symbol="onHide"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="22" lineNum="75" parent="globals/PowerGridView" pc="268436413" symbol="onHide"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="23" lineNum="26" parent="globals/PowerGridView" pc="268436426" symbol="onReceive"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="23" lineNum="27" parent="globals/PowerGridView" pc="268436429" symbol="onReceive"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="23" lineNum="28" parent="globals/PowerGridView" pc="268436438" symbol="onReceive"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="23" lineNum="29" parent="globals/PowerGridView" pc="268436457" symbol="onReceive"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="23" lineNum="31" parent="globals/PowerGridView" pc="268436473" symbol="onReceive"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="23" lineNum="33" parent="globals/PowerGridView" pc="268436488" symbol="onReceive"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="23" lineNum="35" parent="globals/PowerGridView" pc="268436518" symbol="onReceive"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="23" lineNum="36" parent="globals/PowerGridView" pc="268436540" symbol="onReceive"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="23" lineNum="38" parent="globals/PowerGridView" pc="268436558" symbol="onReceive"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="23" lineNum="39" parent="globals/PowerGridView" pc="268436580" symbol="onReceive"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="23" lineNum="41" parent="globals/PowerGridView" pc="268436598" symbol="onReceive"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="23" lineNum="45" parent="globals/PowerGridView" pc="268436612" symbol="onReceive"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="23" lineNum="47" parent="globals/PowerGridView" pc="268436624" symbol="onReceive"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="23" lineNum="48" parent="globals/PowerGridView" pc="268436646" symbol="onReceive"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="24" lineNum="66" parent="globals/PowerGridView" pc="268436663" symbol="onUpdate"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="24" lineNum="68" parent="globals/PowerGridView" pc="268436665" symbol="onUpdate"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="25" lineNum="15" parent="globals/PowerGridView" pc="268436682" symbol="timerCallback"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="25" lineNum="16" parent="globals/PowerGridView" pc="268436685" symbol="timerCallback"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="25" lineNum="19" parent="globals/PowerGridView" pc="268436700" symbol="timerCallback"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="25" lineNum="21" parent="globals/PowerGridView" pc="268436704" symbol="timerCallback"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerMonitorApp.mc" id="27" lineNum="21" parent="globals/PowerMonitorApp" pc="268436741" symbol="getInitialView"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerMonitorApp.mc" id="27" lineNum="22" parent="globals/PowerMonitorApp" pc="268436744" symbol="getInitialView"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerMonitorApp.mc" id="27" lineNum="23" parent="globals/PowerMonitorApp" pc="268436768" symbol="getInitialView"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerMonitorApp.mc" id="28" lineNum="7" parent="globals/PowerMonitorApp" pc="268436805" symbol="initialize"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerMonitorApp.mc" id="28" lineNum="8" parent="globals/PowerMonitorApp" pc="268436807" symbol="initialize"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerMonitorApp.mc" id="28" lineNum="9" parent="globals/PowerMonitorApp" pc="268436819" symbol="initialize"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/output/gen/006-B3704-00/source/Rez.mcgen" id="30" lineNum="25" parent="globals/Rez/Layouts" pc="268436839" symbol="PowerGridLayout"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/output/gen/006-B3704-00/source/Rez.mcgen" id="30" lineNum="26" parent="globals/Rez/Layouts" pc="268436850" symbol="PowerGridLayout"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/output/gen/006-B3704-00/source/Rez.mcgen" id="30" lineNum="28" parent="globals/Rez/Layouts" pc="268436939" symbol="PowerGridLayout"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/output/gen/006-B3704-00/source/Rez.mcgen" id="30" lineNum="30" parent="globals/Rez/Layouts" pc="268437039" symbol="PowerGridLayout"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/output/gen/006-B3704-00/source/Rez.mcgen" id="30" lineNum="32" parent="globals/Rez/Layouts" pc="268437139" symbol="PowerGridLayout"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/output/gen/006-B3704-00/source/Rez.mcgen" id="31" lineNum="13" parent="globals/Rez/Layouts" pc="268437159" symbol="MainLayout"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/output/gen/006-B3704-00/source/Rez.mcgen" id="31" lineNum="14" parent="globals/Rez/Layouts" pc="268437170" symbol="MainLayout"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/output/gen/006-B3704-00/source/Rez.mcgen" id="31" lineNum="16" parent="globals/Rez/Layouts" pc="268437259" symbol="MainLayout"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/output/gen/006-B3704-00/source/Rez.mcgen" id="31" lineNum="18" parent="globals/Rez/Layouts" pc="268437359" symbol="MainLayout"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/output/gen/006-B3704-00/source/Rez.mcgen" id="31" lineNum="20" parent="globals/Rez/Layouts" pc="268437458" symbol="MainLayout"/>
-<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/output/gen/006-B3704-00/source/Rez.mcgen" id="31" lineNum="22" parent="globals/Rez/Layouts" pc="268437558" symbol="MainLayout"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayDelegate.mc" id="1" lineNum="2" parent="globals/TodayDelegate" pc="268435457" symbol="&lt;init&gt;"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridDelegate.mc" id="2" lineNum="2" parent="globals/PowerGridDelegate" pc="268435469" symbol="&lt;init&gt;"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerMonitorApp.mc" id="3" lineNum="28" parent="globals" pc="268435481" symbol="getApp"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerMonitorApp.mc" id="3" lineNum="29" parent="globals" pc="268435491" symbol="getApp"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="4" lineNum="8" parent="globals/PowerMonitorView" pc="268435502" symbol="&lt;init&gt;"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="4" lineNum="10" parent="globals/PowerMonitorView" pc="268435513" symbol="&lt;init&gt;"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/output/gen/006-B3704-00/source/Rez.mcgen" id="5" lineNum="7" parent="globals/Rez" pc="268435543" symbol="&lt;init&gt;"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorDelegate.mc" id="6" lineNum="2" parent="globals/PowerMonitorDelegate" pc="268435563" symbol="&lt;init&gt;"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="7" lineNum="8" parent="globals/PowerGridView" pc="268435575" symbol="&lt;init&gt;"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="7" lineNum="10" parent="globals/PowerGridView" pc="268435586" symbol="&lt;init&gt;"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerMonitorApp.mc" id="8" lineNum="5" parent="globals/PowerMonitorApp" pc="268435616" symbol="&lt;init&gt;"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayView.mc" id="9" lineNum="8" parent="globals/TodayView" pc="268435628" symbol="&lt;init&gt;"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayView.mc" id="9" lineNum="10" parent="globals/TodayView" pc="268435639" symbol="&lt;init&gt;"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayDelegate.mc" id="10" lineNum="4" parent="globals/TodayDelegate" pc="268435669" symbol="initialize"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayDelegate.mc" id="10" lineNum="5" parent="globals/TodayDelegate" pc="268435671" symbol="initialize"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayDelegate.mc" id="10" lineNum="6" parent="globals/TodayDelegate" pc="268435683" symbol="initialize"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayDelegate.mc" id="10" lineNum="7" parent="globals/TodayDelegate" pc="268435702" symbol="initialize"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayDelegate.mc" id="11" lineNum="10" parent="globals/TodayDelegate" pc="268435712" symbol="onTap"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayDelegate.mc" id="11" lineNum="11" parent="globals/TodayDelegate" pc="268435714" symbol="onTap"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayDelegate.mc" id="11" lineNum="12" parent="globals/TodayDelegate" pc="268435729" symbol="onTap"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridDelegate.mc" id="12" lineNum="4" parent="globals/PowerGridDelegate" pc="268435731" symbol="initialize"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridDelegate.mc" id="12" lineNum="5" parent="globals/PowerGridDelegate" pc="268435733" symbol="initialize"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridDelegate.mc" id="12" lineNum="6" parent="globals/PowerGridDelegate" pc="268435745" symbol="initialize"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridDelegate.mc" id="12" lineNum="7" parent="globals/PowerGridDelegate" pc="268435764" symbol="initialize"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridDelegate.mc" id="13" lineNum="10" parent="globals/PowerGridDelegate" pc="268435774" symbol="onTap"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridDelegate.mc" id="13" lineNum="11" parent="globals/PowerGridDelegate" pc="268435777" symbol="onTap"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridDelegate.mc" id="13" lineNum="12" parent="globals/PowerGridDelegate" pc="268435801" symbol="onTap"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridDelegate.mc" id="13" lineNum="13" parent="globals/PowerGridDelegate" pc="268435842" symbol="onTap"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="14" lineNum="67" parent="globals/PowerMonitorView" pc="268435844" symbol="onShow"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="14" lineNum="68" parent="globals/PowerMonitorView" pc="268435846" symbol="onShow"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="14" lineNum="69" parent="globals/PowerMonitorView" pc="268435853" symbol="onShow"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="15" lineNum="60" parent="globals/PowerMonitorView" pc="268435885" symbol="onLayout"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="15" lineNum="61" parent="globals/PowerMonitorView" pc="268435887" symbol="onLayout"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="16" lineNum="12" parent="globals/PowerMonitorView" pc="268435921" symbol="initialize"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="16" lineNum="13" parent="globals/PowerMonitorView" pc="268435923" symbol="initialize"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="17" lineNum="81" parent="globals/PowerMonitorView" pc="268435940" symbol="onHide"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="17" lineNum="82" parent="globals/PowerMonitorView" pc="268435942" symbol="onHide"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="18" lineNum="26" parent="globals/PowerMonitorView" pc="268435955" symbol="onReceive"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="18" lineNum="27" parent="globals/PowerMonitorView" pc="268435958" symbol="onReceive"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="18" lineNum="28" parent="globals/PowerMonitorView" pc="268435967" symbol="onReceive"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="18" lineNum="29" parent="globals/PowerMonitorView" pc="268435986" symbol="onReceive"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="18" lineNum="30" parent="globals/PowerMonitorView" pc="268436002" symbol="onReceive"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="18" lineNum="31" parent="globals/PowerMonitorView" pc="268436018" symbol="onReceive"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="18" lineNum="32" parent="globals/PowerMonitorView" pc="268436034" symbol="onReceive"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="18" lineNum="33" parent="globals/PowerMonitorView" pc="268436050" symbol="onReceive"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="18" lineNum="34" parent="globals/PowerMonitorView" pc="268436065" symbol="onReceive"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="18" lineNum="36" parent="globals/PowerMonitorView" pc="268436094" symbol="onReceive"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="18" lineNum="37" parent="globals/PowerMonitorView" pc="268436109" symbol="onReceive"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="18" lineNum="39" parent="globals/PowerMonitorView" pc="268436138" symbol="onReceive"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="18" lineNum="40" parent="globals/PowerMonitorView" pc="268436153" symbol="onReceive"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="18" lineNum="41" parent="globals/PowerMonitorView" pc="268436161" symbol="onReceive"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="18" lineNum="44" parent="globals/PowerMonitorView" pc="268436193" symbol="onReceive"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="18" lineNum="48" parent="globals/PowerMonitorView" pc="268436222" symbol="onReceive"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="18" lineNum="50" parent="globals/PowerMonitorView" pc="268436234" symbol="onReceive"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="18" lineNum="51" parent="globals/PowerMonitorView" pc="268436256" symbol="onReceive"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="19" lineNum="55" parent="globals/PowerMonitorView" pc="268436273" symbol="getGlanceView"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="19" lineNum="56" parent="globals/PowerMonitorView" pc="268436275" symbol="getGlanceView"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="20" lineNum="73" parent="globals/PowerMonitorView" pc="268436277" symbol="onUpdate"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="20" lineNum="75" parent="globals/PowerMonitorView" pc="268436279" symbol="onUpdate"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="21" lineNum="15" parent="globals/PowerMonitorView" pc="268436300" symbol="timerCallback"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="21" lineNum="16" parent="globals/PowerMonitorView" pc="268436303" symbol="timerCallback"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="21" lineNum="19" parent="globals/PowerMonitorView" pc="268436318" symbol="timerCallback"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorView.mc" id="21" lineNum="21" parent="globals/PowerMonitorView" pc="268436322" symbol="timerCallback"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorDelegate.mc" id="22" lineNum="4" parent="globals/PowerMonitorDelegate" pc="268436359" symbol="initialize"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorDelegate.mc" id="22" lineNum="5" parent="globals/PowerMonitorDelegate" pc="268436361" symbol="initialize"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorDelegate.mc" id="22" lineNum="6" parent="globals/PowerMonitorDelegate" pc="268436373" symbol="initialize"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorDelegate.mc" id="22" lineNum="7" parent="globals/PowerMonitorDelegate" pc="268436392" symbol="initialize"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorDelegate.mc" id="23" lineNum="10" parent="globals/PowerMonitorDelegate" pc="268436402" symbol="onTap"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorDelegate.mc" id="23" lineNum="11" parent="globals/PowerMonitorDelegate" pc="268436405" symbol="onTap"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorDelegate.mc" id="23" lineNum="12" parent="globals/PowerMonitorDelegate" pc="268436429" symbol="onTap"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/MainView/PowerMonitorDelegate.mc" id="23" lineNum="13" parent="globals/PowerMonitorDelegate" pc="268436470" symbol="onTap"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="24" lineNum="60" parent="globals/PowerGridView" pc="268436472" symbol="onShow"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="24" lineNum="61" parent="globals/PowerGridView" pc="268436474" symbol="onShow"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="24" lineNum="62" parent="globals/PowerGridView" pc="268436481" symbol="onShow"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="25" lineNum="53" parent="globals/PowerGridView" pc="268436513" symbol="onLayout"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="25" lineNum="54" parent="globals/PowerGridView" pc="268436515" symbol="onLayout"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="26" lineNum="12" parent="globals/PowerGridView" pc="268436549" symbol="initialize"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="26" lineNum="13" parent="globals/PowerGridView" pc="268436551" symbol="initialize"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="27" lineNum="74" parent="globals/PowerGridView" pc="268436564" symbol="onHide"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="27" lineNum="75" parent="globals/PowerGridView" pc="268436566" symbol="onHide"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="28" lineNum="26" parent="globals/PowerGridView" pc="268436579" symbol="onReceive"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="28" lineNum="27" parent="globals/PowerGridView" pc="268436582" symbol="onReceive"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="28" lineNum="28" parent="globals/PowerGridView" pc="268436591" symbol="onReceive"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="28" lineNum="29" parent="globals/PowerGridView" pc="268436610" symbol="onReceive"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="28" lineNum="31" parent="globals/PowerGridView" pc="268436626" symbol="onReceive"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="28" lineNum="33" parent="globals/PowerGridView" pc="268436641" symbol="onReceive"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="28" lineNum="35" parent="globals/PowerGridView" pc="268436671" symbol="onReceive"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="28" lineNum="36" parent="globals/PowerGridView" pc="268436693" symbol="onReceive"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="28" lineNum="38" parent="globals/PowerGridView" pc="268436711" symbol="onReceive"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="28" lineNum="39" parent="globals/PowerGridView" pc="268436733" symbol="onReceive"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="28" lineNum="41" parent="globals/PowerGridView" pc="268436751" symbol="onReceive"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="28" lineNum="45" parent="globals/PowerGridView" pc="268436765" symbol="onReceive"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="28" lineNum="47" parent="globals/PowerGridView" pc="268436777" symbol="onReceive"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="28" lineNum="48" parent="globals/PowerGridView" pc="268436799" symbol="onReceive"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="29" lineNum="66" parent="globals/PowerGridView" pc="268436816" symbol="onUpdate"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="29" lineNum="68" parent="globals/PowerGridView" pc="268436818" symbol="onUpdate"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="30" lineNum="15" parent="globals/PowerGridView" pc="268436835" symbol="timerCallback"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="30" lineNum="16" parent="globals/PowerGridView" pc="268436838" symbol="timerCallback"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="30" lineNum="19" parent="globals/PowerGridView" pc="268436853" symbol="timerCallback"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridView.mc" id="30" lineNum="21" parent="globals/PowerGridView" pc="268436857" symbol="timerCallback"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerMonitorApp.mc" id="32" lineNum="21" parent="globals/PowerMonitorApp" pc="268436894" symbol="getInitialView"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerMonitorApp.mc" id="32" lineNum="22" parent="globals/PowerMonitorApp" pc="268436897" symbol="getInitialView"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerMonitorApp.mc" id="32" lineNum="23" parent="globals/PowerMonitorApp" pc="268436921" symbol="getInitialView"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerMonitorApp.mc" id="33" lineNum="7" parent="globals/PowerMonitorApp" pc="268436958" symbol="initialize"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerMonitorApp.mc" id="33" lineNum="8" parent="globals/PowerMonitorApp" pc="268436960" symbol="initialize"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerMonitorApp.mc" id="33" lineNum="9" parent="globals/PowerMonitorApp" pc="268436972" symbol="initialize"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayView.mc" id="35" lineNum="65" parent="globals/TodayView" pc="268436992" symbol="onShow"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayView.mc" id="35" lineNum="66" parent="globals/TodayView" pc="268436994" symbol="onShow"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayView.mc" id="35" lineNum="67" parent="globals/TodayView" pc="268437001" symbol="onShow"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayView.mc" id="36" lineNum="58" parent="globals/TodayView" pc="268437033" symbol="onLayout"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayView.mc" id="36" lineNum="59" parent="globals/TodayView" pc="268437035" symbol="onLayout"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayView.mc" id="37" lineNum="12" parent="globals/TodayView" pc="268437069" symbol="initialize"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayView.mc" id="37" lineNum="13" parent="globals/TodayView" pc="268437071" symbol="initialize"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayView.mc" id="38" lineNum="79" parent="globals/TodayView" pc="268437084" symbol="onHide"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayView.mc" id="38" lineNum="80" parent="globals/TodayView" pc="268437086" symbol="onHide"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayView.mc" id="39" lineNum="28" parent="globals/TodayView" pc="268437099" symbol="onReceive"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayView.mc" id="39" lineNum="29" parent="globals/TodayView" pc="268437102" symbol="onReceive"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayView.mc" id="39" lineNum="31" parent="globals/TodayView" pc="268437111" symbol="onReceive"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayView.mc" id="39" lineNum="32" parent="globals/TodayView" pc="268437121" symbol="onReceive"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayView.mc" id="39" lineNum="33" parent="globals/TodayView" pc="268437140" symbol="onReceive"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayView.mc" id="39" lineNum="50" parent="globals/TodayView" pc="268437161" symbol="onReceive"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayView.mc" id="39" lineNum="52" parent="globals/TodayView" pc="268437173" symbol="onReceive"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayView.mc" id="39" lineNum="53" parent="globals/TodayView" pc="268437195" symbol="onReceive"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayView.mc" id="40" lineNum="71" parent="globals/TodayView" pc="268437212" symbol="onUpdate"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayView.mc" id="40" lineNum="73" parent="globals/TodayView" pc="268437214" symbol="onUpdate"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayView.mc" id="41" lineNum="15" parent="globals/TodayView" pc="268437231" symbol="timerCallback"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayView.mc" id="41" lineNum="16" parent="globals/TodayView" pc="268437234" symbol="timerCallback"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayView.mc" id="41" lineNum="19" parent="globals/TodayView" pc="268437249" symbol="timerCallback"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayView.mc" id="41" lineNum="21" parent="globals/TodayView" pc="268437253" symbol="timerCallback"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayView.mc" id="41" lineNum="22" parent="globals/TodayView" pc="268437295" symbol="timerCallback"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayView.mc" id="41" lineNum="23" parent="globals/TodayView" pc="268437316" symbol="timerCallback"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/output/gen/006-B3704-00/source/Rez.mcgen" id="42" lineNum="25" parent="globals/Rez/Layouts" pc="268437361" symbol="PowerGridLayout"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/output/gen/006-B3704-00/source/Rez.mcgen" id="42" lineNum="26" parent="globals/Rez/Layouts" pc="268437372" symbol="PowerGridLayout"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/output/gen/006-B3704-00/source/Rez.mcgen" id="42" lineNum="28" parent="globals/Rez/Layouts" pc="268437461" symbol="PowerGridLayout"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/output/gen/006-B3704-00/source/Rez.mcgen" id="42" lineNum="30" parent="globals/Rez/Layouts" pc="268437561" symbol="PowerGridLayout"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/output/gen/006-B3704-00/source/Rez.mcgen" id="42" lineNum="32" parent="globals/Rez/Layouts" pc="268437661" symbol="PowerGridLayout"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/output/gen/006-B3704-00/source/Rez.mcgen" id="43" lineNum="13" parent="globals/Rez/Layouts" pc="268437681" symbol="MainLayout"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/output/gen/006-B3704-00/source/Rez.mcgen" id="43" lineNum="14" parent="globals/Rez/Layouts" pc="268437692" symbol="MainLayout"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/output/gen/006-B3704-00/source/Rez.mcgen" id="43" lineNum="16" parent="globals/Rez/Layouts" pc="268437781" symbol="MainLayout"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/output/gen/006-B3704-00/source/Rez.mcgen" id="43" lineNum="18" parent="globals/Rez/Layouts" pc="268437881" symbol="MainLayout"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/output/gen/006-B3704-00/source/Rez.mcgen" id="43" lineNum="20" parent="globals/Rez/Layouts" pc="268437980" symbol="MainLayout"/>
+<entry filename="/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/output/gen/006-B3704-00/source/Rez.mcgen" id="43" lineNum="22" parent="globals/Rez/Layouts" pc="268438080" symbol="MainLayout"/>
 </pcToLineNum>
 <symbolTable>
 <entry id="8388639" module="true" symbol="Graphics"/>
 <entry id="8389346" symbol="text"/>
 <entry id="8388632" method="true" symbol="&lt;init&gt;"/>
-<entry id="18" method="true" symbol="PowerGridLayout"/>
-<entry id="17" method="true" symbol="MainLayout"/>
-<entry field="true" id="13" symbol="timer"/>
+<entry id="20" method="true" symbol="PowerGridLayout"/>
+<entry id="19" method="true" symbol="MainLayout"/>
+<entry field="true" id="15" symbol="timer"/>
 <entry field="true" id="8388611" module="true" symbol="Toybox"/>
 <entry id="6" object="true" symbol="PowerGridDelegate"/>
-<entry field="true" id="19" symbol="AppName"/>
+<entry field="true" id="21" symbol="AppName"/>
 <entry id="10" object="true" symbol="PowerMonitorView"/>
 <entry id="8" object="true" symbol="PowerMonitorApp"/>
 <entry id="5" module="true" symbol="globals/Rez/Strings"/>
@@ -135,13 +172,15 @@
 <entry field="true" id="8389063" symbol="identifier"/>
 <entry id="8389349" symbol="justification"/>
 <entry id="8389098" method="true" symbol="onTap"/>
+<entry id="12" object="true" symbol="TodayView"/>
 <entry id="3" module="true" symbol="globals/Rez/Drawables"/>
+<entry id="11" object="true" symbol="TodayDelegate"/>
 <entry id="8388786" method="true" symbol="method"/>
 <entry id="8388769" module="true" object="true" symbol="Rez"/>
-<entry id="12" method="true" symbol="onReceive"/>
-<entry id="14" method="true" symbol="timerCallback"/>
+<entry id="14" method="true" symbol="onReceive"/>
+<entry id="16" method="true" symbol="timerCallback"/>
 <entry id="8388640" module="true" symbol="Lang"/>
-<entry field="true" id="16" symbol="LauncherIcon"/>
+<entry field="true" id="18" symbol="LauncherIcon"/>
 <entry id="8388610" symbol="statics"/>
 <entry id="8389123" method="true" symbol="onShow"/>
 <entry id="8389350" module="true" symbol="globals"/>
@@ -149,43 +188,54 @@
 <entry id="8388702" method="true" symbol="initialize"/>
 <entry id="8389279" method="true" symbol="onStart"/>
 <entry id="9" object="true" symbol="PowerMonitorDelegate"/>
-<entry field="true" id="11" symbol="view"/>
+<entry field="true" id="13" symbol="view"/>
 <entry id="8389280" method="true" symbol="getInitialView"/>
 <entry id="8389281" method="true" symbol="onStop"/>
 <entry id="8389347" symbol="color"/>
 <entry id="8388646" module="true" object="true" symbol="Timer"/>
-<entry id="15" module="true" symbol="Layouts"/>
+<entry id="17" module="true" symbol="Layouts"/>
+<entry id="8391457" method="true" symbol="getGlanceView"/>
 <entry id="8389125" method="true" symbol="onHide"/>
 <entry id="8388635" module="true" symbol="Application"/>
 </symbolTable>
 <localVars>
-<entry arg="true" endPc="268435658" name="_view" stackId="1" startPc="268435616"/>
-<entry arg="true" endPc="268435702" name="evt" stackId="1" startPc="268435659"/>
-<entry arg="true" endPc="268435779" name="dc" stackId="1" startPc="268435744"/>
-<entry arg="true" endPc="268436127" name="responseCode" stackId="1" startPc="268435810"/>
-<entry arg="true" endPc="268436127" name="data" stackId="2" startPc="268435810"/>
-<entry endPc="268436087" name="production" stackId="3" startPc="268435822"/>
-<entry endPc="268436087" name="usage" stackId="4" startPc="268435822"/>
-<entry endPc="268436087" name="feed" stackId="5" startPc="268435822"/>
-<entry endPc="268436087" name="consumption" stackId="6" startPc="268435822"/>
-<entry endPc="268436087" name="prodText" stackId="7" startPc="268435822"/>
-<entry endPc="268436087" name="usageText" stackId="8" startPc="268435822"/>
-<entry endPc="268436087" name="feedConsText" stackId="9" startPc="268435822"/>
-<entry arg="true" endPc="268436146" name="dc" stackId="1" startPc="268436128"/>
-<entry endPc="268436204" name="options" stackId="1" startPc="268436150"/>
-<entry endPc="268436204" name="params" stackId="2" startPc="268436150"/>
-<entry arg="true" endPc="268436248" name="_view" stackId="1" startPc="268436206"/>
-<entry arg="true" endPc="268436318" name="evt" stackId="1" startPc="268436249"/>
-<entry arg="true" endPc="268436395" name="dc" stackId="1" startPc="268436360"/>
-<entry arg="true" endPc="268436662" name="responseCode" stackId="1" startPc="268436426"/>
-<entry arg="true" endPc="268436662" name="data" stackId="2" startPc="268436426"/>
-<entry endPc="268436622" name="frequency" stackId="3" startPc="268436438"/>
-<entry endPc="268436622" name="freqText" stackId="4" startPc="268436438"/>
-<entry arg="true" endPc="268436681" name="dc" stackId="1" startPc="268436663"/>
-<entry endPc="268436739" name="options" stackId="1" startPc="268436685"/>
-<entry endPc="268436739" name="params" stackId="2" startPc="268436685"/>
-<entry arg="true" endPc="268437158" name="dc" stackId="1" startPc="268436839"/>
-<entry arg="true" endPc="268437582" name="dc" stackId="1" startPc="268437159"/>
+<entry arg="true" endPc="268435711" name="_view" stackId="1" startPc="268435669"/>
+<entry arg="true" endPc="268435730" name="evt" stackId="1" startPc="268435712"/>
+<entry arg="true" endPc="268435773" name="_view" stackId="1" startPc="268435731"/>
+<entry arg="true" endPc="268435843" name="evt" stackId="1" startPc="268435774"/>
+<entry arg="true" endPc="268435920" name="dc" stackId="1" startPc="268435885"/>
+<entry arg="true" endPc="268436272" name="responseCode" stackId="1" startPc="268435955"/>
+<entry arg="true" endPc="268436272" name="data" stackId="2" startPc="268435955"/>
+<entry endPc="268436232" name="production" stackId="3" startPc="268435967"/>
+<entry endPc="268436232" name="usage" stackId="4" startPc="268435967"/>
+<entry endPc="268436232" name="feed" stackId="5" startPc="268435967"/>
+<entry endPc="268436232" name="consumption" stackId="6" startPc="268435967"/>
+<entry endPc="268436232" name="prodText" stackId="7" startPc="268435967"/>
+<entry endPc="268436232" name="usageText" stackId="8" startPc="268435967"/>
+<entry endPc="268436232" name="feedConsText" stackId="9" startPc="268435967"/>
+<entry arg="true" endPc="268436299" name="dc" stackId="1" startPc="268436277"/>
+<entry endPc="268436357" name="options" stackId="1" startPc="268436303"/>
+<entry endPc="268436357" name="params" stackId="2" startPc="268436303"/>
+<entry arg="true" endPc="268436401" name="_view" stackId="1" startPc="268436359"/>
+<entry arg="true" endPc="268436471" name="evt" stackId="1" startPc="268436402"/>
+<entry arg="true" endPc="268436548" name="dc" stackId="1" startPc="268436513"/>
+<entry arg="true" endPc="268436815" name="responseCode" stackId="1" startPc="268436579"/>
+<entry arg="true" endPc="268436815" name="data" stackId="2" startPc="268436579"/>
+<entry endPc="268436775" name="frequency" stackId="3" startPc="268436591"/>
+<entry endPc="268436775" name="freqText" stackId="4" startPc="268436591"/>
+<entry arg="true" endPc="268436834" name="dc" stackId="1" startPc="268436816"/>
+<entry endPc="268436892" name="options" stackId="1" startPc="268436838"/>
+<entry endPc="268436892" name="params" stackId="2" startPc="268436838"/>
+<entry arg="true" endPc="268437068" name="dc" stackId="1" startPc="268437033"/>
+<entry arg="true" endPc="268437211" name="responseCode" stackId="1" startPc="268437099"/>
+<entry arg="true" endPc="268437211" name="data" stackId="2" startPc="268437099"/>
+<entry endPc="268437171" name="produced" stackId="3" startPc="268437111"/>
+<entry arg="true" endPc="268437230" name="dc" stackId="1" startPc="268437212"/>
+<entry endPc="268437359" name="options" stackId="1" startPc="268437234"/>
+<entry endPc="268437359" name="params" stackId="2" startPc="268437234"/>
+<entry endPc="268437359" name="unixTime" stackId="3" startPc="268437234"/>
+<entry arg="true" endPc="268437680" name="dc" stackId="1" startPc="268437361"/>
+<entry arg="true" endPc="268438104" name="dc" stackId="1" startPc="268437681"/>
 </localVars>
 <deviceInfo deviceVersion="d768f42b362bd6ce30dcbbc223d308fbb5a79106" partNumber="006-B3704-00"/>
 <annotations>
@@ -194,69 +244,88 @@
 </annotations>
 <dataEntryOffsetMappings>
 <dataEntry label="globals" offset="58" parentId="" symbolId="globals" type="module"/>
-<dataEntry label="globals/PowerGridDelegate" offset="152" parentId="globals" symbolId="PowerGridDelegate" type="class"/>
-<dataEntry label="globals/PowerMonitorView" offset="214" parentId="globals" symbolId="PowerMonitorView" type="class"/>
-<dataEntry label="globals/Rez" offset="321" parentId="globals" symbolId="Rez" type="module"/>
-<dataEntry label="globals/PowerMonitorDelegate" offset="374" parentId="globals" symbolId="PowerMonitorDelegate" type="class"/>
-<dataEntry label="globals/PowerGridView" offset="436" parentId="globals" symbolId="PowerGridView" type="class"/>
-<dataEntry label="globals/PowerMonitorApp" offset="543" parentId="globals" symbolId="PowerMonitorApp" type="class"/>
-<dataEntry label="globals/Rez/Drawables" offset="614" parentId="Rez" symbolId="Drawables" type="module"/>
-<dataEntry label="globals/Rez/Layouts" offset="649" parentId="Rez" symbolId="Layouts" type="module"/>
-<dataEntry label="globals/Rez/Strings" offset="693" parentId="Rez" symbolId="Strings" type="module"/>
+<dataEntry label="globals/TodayDelegate" offset="170" parentId="globals" symbolId="TodayDelegate" type="class"/>
+<dataEntry label="globals/PowerGridDelegate" offset="232" parentId="globals" symbolId="PowerGridDelegate" type="class"/>
+<dataEntry label="globals/PowerMonitorView" offset="294" parentId="globals" symbolId="PowerMonitorView" type="class"/>
+<dataEntry label="globals/Rez" offset="410" parentId="globals" symbolId="Rez" type="module"/>
+<dataEntry label="globals/PowerMonitorDelegate" offset="463" parentId="globals" symbolId="PowerMonitorDelegate" type="class"/>
+<dataEntry label="globals/PowerGridView" offset="525" parentId="globals" symbolId="PowerGridView" type="class"/>
+<dataEntry label="globals/PowerMonitorApp" offset="632" parentId="globals" symbolId="PowerMonitorApp" type="class"/>
+<dataEntry label="globals/TodayView" offset="703" parentId="globals" symbolId="TodayView" type="class"/>
+<dataEntry label="globals/Rez/Drawables" offset="810" parentId="Rez" symbolId="Drawables" type="module"/>
+<dataEntry label="globals/Rez/Layouts" offset="845" parentId="Rez" symbolId="Layouts" type="module"/>
+<dataEntry label="globals/Rez/Strings" offset="889" parentId="Rez" symbolId="Strings" type="module"/>
 </dataEntryOffsetMappings>
 <functions>
-<functionEntry accessMode="public" endPc="268435468" name="&lt;init&gt;" parent="PowerGridDelegate" startPc="268435457">
+<functionEntry accessMode="public" endPc="268435468" name="&lt;init&gt;" parent="TodayDelegate" startPc="268435457">
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268435489" name="getApp" startPc="268435469">
+<functionEntry accessMode="public" endPc="268435480" name="&lt;init&gt;" parent="PowerGridDelegate" startPc="268435469">
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268435530" name="&lt;init&gt;" parent="PowerMonitorView" startPc="268435490">
+<functionEntry accessMode="public" endPc="268435501" name="getApp" startPc="268435481">
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268435550" name="&lt;init&gt;" parent="Rez" startPc="268435531">
+<functionEntry accessMode="public" endPc="268435542" name="&lt;init&gt;" parent="PowerMonitorView" startPc="268435502">
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268435562" name="&lt;init&gt;" parent="PowerMonitorDelegate" startPc="268435551">
+<functionEntry accessMode="public" endPc="268435562" name="&lt;init&gt;" parent="Rez" startPc="268435543">
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268435603" name="&lt;init&gt;" parent="PowerGridView" startPc="268435563">
+<functionEntry accessMode="public" endPc="268435574" name="&lt;init&gt;" parent="PowerMonitorDelegate" startPc="268435563">
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268435615" name="&lt;init&gt;" parent="PowerMonitorApp" startPc="268435604">
+<functionEntry accessMode="public" endPc="268435615" name="&lt;init&gt;" parent="PowerGridView" startPc="268435575">
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268435658" name="initialize" parent="PowerGridDelegate" startPc="268435616">
+<functionEntry accessMode="public" endPc="268435627" name="&lt;init&gt;" parent="PowerMonitorApp" startPc="268435616">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268435668" name="&lt;init&gt;" parent="TodayView" startPc="268435628">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268435711" name="initialize" parent="TodayDelegate" startPc="268435669">
 <param id="_view"/>
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268435702" name="onTap" parent="PowerGridDelegate" startPc="268435659">
+<functionEntry accessMode="public" endPc="268435730" name="onTap" parent="TodayDelegate" startPc="268435712">
 <param id="evt"/>
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268435743" name="onShow" parent="PowerMonitorView" startPc="268435703">
+<functionEntry accessMode="public" endPc="268435773" name="initialize" parent="PowerGridDelegate" startPc="268435731">
+<param id="_view"/>
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268435779" name="onLayout" parent="PowerMonitorView" startPc="268435744">
+<functionEntry accessMode="public" endPc="268435843" name="onTap" parent="PowerGridDelegate" startPc="268435774">
+<param id="evt"/>
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268435884" name="onShow" parent="PowerMonitorView" startPc="268435844">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268435920" name="onLayout" parent="PowerMonitorView" startPc="268435885">
 <param id="dc"/>
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268435794" name="initialize" parent="PowerMonitorView" startPc="268435780">
+<functionEntry accessMode="public" endPc="268435939" name="initialize" parent="PowerMonitorView" startPc="268435921">
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268435809" name="onHide" parent="PowerMonitorView" startPc="268435795">
+<functionEntry accessMode="public" endPc="268435954" name="onHide" parent="PowerMonitorView" startPc="268435940">
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268436127" name="onReceive" parent="PowerMonitorView" startPc="268435810">
+<functionEntry accessMode="public" endPc="268436272" name="onReceive" parent="PowerMonitorView" startPc="268435955">
 <param id="responseCode"/>
 <param id="data"/>
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268436146" name="onUpdate" parent="PowerMonitorView" startPc="268436128">
+<functionEntry accessMode="public" endPc="268436276" name="getGlanceView" parent="PowerMonitorView" startPc="268436273">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268436299" name="onUpdate" parent="PowerMonitorView" startPc="268436277">
 <param id="dc"/>
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268436205" name="timerCallback" parent="PowerMonitorView" startPc="268436147">
+<functionEntry accessMode="public" endPc="268436358" name="timerCallback" parent="PowerMonitorView" startPc="268436300">
 <documentation/>
 </functionEntry>
 <functionEntry accessMode="public" name="&lt;init&gt;" parent="Drawables">
@@ -268,58 +337,83 @@
 <functionEntry accessMode="public" name="&lt;init&gt;" parent="Strings">
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268436248" name="initialize" parent="PowerMonitorDelegate" startPc="268436206">
+<functionEntry accessMode="public" endPc="268436401" name="initialize" parent="PowerMonitorDelegate" startPc="268436359">
 <param id="_view"/>
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268436318" name="onTap" parent="PowerMonitorDelegate" startPc="268436249">
+<functionEntry accessMode="public" endPc="268436471" name="onTap" parent="PowerMonitorDelegate" startPc="268436402">
 <param id="evt"/>
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268436359" name="onShow" parent="PowerGridView" startPc="268436319">
+<functionEntry accessMode="public" endPc="268436512" name="onShow" parent="PowerGridView" startPc="268436472">
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268436395" name="onLayout" parent="PowerGridView" startPc="268436360">
+<functionEntry accessMode="public" endPc="268436548" name="onLayout" parent="PowerGridView" startPc="268436513">
 <param id="dc"/>
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268436410" name="initialize" parent="PowerGridView" startPc="268436396">
+<functionEntry accessMode="public" endPc="268436563" name="initialize" parent="PowerGridView" startPc="268436549">
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268436425" name="onHide" parent="PowerGridView" startPc="268436411">
+<functionEntry accessMode="public" endPc="268436578" name="onHide" parent="PowerGridView" startPc="268436564">
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268436662" name="onReceive" parent="PowerGridView" startPc="268436426">
+<functionEntry accessMode="public" endPc="268436815" name="onReceive" parent="PowerGridView" startPc="268436579">
 <param id="responseCode"/>
 <param id="data"/>
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268436681" name="onUpdate" parent="PowerGridView" startPc="268436663">
+<functionEntry accessMode="public" endPc="268436834" name="onUpdate" parent="PowerGridView" startPc="268436816">
 <param id="dc"/>
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268436740" name="timerCallback" parent="PowerGridView" startPc="268436682">
+<functionEntry accessMode="public" endPc="268436893" name="timerCallback" parent="PowerGridView" startPc="268436835">
 <documentation/>
 </functionEntry>
 <functionEntry accessMode="public" name="onStart" parent="PowerMonitorApp">
 <param id="state"/>
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268436804" name="getInitialView" parent="PowerMonitorApp" startPc="268436741">
+<functionEntry accessMode="public" endPc="268436957" name="getInitialView" parent="PowerMonitorApp" startPc="268436894">
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268436838" name="initialize" parent="PowerMonitorApp" startPc="268436805">
+<functionEntry accessMode="public" endPc="268436991" name="initialize" parent="PowerMonitorApp" startPc="268436958">
 <documentation/>
 </functionEntry>
 <functionEntry accessMode="public" name="onStop" parent="PowerMonitorApp">
 <param id="state"/>
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268437158" name="PowerGridLayout" parent="Layouts" startPc="268436839">
+<functionEntry accessMode="public" endPc="268437032" name="onShow" parent="TodayView" startPc="268436992">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268437068" name="onLayout" parent="TodayView" startPc="268437033">
 <param id="dc"/>
 <documentation/>
 </functionEntry>
-<functionEntry accessMode="public" endPc="268437582" name="MainLayout" parent="Layouts" startPc="268437159">
+<functionEntry accessMode="public" endPc="268437083" name="initialize" parent="TodayView" startPc="268437069">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268437098" name="onHide" parent="TodayView" startPc="268437084">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268437211" name="onReceive" parent="TodayView" startPc="268437099">
+<param id="responseCode"/>
+<param id="data"/>
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268437230" name="onUpdate" parent="TodayView" startPc="268437212">
+<param id="dc"/>
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268437360" name="timerCallback" parent="TodayView" startPc="268437231">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268437680" name="PowerGridLayout" parent="Layouts" startPc="268437361">
+<param id="dc"/>
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268438104" name="MainLayout" parent="Layouts" startPc="268437681">
 <param id="dc"/>
 <documentation/>
 </functionEntry>

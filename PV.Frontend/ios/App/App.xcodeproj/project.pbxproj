@@ -16,6 +16,8 @@
 		362FE6462BE284ED002D9F20 /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362FE6452BE284ED002D9F20 /* AppIntent.swift */; };
 		362FE6482BE284EF002D9F20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 362FE6472BE284EF002D9F20 /* Assets.xcassets */; };
 		362FE64C2BE284EF002D9F20 /* currentExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 362FE6392BE284EC002D9F20 /* currentExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		369D4E512C221E760054547E /* ActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369D4E502C221E760054547E /* ActivityAttributes.swift */; };
+		369D4E522C221E760054547E /* ActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369D4E502C221E760054547E /* ActivityAttributes.swift */; };
 		50379B232058CBB4000EE86E /* capacitor.config.json in Resources */ = {isa = PBXBuildFile; fileRef = 50379B222058CBB4000EE86E /* capacitor.config.json */; };
 		504EC3081FED79650016851F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504EC3071FED79650016851F /* AppDelegate.swift */; };
 		504EC30D1FED79650016851F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 504EC30B1FED79650016851F /* Main.storyboard */; };
@@ -60,6 +62,7 @@
 		362FE6452BE284ED002D9F20 /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
 		362FE6472BE284EF002D9F20 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		362FE6492BE284EF002D9F20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		369D4E502C221E760054547E /* ActivityAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityAttributes.swift; sourceTree = "<group>"; };
 		50379B222058CBB4000EE86E /* capacitor.config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = capacitor.config.json; sourceTree = "<group>"; };
 		504EC3041FED79650016851F /* App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		504EC3071FED79650016851F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -107,6 +110,7 @@
 		362FE63E2BE284ED002D9F20 /* current */ = {
 			isa = PBXGroup;
 			children = (
+				369D4E432C221C020054547E /* model */,
 				362FE63F2BE284ED002D9F20 /* currentBundle.swift */,
 				362FE6412BE284ED002D9F20 /* currentLiveActivity.swift */,
 				362FE6432BE284ED002D9F20 /* current.swift */,
@@ -115,6 +119,14 @@
 				362FE6492BE284EF002D9F20 /* Info.plist */,
 			);
 			path = current;
+			sourceTree = "<group>";
+		};
+		369D4E432C221C020054547E /* model */ = {
+			isa = PBXGroup;
+			children = (
+				369D4E502C221E760054547E /* ActivityAttributes.swift */,
+			);
+			path = model;
 			sourceTree = "<group>";
 		};
 		504EC2FB1FED79650016851F = {
@@ -308,6 +320,7 @@
 			files = (
 				362FE6422BE284ED002D9F20 /* currentLiveActivity.swift in Sources */,
 				362FE6462BE284ED002D9F20 /* AppIntent.swift in Sources */,
+				369D4E522C221E760054547E /* ActivityAttributes.swift in Sources */,
 				362FE6442BE284ED002D9F20 /* current.swift in Sources */,
 				362FE6402BE284ED002D9F20 /* currentBundle.swift in Sources */,
 			);
@@ -318,6 +331,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				504EC3081FED79650016851F /* AppDelegate.swift in Sources */,
+				369D4E512C221E760054547E /* ActivityAttributes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -549,7 +563,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5P7T6VY5CS;
 				INFOPLIST_FILE = App/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -574,7 +588,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5P7T6VY5CS;
 				INFOPLIST_FILE = App/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

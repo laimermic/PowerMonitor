@@ -33,19 +33,23 @@ _Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_PowerGrid_PowerGrid
 _Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_PowerGrid_PowerGridDelegate_mc_10_24_14_4_start:
 [ "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridDelegate.mc" 11 8 ]
         [ "_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_PowerGrid_PowerGridDelegate_mc_10_24_14_4_start" "_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_PowerGrid_PowerGridDelegate_mc_10_24_14_4_stop" ]
-        %mainView.1 = local;
-        %tmp.4 = getv ? :PowerMonitorView;
+        %todayView.1 = local;
+        %tmp.4 = getv ? :TodayView;
         %tmp.1 = newc %tmp.4 ();
-        lputv %mainView.1 %tmp.1;
+        lputv %todayView.1 %tmp.1;
 [ "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridDelegate.mc" 12 8 ]
         %tmp.5 = getm $.Toybox.WatchUi;
-        %tmp.6 = getv function %tmp.5 :popView;
-        %tmp.7 = getm $.Toybox.WatchUi;
-        %tmp.8 = getv %tmp.7 :SLIDE_RIGHT;
-        invoke %tmp.5 %tmp.6(%tmp.8);
+        %tmp.6 = getv function %tmp.5 :pushView;
+        %tmp.8 = lgetv %todayView.1;
+        %tmp.12 = getv ? :TodayDelegate;
+        %tmp.14 = lgetv %todayView.1;
+        %tmp.9 = newc %tmp.12 (%tmp.14);
+        %tmp.15 = getm $.Toybox.WatchUi;
+        %tmp.16 = getv %tmp.15 :SLIDE_RIGHT;
+        invoke %tmp.5 %tmp.6(%tmp.8, %tmp.9, %tmp.16);
 [ "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/PowerGrid/PowerGridDelegate.mc" 13 8 ]
-        %tmp.9 = true;
-        ret %tmp.9;
+        %tmp.17 = true;
+        ret %tmp.17;
 _Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_PowerGrid_PowerGridDelegate_mc_10_24_14_4_stop:
     }
 }

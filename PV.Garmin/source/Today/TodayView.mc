@@ -5,7 +5,7 @@ import Toybox.Application;
 import Toybox.Lang;
 import Toybox.WatchUi;
 
-class PowerMonitorView extends WatchUi.GlanceView {
+class TodayView extends WatchUi.View {
     
     var timer = new Timer.Timer();
 
@@ -18,32 +18,34 @@ class PowerMonitorView extends WatchUi.GlanceView {
         };
         var params = {                          
         };
-        Communications.makeJsonRequest("https://api.pv.terrex.at/api/now", params, options, method(:onReceive));
+        var unixTime = new Time.Moment(Time.now().value());
+        System.println(unixTime.toString());
+        Communications.makeJsonRequest("https://api.pv.terrex.at/api/fullday/" + unixTime.toString(), params, options, method(:onReceive));
     }
 
 
 
     function onReceive(responseCode as Number, data as Dictionary?) as Void {
         if (responseCode == 200) {
-            System.println("Main View Request Successful"); 
-            var production = data["production"]["value"];
-            var usage = data["usage"]["value"];
-            var feed = data["delivery"]["value"];
-            var consumption = data["consumption"]["value"];
-            var prodText = self.findDrawableById("production") as Text;
-            prodText.setText("Production: " + production.toString() + " W");
-            
-            var usageText = self.findDrawableById("usage") as Text;
-            usageText.setText("Usage: " + usage.toString() + " W");
 
-            var feedConsText = self.findDrawableById("feedcons") as Text;
-            if (production > usage) {
-                feedConsText.setText("Feed: " + feed.toString() + " W");
-                //feedConsText.setColor("#26b100")
-            } else {
-                feedConsText.setText("Consumption: " + consumption.toString() + " W");
-                //feedConsText.setColor("#8900f8")
-            }
+            var produced = data["produced"];
+            System.println("Today Request Successful");
+            System.println(produced.toString()); 
+            // var frequency = data["frequency"]["value"];
+            
+            // var freqText = self.findDrawableById("grid") as Text;
+            // // var formatedFreq = ((frequency * 100).toNumber().toFloat()) / 100;
+            // freqText.setText(frequency.format("%.2f") + " Hz");
+
+            // if (frequency < 49.8 || frequency > 50.2) {
+            //     freqText.setColor(Graphics.COLOR_RED);
+            // } else {
+            //     if (frequency < 49.85 || frequency > 50.15) {
+            //         freqText.setColor(Graphics.COLOR_YELLOW);
+            //     } else {
+            //         freqText.setColor(Graphics.COLOR_GREEN);
+            //     }
+            // }
 
             WatchUi.requestUpdate();
         } else {
@@ -52,13 +54,9 @@ class PowerMonitorView extends WatchUi.GlanceView {
         }
     }
 
-    function getGlanceView() as [WatchUi.GlanceView] or Null {
-        return null;
-    }
-
     // Load your resources here
     function onLayout(dc as Dc) as Void {
-        setLayout(Rez.Layouts.MainLayout(dc));
+        setLayout(Rez.Layouts.PowerGridLayout(dc));
     }
 
     // Called when this View is brought to the foreground. Restore

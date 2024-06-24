@@ -1,0 +1,48 @@
+[ @file = "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayDelegate.mc"; @line = 1; ]
+import Toybox.WatchUi;
+[ @file = "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayDelegate.mc"; @line = 2; ]
+class TodayDelegate extends WatchUi.InputDelegate{
+    [ @file = "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayDelegate.mc"; @line = 2; ]
+    <init> {
+    }
+    [ @file = "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayDelegate.mc"; @line = 2; ]
+    static
+    <init> {
+    }
+    [ @file = "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayDelegate.mc"; @line = 3; @position = 8; ]
+    var view;
+    [ @file = "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayDelegate.mc"; @line = 4; ]
+    function initialize(_view) as Void {
+_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_Today_TodayDelegate_mc_4_31_8_4_start:
+[ "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayDelegate.mc" 5 8 ]
+        %tmp.2 = getv ? :InputDelegate;
+        %tmp.3 = getv function %tmp.2 :initialize;
+        invoke %tmp.2 %tmp.3();
+[ "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayDelegate.mc" 6 8 ]
+        %tmp.5 = getv ? :System;
+        %tmp.6 = getv function %tmp.5 :println;
+        %tmp.7 = "TodayDelegate.initialize()";
+        invoke %tmp.5 %tmp.6(%tmp.7);
+[ "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayDelegate.mc" 7 8 ]
+        %tmp.9 = lgetv %_view;
+        putv self :view %tmp.9;
+_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_Today_TodayDelegate_mc_4_31_8_4_stop:
+    }
+    [ @file = "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayDelegate.mc"; @line = 10; ]
+    function onTap(evt) {
+_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_Today_TodayDelegate_mc_10_24_13_4_start:
+[ "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayDelegate.mc" 11 8 ]
+        %tmp.1 = getm $.Toybox.WatchUi;
+        %tmp.2 = getv function %tmp.1 :popView;
+        %tmp.3 = getm $.Toybox.WatchUi;
+        %tmp.4 = getv %tmp.3 :SLIDE_RIGHT;
+        invoke %tmp.1 %tmp.2(%tmp.4);
+[ "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayDelegate.mc" 12 8 ]
+        %tmp.5 = true;
+        ret %tmp.5;
+_Users_michaellaimer_Documents_PowerMonitor_PV_Garmin_source_Today_TodayDelegate_mc_10_24_13_4_stop:
+    }
+}
+[ @file = "/Users/michaellaimer/Documents/PowerMonitor/PV.Garmin/source/Today/TodayDelegate.mc"; @line = 1; ]
+<init> {
+}

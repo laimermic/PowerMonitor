@@ -8,8 +8,8 @@ class PowerGridDelegate extends WatchUi.InputDelegate {
     }
 
     function onTap(evt) {
-        var mainView = new PowerMonitorView();
-        WatchUi.popView(WatchUi.SLIDE_RIGHT);
+        var todayView = new TodayView();
+        WatchUi.pushView(todayView, new TodayDelegate(todayView), WatchUi.SLIDE_RIGHT);
         return true;
     }
 }
